@@ -1,0 +1,46 @@
+<div class="menu" id="rc-menu">
+    <ul>
+        <li><a href="#" id="add-split">Add split...</a></li>
+        <li><a href="#" id="remove-split">Remove split...</a></li>
+        <li><a href="#" id="delete-road">Delete road...</a></li>
+        <li><a href="#" id="delete-control">Delete control...</a></li>
+        <li><a href="#" id="delete-landmark">Delete landmark...</a></li>
+        <li><a href="#" id="delete-conflict">Delete conflict...</a></li>
+        <li><a href="#" id="properties">Properties...</a></li>
+    </ul>
+</div>
+
+<script>
+    $("html").on("click", function(){
+        $(".menu").hide();
+    });
+
+    $('#add-split').on('click', function(){
+        app.toolbar.button_list[0].default_.right_menu(this.id, app.gc);
+    });
+
+    $('#remove-split').on('click', function(){
+        app.toolbar.button_list[0].default_.right_menu(this.id, app.gc);
+    });
+
+    $('#delete-road').on('click', function(){
+        app.toolbar.button_list[0].default_.right_menu(this.id, app.gc);
+    });
+
+    $('#delete-control').on('click', function(){
+        app.toolbar.button_list[0].default_.right_menu(this.id, app.gc);
+    });
+
+    $('#delete-landmark').on('click', function(){
+        app.toolbar.button_list[0].default_.right_menu(this.id, app.gc);
+    });
+
+    $('#delete-conflict').on('click', function(){
+        app.toolbar.button_list[0].default_.right_menu(this.id, app.gc);
+    });
+
+    $('#properties').on('click', function(){
+        app.toolbar.button_list[0].default_.right_menu(this.id, app.gc);
+    });
+
+</script>

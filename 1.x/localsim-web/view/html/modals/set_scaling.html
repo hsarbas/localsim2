@@ -1,0 +1,71 @@
+<div id="set-scaling" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <form>
+            <div class="modal-content">
+
+                <!-- header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Set Scaling</h4>
+                </div>
+
+                <!-- body -->
+                <div class="modal-body container-fluid">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="row form-fields-row">
+
+                            </div>
+                            <div class="table-bordered form-fields">
+                                <p>Length (m):</p>
+                                <input title="length" type="text" class="form-control" id="scale-length">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-success" id="scale-submit">Set scale</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+
+    let scale_modal = $("#set-scaling");
+    let scale_submit = $('#scale-submit');
+
+    scale_submit.click(function(){
+        app.set_scaling_popup.do_();
+    });
+
+    scale_modal.on('hidden.bs.modal', function(){
+        $(this).find('form').trigger('reset');
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            app.keypress_callback(e);
+        });
+    });
+
+    scale_modal.on('shown.bs.modal', function () {
+        $('#scale-length').focus();
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            if (e.which == ENTER_KEY) {
+                e.preventDefault();
+
+                scale_submit.click();
+            }
+        });
+    });
+
+    scale_modal.draggable({
+        handle: ".modal-header, .modal-footer"
+    });
+
+</script>

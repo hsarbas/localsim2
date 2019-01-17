@@ -1,0 +1,69 @@
+<div id="create-conflict" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <form>
+            <div class="modal-content">
+
+                <!-- header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create Conflict Area</h4>
+                </div>
+
+                <!-- body -->
+                <div class="modal-body container-fluid">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="table-bordered form-fields">
+                                <label for="conflict-lanes">Affected Lanes:</label>
+                                <select multiple class="form-control" id="conflict-lanes">
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-success" id="conflict-submit">Create conflict area</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    let conflict_modal = $('#create-conflict');
+    let conflict_submit = $('#conflict-submit');
+
+    conflict_submit.click(function(){
+        app.create_conflict_popup.do_();
+    });
+
+    conflict_modal.on('hidden.bs.modal', function(){
+        $(this).find('form').trigger('reset');
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            app.keypress_callback(e);
+        });
+        app.create_conflict_popup.reset_droad_color();
+    });
+
+    conflict_modal.on('shown.bs.modal', function(){
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            if (e.which == ENTER_KEY) {
+                e.preventDefault();
+
+                conflict_submit.click();
+            }
+        });
+    });
+
+    conflict_modal.draggable({
+        handle: ".modal-header, .modal-footer"
+    });
+
+</script>

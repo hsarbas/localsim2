@@ -1,0 +1,138 @@
+<div id="create-uroad" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-long">
+
+        <!-- Modal content-->
+        <form>
+            <div class="modal-content">
+
+                <!-- header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create Link</h4>
+                </div>
+
+                <!-- body -->
+                <div class="modal-body container-fluid">
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label>Road Fields</label>
+                            <div class="table-bordered form-fields">
+                                <div class="row form-fields-row">
+                                    <div class="col-sm-5"><p>Label:</p></div>
+                                    <div class="col-sm-7"><input title="label" type="text" class="form-control" id="uroad-label"></div>
+                                </div>
+                                <div class="row form-fields-row">
+                                    <div class="col-sm-5"><p>No. of Lanes:</p></div>
+                                    <div class="col-sm-7"><input title="lanes" type="text" class="form-control" id="uroad-lanes"></div>
+                                </div>
+
+                                <div class="row form-fields-row">
+                                    <div class="col-sm-5"><p>Length(m):</p></div>
+                                    <div class="col-sm-7"><input title="link length" type="text" class="form-control" id="uroad-length"></div>
+                                </div>
+
+                                <div class="row form-fields-row">
+                                    <div class="col-sm-5"><p>Lane Width(m):</p></div>
+                                    <div class="col-sm-7"><input title="lane-width" type="text" class="form-control" id="uroad-width"></div>
+                                </div>
+
+                                <div class="row form-fields-row">
+                                    <div class="col-sm-5"><p>Speed Limit(kph):</p></div>
+                                    <div class="col-sm-7"><input title="limit" type="text" class="form-control" id="uroad-limit"></div>
+                                </div>
+
+                                <div class="row form-fields-row">
+                                    <div class="col-sm-5"><p>Priority:</p></div>
+                                    <div class="col-sm-7">
+                                        <label class="radio-inline"><input type="radio" name="uroad-priority" value="major" id="uroad-priority-major">Major</label>
+                                        <label class="radio-inline"><input type="radio" name="uroad-priority" value="minor" id="uroad-priority-minor">Minor</label>
+                                    </div>
+                                </div>
+                                <!--<div class="row form-fields-row">-->
+                                    <!--<div class="col-sm-5"><p>Gradient:</p></div>-->
+                                    <!--<div class="col-sm-7"><input title="gradient" type="text" class="form-control" id="uroad-gradient"></div>-->
+                                <!--</div>-->
+
+                                <!--<div class="row form-fields-row">-->
+                                    <!--<div class="col-sm-5"><p>Type:</p></div>-->
+                                    <!--<div class="col-sm-7">-->
+                                        <!--<div class="dropdown">-->
+                                            <!--<select class="btn btn-default dropdown-toggle" id="type" name="type">-->
+                                                <!--<option value="Urban">Urban</option>-->
+                                                <!--<option value="Rural">Rural</option>-->
+                                                <!--<option value="Freeway">Freeway</option>-->
+                                            <!--</select>-->
+
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="entry-exit">Entry/Exit Road</label>
+                            <div class="table-bordered form-fields" id="entry-exit">
+                                <div class="row form-fields-row">
+                                    <div class="col-sm-6">
+                                        <select multiple disabled class="form-control" id="uroad-entry" title="entry" size=10>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <select multiple disabled class="form-control" id="uroad-exit" title="exit" size=10>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-success" id="uroad-submit">Create link</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+
+    let uroad_modal = $("#create-uroad");
+    let uroad_submit = $('#uroad-submit');
+
+    uroad_submit.click(function(){
+        app.create_uroad_popup.do_();
+    });
+
+    uroad_modal.on('hidden.bs.modal', function(){
+        $('#uroad-entry').empty();
+        $('#uroad-exit').empty();
+        $(this).find('form').trigger('reset');
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            app.keypress_callback(e);
+        });
+    });
+
+    uroad_modal.on('shown.bs.modal', function () {
+        $('#uroad-label').focus();
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            if (e.which == ENTER_KEY) {
+                e.preventDefault();
+
+                uroad_submit.click();
+            }
+        });
+    });
+
+    uroad_modal.draggable({
+        handle: ".modal-header, .modal-footer"
+    });
+
+    $(".type-dropdown a").click(function(){
+        $('#type').text($(this).text());
+    });
+
+</script>

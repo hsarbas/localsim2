@@ -1,0 +1,76 @@
+<div id="create-stop-yield" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <form>
+            <div class="modal-content">
+
+                <!-- header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create Stop/Yield Sign</h4>
+                </div>
+
+                <!-- body -->
+                <div class="modal-body container-fluid">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="row form-fields-row">
+
+                            </div>
+                            <div class="table-bordered form-fields">
+                                <div class="radio">
+                                    <label><input type="radio" name="stop-yield-sign" value="stop" id="stop-sign" checked>Stop sign</label>
+                                </div>
+                                <div class="radio">
+                                    <label><input type="radio" name="stop-yield-sign" value="yield" id="yield-sign">Yield sign</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-success" id="stop-yield-submit">Create stop/yield sign</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+
+    let stop_yield_modal = $("#create-stop-yield");
+    let stop_yield_submit = $('#stop-yield-submit');
+
+    stop_yield_submit.click(function(){
+        app.create_stop_yield_popup.do_();
+    });
+
+    stop_yield_modal.on('hidden.bs.modal', function(){
+        $(this).find('form').trigger('reset');
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            app.keypress_callback(e);
+        });
+    });
+
+    stop_yield_modal.on('shown.bs.modal', function () {
+        $('#stop-sign').focus();
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            if (e.which == ENTER_KEY) {
+                e.preventDefault();
+
+                stop_yield_submit.click();
+            }
+        });
+    });
+
+    stop_yield_modal.draggable({
+        handle: ".modal-header, .modal-footer"
+    });
+
+</script>

@@ -1,0 +1,77 @@
+<div id="output" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <form>
+            <div class="modal-content">
+
+                <!-- header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Done</h4>
+                </div>
+
+                <!-- body -->
+                <div class="modal-body container-fluid">
+                    <div class="table-bordered form-fields">
+                        <label>Simulation is done. Ready to export data to file.</label>
+                    </div>
+
+                    <!--<div class="table-bordered form-fields">-->
+                        <!--<div class="form-group">-->
+                            <!--<div class="row form-fields-row">-->
+                                <!--<div class="col-sm-4">-->
+                                    <!--<label>Save as (filename):</label>-->
+                                <!--</div>-->
+                                <!--<div class="col-sm-8">-->
+                                    <!--<input title="filename" type="text" class="form-control" id="output-filename">-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+
+                <!-- footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="output-export">Export Data</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+
+    let output_modal = $("#output");
+    let output_export = $('#output-export');
+
+    output_export.click(function(){
+        app.output_popup.do_();
+    });
+
+    output_modal.on('hidden.bs.modal', function(){
+        $(this).find('form').trigger('reset');
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            app.keypress_callback(e);
+        });
+    });
+
+    output_modal.on('shown.bs.modal', function () {
+        $('#output-filename').focus();
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            if (e.which == ENTER_KEY) {
+                e.preventDefault();
+
+                output_export.click();
+            }
+        });
+    });
+
+    output_modal.draggable({
+        handle: ".modal-header, .modal-footer"
+    });
+
+</script>

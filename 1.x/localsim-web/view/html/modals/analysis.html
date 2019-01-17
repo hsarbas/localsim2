@@ -1,0 +1,107 @@
+<div id="analysis" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <form>
+            <div class="modal-content">
+
+                <!-- header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Analysis</h4>
+                </div>
+
+                <!-- body -->
+                <div class="modal-body">
+                    <ul class="nav nav-tabs" id="analysis-tabs">
+                        <li class="active"><a data-toggle="tab" href="#u-k-tab">u & k</a></li>
+                        <li><a data-toggle="tab" href="#q-tab">q</a></li>
+                        <li><a data-toggle="tab" href="#cvcc-tab">CVCC</a></li>
+                        <li><a data-toggle="tab" href="#stoplight-tab">Stoplight</a></li>
+                        <li><a data-toggle="tab" href="#delay-tab">Delay</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="u-k-tab" class="tab-pane fade in active">
+                            <div class="table-bordered form-fields" id="u-k-container">
+
+                            </div>
+                        </div>
+                        <div id="q-tab" class="tab-pane fade">
+                            <div class="table-bordered form-fields" id="q-container">
+
+                            </div>
+                        </div>
+                        <div id="cvcc-tab" class="tab-pane fade">
+                            <div class="table-bordered form-fields" id="cvcc-container">
+
+                            </div>
+                        </div>
+                        <div id="stoplight-tab" class="tab-pane fade">
+                            <div class="table-bordered form-fields" id="stoplight-container">
+
+                            </div>
+                        </div>
+                        <div id="delay-tab" class="tab-pane fade">
+                            <div class="table-bordered form-fields" id="delay-container">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-bordered form-fields">
+                        <button type="button" class="btn btn-default" id="analysis-select">Select all</button>
+                        <button type="button" class="btn btn-default" id="analysis-deselect">Deselect all</button>
+                    </div>
+                </div>
+
+                <!-- footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="analysis-submit">Submit</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+    let analysis_modal = $('#analysis');
+    let analysis_submit = $('#analysis-submit');
+
+    analysis_submit.click(function(){
+        app.analysis_popup.do_();
+    });
+
+    $('#analysis-select').click(function(){
+        app.analysis_popup.select_all();
+    });
+
+    $('#analysis-deselect').click(function(){
+        app.analysis_popup.deselect_all();
+    });
+
+    analysis_modal.on('hidden.bs.modal', function(){
+        $(this).find('form').trigger('reset');
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            app.keypress_callback(e);
+        });
+    });
+
+    analysis_modal.on('shown.bs.modal', function () {
+        $('#analysis-submit').focus();
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            if (e.which == ENTER_KEY) {
+                e.preventDefault();
+
+                analysis_submit.click();
+            }
+        });
+    });
+
+    analysis_modal.draggable({
+        handle: ".modal-header"
+    });
+</script>

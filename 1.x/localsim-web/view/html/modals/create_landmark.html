@@ -1,0 +1,82 @@
+<div id="create-landmark" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <form>
+            <div class="modal-content">
+
+                <!-- header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create Landmark</h4>
+                </div>
+
+                <!-- body -->
+                <div class="modal-body container-fluid">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="table-bordered form-fields">
+                                <label for="landmark-size">Size:</label>
+                                <select class="form-control form-fields-row" id="landmark-size">
+                                    <option>12</option>
+                                    <option>15</option>
+                                    <option>18</option>
+                                    <option>21</option>
+                                    <option selected>24</option>
+                                    <option>27</option>
+                                    <option>30</option>
+                                    <option>33</option>
+                                    <option>36</option>
+                                </select>
+
+                                <label for="landmark-label">Label:</label>
+                                <input title="label" type="text" class="form-control" id="landmark-label">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-success" id="landmark-submit">Create landmark</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+
+    let landmark_modal = $("#create-landmark");
+    let landmark_submit = $('#landmark-submit');
+
+    landmark_submit.click(function(){
+        app.create_landmark_popup.do_();
+    });
+
+    landmark_modal.on('hidden.bs.modal', function(){
+        $(this).find('form').trigger('reset');
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            app.keypress_callback(e);
+        });
+    });
+
+    landmark_modal.on('shown.bs.modal', function () {
+        $('#landmark-label').focus();
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            if (e.which == ENTER_KEY) {
+                e.preventDefault();
+
+                landmark_submit.click();
+            }
+        });
+    });
+
+    landmark_modal.draggable({
+        handle: ".modal-header, .modal-footer"
+    });
+
+</script>

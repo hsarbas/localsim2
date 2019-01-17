@@ -1,0 +1,88 @@
+<div id="match-conflict" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <form>
+            <div class="modal-content">
+
+                <!-- header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Match Conflict Area</h4>
+                </div>
+
+                <!-- body -->
+                <div class="modal-body container-fluid">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="table-bordered form-fields">
+                                <div class="row form-fields-row">
+                                    <div class="col-sm-5"><p>Conflict group/s:</p></div>
+                                    <div class="col-sm-7"><input readonly title="name" type="text" class="form-control" id="match-conflict-name"></div>
+                                </div>
+                            </div>
+
+                            <div class="table-bordered form-fields">
+                                <label for="match-conflict-data">Conflict areas:</label>
+                                <select size="10" multiple class="form-control" id="match-conflict-data">
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-danger" id="match-conflict-clear">Clear groups</button>
+                    <button type="button" class="btn btn-default btn-success" id="match-conflict-submit">Create group</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    let match_modal = $('#match-conflict');
+    let match_conflict_submit = $('#match-conflict-submit');
+    let match_conflict_clear = $('#match-conflict-clear');
+
+    match_conflict_clear.click(function(){
+        app.match_conflict_popup.clear_conflict_group();
+    });
+
+    match_conflict_submit.click(function(){
+        app.match_conflict_popup.do_();
+    });
+
+
+    match_modal.on('hidden.bs.modal', function(){
+        app.match_conflict_popup.reset_colors();
+        $(this).find('form').trigger('reset');
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            app.keypress_callback(e);
+        });
+    });
+
+    match_modal.on('shown.bs.modal', function(){
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            if (e.which == ENTER_KEY) {
+                e.preventDefault();
+
+                match_conflict_submit.click();
+            }
+        });
+    });
+
+    match_modal.draggable({
+        handle: ".modal-header, .modal-footer"
+    });
+
+    $('#match-conflict-data').change(function(){
+        let value = $(this).val();
+        app.match_conflict_popup.on_select(value);
+    });
+
+</script>

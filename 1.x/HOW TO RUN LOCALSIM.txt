@@ -1,0 +1,16 @@
+﻿===== INSTRUCTIONS ON RUNNING LOCALSIM APP =====
+
+FOR WINDOWS USERS:
+	1. Right click on LocalSIM.exe
+	2. Click ‘Run as admin’. The server user-interface will appear.
+	3. Click ‘Run server’
+	4. Without closing the server UI, open your browser and type ‘localhost’. You will then be directed to the localsim main page.
+
+
+FOR MACOS USERS:
+	1. Open Terminal. You can use spotlight search if no shortcut is available.
+	2. Navigate to the localsim_v2.0/main folder.
+		- type cd <path to localsim_v2.0/main>
+		- For example, if the localsim_v2.0 folder is located in the desktop, type ‘cd Desktop/localsim_v2.0/main’ without the quotation marks.
+	3. On the same terminal, type ‘sudo ./LocalSIM’. The server user-interface will appear.
+	4. Without closing the server UI, open your browser and type ‘localhost’. You will then be directed to the localsim main page.

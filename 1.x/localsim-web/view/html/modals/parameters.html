@@ -1,0 +1,169 @@
+<div id="parameters" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <form>
+            <div class="modal-content">
+
+                <!-- header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Simulation Parameters</h4>
+                </div>
+
+                <!-- body -->
+                <div class="modal-body">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#parameters-car-following">Car following model</a></li>
+                        <li><a data-toggle="tab" href="#parameters-lane-changing">Lane changing model</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="parameters-car-following" class="tab-pane fade in active">
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="table-bordered form-fields">
+
+                                        <div class="row form-fields-row">
+                                            <div class="col-sm-6">
+                                                <label>Desired velocity (m/s):</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input title="desired-velocity" type="text" class="form-control" id="params-desired-velocity">
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-fields-row">
+                                            <div class="col-sm-6">
+                                                <label>Minimum headway (m):</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input title="min-gap-v0" type="text" class="form-control" id="params-min-gap-v0">
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-fields-row">
+                                            <div class="col-sm-6">
+                                                <label>Safe time headway (s):</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input title="min-gap-v0" type="text" class="form-control" id="params-safe-time-headway">
+                                            </div>
+                                        </div>
+
+                                        <button type="button" class="btn btn-default btn-success" id="params-cf-save">Save</button>
+                                        <button type="button" class="btn btn-default btn-warning" id="params-cf-default">Default</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="parameters-lane-changing" class="tab-pane fade">
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="table-bordered form-fields">
+
+                                        <div class="row form-fields-row">
+                                            <div class="col-sm-6">
+                                                <label>Acceleration threshold (m/s<sup>2</sup>):</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input title="acceleration-threshold" type="text" class="form-control" id="params-acceleration-threshold">
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-fields-row">
+                                            <div class="col-sm-6">
+                                                <label>Politeness factor:</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input title="politeness-factor" type="text" class="form-control" id="params-politeness-factor">
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-fields-row">
+                                            <div class="col-sm-6">
+                                                <label>Safe braking deceleration (m/s<sup>2</sup>):</label>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input title="safe-breaking-deceleration" type="text" class="form-control" id="params-safe-breaking-deceleration">
+                                            </div>
+                                        </div>
+
+                                        <button type="button" class="btn btn-default btn-success" id="params-lc-save">Save</button>
+                                        <button type="button" class="btn btn-default btn-warning" id="params-lc-default">Default</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-success" id="parameters-done">Done</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+
+    let parameters_modal = $("#parameters");
+    let parameters_done = $("#parameters-done");
+
+    let params_cf_save = $('#params-cf-save');
+    let params_cf_default = $('#params-cf-default');
+
+    let params_lc_save = $('#params-lc-save');
+    let params_lc_default = $('#params-lc-default');
+
+    let params_desired_velocity = $('#params-desired-velocity');
+
+    parameters_done.click(function(){
+        app.paramaters_popup.do_();
+    });
+
+    params_cf_save.click(function(){
+        app.paramaters_popup.car_following_save();
+    });
+
+    params_cf_default.click(function(){
+        app.paramaters_popup.car_following_default();
+    });
+
+    params_lc_save.click(function(){
+        app.paramaters_popup.lane_changing_save();
+    });
+
+    params_lc_default.click(function(){
+        app.paramaters_popup.lane_changing_default();
+    });
+
+    parameters_modal.on('hidden.bs.modal', function(){
+        $(this).find('form').trigger('reset');
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            app.keypress_callback(e);
+        });
+    });
+
+    parameters_modal.on('shown.bs.modal', function () {
+        params_desired_velocity.focus();
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            if (e.which == ENTER_KEY) {
+                e.preventDefault();
+
+                parameters_done.click();
+            }
+        });
+    });
+
+    parameters_modal.draggable({
+        handle: ".modal-header, .modal-footer"
+    });
+
+</script>

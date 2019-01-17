@@ -1,0 +1,73 @@
+<div id="create-survey" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <form>
+            <div class="modal-content">
+
+                <!-- header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create Survey Zone</h4>
+                </div>
+
+                <!-- body -->
+                <div class="modal-body container-fluid">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="table-bordered form-fields">
+                                <label>Collection Frequency (per agent):</label>
+                                <div class="radio">
+                                    <label><input type="radio" name="survey-frequency" value='Unique'>Unique</label>
+                                </div>
+                                <div class="radio">
+                                    <label><input type="radio" name="survey-frequency" value='Repetitive'>Repetitive</label>
+                                </div>
+                                <div class="radio">
+                                    <label><input type="radio" name="survey-frequency" value='Bus'>Bus Only</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-success" id="survey-submit">Create survey zone</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    let survey_modal = $('#create-survey');
+    let survey_submit = $('#survey-submit');
+
+    survey_submit.click(function(){
+        app.create_survey_popup.do_();
+    });
+
+    survey_modal.on('hidden.bs.modal', function(){
+        $(this).find('form').trigger('reset');
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            app.keypress_callback(e);
+        });
+    });
+
+    survey_modal.on('shown.bs.modal', function () {
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            if (e.which == ENTER_KEY) {
+                e.preventDefault();
+
+                survey_submit.click();
+            }
+        });
+    });
+
+    survey_modal.draggable({
+        handle: ".modal-header, .modal-footer"
+    });
+</script>

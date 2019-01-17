@@ -1,0 +1,69 @@
+<div id="save" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <form>
+            <div class="modal-content">
+
+                <!-- header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Save Map</h4>
+                </div>
+
+                <!-- body -->
+                <div class="modal-body container-fluid">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="table-bordered form-fields">
+                                <p>Save file as:</p>
+                                <input title="filename" type="text" class="form-control" id="save-filename">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-success" id="save-submit">Save map file</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+
+    let save_modal = $("#save");
+    let save_submit = $('#save-submit');
+
+    save_submit.click(function(){
+        app.save_popup.do_();
+    });
+
+    save_modal.on('hidden.bs.modal', function(){
+        $(this).find('form').trigger('reset');
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            app.keypress_callback(e);
+        });
+    });
+
+    save_modal.on('shown.bs.modal', function () {
+        $('#save-filename').focus();
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            if (e.which == ENTER_KEY) {
+                e.preventDefault();
+
+                save_submit.click();
+            }
+        });
+    });
+
+    save_modal.draggable({
+        handle: ".modal-header, .modal-footer"
+    });
+
+</script>

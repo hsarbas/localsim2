@@ -1,0 +1,36 @@
+const DT = 0.25;
+
+const MEAN_CAR_WIDTH = 1.83;
+const MEAN_CAR_LENGTH = 4.81;
+
+const MEAN_BUS_WIDTH = 2.5;
+const MEAN_BUS_LENGTH = 11.6;
+
+const MEAN_TRUCK_WIDTH = 2.42;
+const MEAN_TRUCK_LENGTH = 13.6;
+
+const MEAN_JEEP_WIDTH = 1.72;
+const MEAN_JEEP_LENGTH = 5.9;
+
+const MEAN_MOTORCYCLE_WIDTH = 0.675;
+const MEAN_MOTORCYCLE_LENGTH = 1.82;
+
+const MEAN_TRICYCLE_WIDTH = 1.040;
+const MEAN_TRICYCLE_LENGTH = 1.625;
+
+const LEFT = -1;
+const THROUGH = 0;
+const RIGHT = 1;
+
+const NORMAL_MERGE = 'M';
+const COURTESY_MERGE = 'C';
+const FORCED_MERGE = 'F';
+
+const LC_DELAY = 5;  // seconds
+
+const CAR_DEFAULT_DIST = 0.167;
+const BUS_DEFAULT_DIST = 0.167;
+const JEEP_DEFAULT_DIST = 0.167;
+const MOTORCYCLE_DEFAULT_DIST = 0.167;
+const TRICYCLE_DEFAULT_DIST = 0.167;
+const TRUCK_DEFAULT_DIST = 0.165;

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../bootstrap/css/custom-main.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="../bootstrap/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
+
+        <title>Project LocalSim</title>
+        <link href="../bootstrap/img/favicon.png" id="favicon" rel="shortcut icon">
+    </head>
+
+    <body>
+        <script>
+            $('body').css('display', 'none');
+            $(document).ready(function(){
+                $('body').fadeIn(1000);
+            });
+
+            window.addEventListener('selectstart', function(e){ e.preventDefault(); });
+
+        </script>
+        <!--div for saving files-->
+        <div id="save-link" style="display: none">
+            <a id="dl-link" download>a</a>
+        </div>
+
+        <!-- Navigation Bar -->
+        <header>
+            <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="main.html">LocalSIM Traffic Simulator</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown" id="file-container">
+                            <a id="file-menu" class="dropdown-toggle hvr-underline-from-center" data-toggle="dropdown" href="#">File<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" id="new-map">New Map</a></li>
+                                <li><a href="#" id="download-link">Save Map...</a>
+                                    <!--<form id="save-submit" action="/" method="post" enctype="multipart/form-data">-->
+                                    <!--<input osmfile-save" type="hidden" naosmfile-save" style="width: 1px; height: 1px">-->
+                                    <!--</form>-->
+                                </li>
+                                <li><a href="#" id="upload-link">Load Map...</a>
+                                    <form id="load-submit" action="/" method="post" enctype="multipart/form-data">
+                                        <input id="file-load" type="file" name="file-load" accept=".lmf" style="visibility: hidden; height: 1px; width: 1px">
+                                    </form>
+                                </li>
+                                <li class="divider"></li>
+                                <li><a href="#" id="import-osm">Import Guide...</a>
+                                    <form id="load-osm-submit" action="/" method="post" enctype="multipart/form-data">
+                                        <input id="import-osm-load" type="file" name="import-osm-file" accept="image/*" style="visibility: hidden; height: 1px; width: 1px">
+                                    </form>
+                                </li>
+                                <li><a href="#" id="remove-osm">Remove Guide</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle hvr-underline-from-center" data-toggle="dropdown" href="#">Tools<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li id="undo-container"><a href="#" data-backdrop="static" id="undo">Undo Action</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#" data-backdrop="static" id="inspect-map-option">Inspect Map...</a></li>
+
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle hvr-underline-from-center" data-toggle="dropdown" href="#">Simulation<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li id="traffic-data-container"><a id="traffic-data-option" href="#" data-toggle="modal" data-backdrop="static">Traffic Data...</a></li>
+                                <li id="parameters-container"><a href="#" data-toggle="modal" data-backdrop="static" id="parameters-option">Parameters...</a></li>
+                                <li class="divider"></li>
+                                <li id="play-container"><a href="#" data-toggle="modal" data-backdrop="static" id="play-menu">Play...</a></li>
+                                <li id="pause-container"><a href="#" id="pause-menu">Pause</a></li>
+                                <li id="stop-container"><a href="#" id="stop-menu">Stop</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#" id="logout" class="hvr-underline-from-center">Quit</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <div class="container-fluid" id="main-content">
+            <!-- Toolbar -->
+            <div class="row">
+                <div id="toolbar">
+                    <div class="toolbar-grp" id="legend">
+                        <label class="toolbar-label">Legend</label>
+                        <img src="../bootstrap/img/legend.png" id="legend-img" alt="legend image">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Canvas -->
+            <div class="row">
+                <div id="canvas-container">
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="footer">
+            <div class="col-sm-4" id="status-bar-container">
+                <label id="status-bar"></label>
+            </div>
+            <div class="col-sm-4" id="play-speed-container">
+
+                <div class="col-sm-4">
+                    <label>Animation speed:</label>
+                </div>
+                <div class="col-sm-8">
+                    <input id="play-speed-zoom" type="range" value="440" min="10" max="500" step="10">
+                </div>
+            </div>
+            <!-- zoom tool -->
+            <div class="col-sm-4" id="zoom-container">
+                <div class="col-sm-4">
+                    <label>Zoom level:</label>
+                </div>
+                <div class="col-sm-8">
+                    <input id="zoom-slider" type="range" value="1.0" min=".10" max="5.0" step=".10">
+                </div>
+            </div>
+        </footer>
+
+        <!-- include external html code -->
+        <div data-include="rc_menu"></div>
+        <div data-include="modals/traffic_data"></div>
+        <div data-include="modals/parameters"></div>
+        <div data-include="modals/analysis"></div>
+        <div data-include="modals/play"></div>
+        <div data-include="modals/create_uroad"></div>
+        <div data-include="modals/create_iroad"></div>
+        <div data-include="modals/create_stoplight"></div>
+        <div data-include="modals/create_stop_yield"></div>
+        <div data-include="modals/create_speed_limit"></div>
+        <div data-include="modals/create_type_restriction"></div>
+        <div data-include="modals/create_ptstop"></div>
+        <div data-include="modals/create_survey_zone"></div>
+        <div data-include="modals/create_conflict_area"></div>
+        <div data-include="modals/match_conflict_area"></div>
+        <div data-include="modals/create_landmark"></div>
+        <div data-include="modals/set_scaling"></div>
+        <div data-include="modals/inspect_map"></div>
+        <div data-include="modals/save"></div>
+        <div data-include="modals/play_progress"></div>
+        <div data-include="modals/load_progress"></div>
+        <div data-include="modals/output"></div>
+
+        <script src="../../analysis/matrices.js"></script>
+        <script src="../../utils/signal.js"></script>
+        <script src="../../utils/itertools.js"></script>
+        <script src="../../utils/tools.js"></script>
+        
+        <script src="../js/config.js"></script>
+        <script src="../js/localsim-init.js"></script>
+        <script src="../js/toolbar.js"></script>
+
+        <script src="../../serializer/base.js"></script>
+        <script src="../../serializer/codec.js"></script>
+
+        <script src="../../models/infra/road/road_const.js"></script>
+        <script src="../../models/infra/road/node.js"></script>
+        <script src="../../models/infra/road/road.js"></script>
+        <script src="../../models/infra/control/control_const.js"></script>
+        <script src="../../models/infra/control/base.js"></script>
+        <script src="../../models/infra/control/concrete.js"></script>
+        <script src="../../models/infra/conflict_zone.js"></script>
+        <script src="../../models/infra/landmark.js"></script>
+        <script src="../../models/infra/survey_zone.js"></script>
+        <script src="../../models/agent/base.js"></script>
+        <script src="../../models/agent/agent_const.js"></script>
+        <script src="../../models/agent/concrete.js"></script>
+        <script src="../../models/meta/traffic.js"></script>
+        <script src="../../models/scene.js"></script>
+
+        <script src="../../controller/base.js"></script>
+        <script src="../../controller/utils.js"></script>
+
+        <script src="../drawables/popups_pkg/toolbar_popups.js"></script>
+        <script src="../drawables/popups_pkg/menubar_popups.js"></script>
+        <script src="../drawables/popups_pkg/sim_popups.js"></script>
+        <script src="../drawables/gc.js"></script>
+        <script src="../drawables/const.js"></script>
+        <script src="../drawables/dnode.js"></script>
+        <script src="../drawables/droad.js"></script>
+        <script src="../drawables/dcontrol_line.js"></script>
+        <script src="../drawables/dcontrol_zone.js"></script>
+        <script src="../drawables/dsurvey_zone.js"></script>
+        <script src="../drawables/dconflict_zone.js"></script>
+        <script src="../drawables/dlandmark.js"></script>
+        <script src="../drawables/factory.js"></script>
+        <script src="../drawables/dagent.js"></script>
+
+        <script src="../js/external.js"></script>
+        <script src="../js/main.js"></script>
+
+        <script>
+            var config = conf();
+            var explored = [];
+            let app = new Main();
+            $(document).ready(function(){
+                $('[data-toggle="tooltip"]').tooltip();
+                app.gc = new GraphicsContext('canvas-container');
+                app.toolbar = new Toolbar('toolbar');
+                app.toolbar.init_buttons(app.gc);
+
+                app.gc.change_menu_state(NAVBAR_PAUSE_STOP, PAUSE_STOP, DISABLED);
+
+                $(document).keydown(function(e){
+                    app.keypress_callback(e);
+                });
+
+                $('#inspect-map-option').click(function(){
+                    app.inspect_road();
+                });
+
+                $('#traffic-data-option').click(function(){
+                    app.view_traffic_data();
+                });
+
+                $('#parameters-option').click(function(){
+                    app.view_parameters();
+                });
+
+                $('#new-map').click(function(){
+                    app.reset_map();
+                });
+
+                $('#play-menu').click(function(){
+                    app.play();
+                });
+
+                $('#pause-menu').click(function(){
+                    app.pause();
+                });
+
+                $('#stop-menu').click(function(){
+                    app.stop();
+                });
+
+                $('#import-osm').click(function(){
+                    app.open_import_guide_dialog();
+                });
+
+                $('#import-osm-load').change(function(event){
+                    app.import_osm(event);
+                });
+
+                $('#remove-osm').click(function(){
+                    app.remove_osm();
+                });
+
+                $('#download-link').click(function(){
+                    app.save();
+                });
+
+                $('#upload-link').click(function(){
+                    app.open_load_dialog();
+                });
+
+                $('#file-load').change(function(event){
+                    app.load(event);
+                });
+
+                $('#logout').click(function(){
+                    app.logout();
+                });
+
+                $('#undo').click(function(){
+                    app.undo();
+                });
+
+                $("#zoom-slider").on("change", function(){
+                    app.zoom(this.value);
+                });
+
+                $("#play-speed-zoom").on("change", function(){
+                    app.change_animation_speed(this.value);
+                })
+            });
+        </script>
+
+    </body>
+</html>

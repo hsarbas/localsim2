@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../bootstrap/css/new_index.css">
+
+    <title>Project LocalSim</title>
+</head>
+
+<body class="bg">
+    <div class="container">
+        <img src="../bootstrap/img/logo.png" alt="LocalSim logo" id="logo">
+
+        <div id="login-container">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-sm-2 login-label" for="email">Email:</label>
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="email" placeholder="Enter email" disabled="disabled">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2 login-label" for="pwd">Password:</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="pwd" placeholder="Enter password" disabled="disabled">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" class="btn btn-success" id="login-btn">Start simulator</button>
+                        <!--<button type="button" class="btn btn-success" id="login-btn">Log in</button>-->
+                        <button type="button" class="btn btn-default" id="signup-btn" disabled="disabled">Sign up</button>
+                    </div>
+                </div>
+
+                <div class="alert alert-danger col-sm-offset-2 col-sm-10" id="login-error">
+                    <strong>Log in error!</strong> Please review your login credentials.
+                </div>
+
+                <div class="alert alert-danger col-sm-offset-2 col-sm-10" id="signup-error">
+                    <strong>Sign up error!</strong> Invalid inputs or email is already in use.
+                </div>
+
+                <div class="alert alert-success col-sm-offset-2 col-sm-10" id="signup-success">
+                    <strong>Sign up success!</strong> You can now login using your credentials.
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    $('body').css('display', 'none');
+        $(document).ready(function(){
+            $('body').fadeIn(1000);
+        });
+
+        window.addEventListener('selectstart', function(e){ e.preventDefault(); });
+
+    $(document).keydown(function(e){
+        if (e.which === 13){
+            $('#login-btn').click();
+        }
+    });
+
+    $('#email').focus();
+
+    hide_alerts();
+
+    // $('#login-btn').click(function(){
+    //
+    //     hide_alerts();
+    //
+    //     let email = $('#email').val();
+    //     let password = $('#pwd').val();
+    //
+    //     let raw = "LOGIN " + email + " " + password;
+    //
+    //     $.post("/index.html", raw, function(data){
+    //         if (data === 'login success'){
+    //             $('#login-error').hide();
+    //             location.href = "main.html";
+    //         }
+    //         else{
+    //             $('#login-error').show();
+    //         }
+    //     });
+    //
+    //     reset_email_password()
+    // });
+
+    $('#login-btn').click(function(){
+
+        location.href = "main.html";
+    });
+
+    $('#signup-btn').click(function(){
+
+        hide_alerts();
+
+        let email = $('#email').val();
+        let password = $('#pwd').val();
+
+        let raw = "SIGNUP " + email + " " + password;
+
+        $.post("/index.html", raw, function(data){
+            if (data === 'signup success'){
+                $('#signup-success').show();
+            }
+            else{
+                $('#signup-error').show();
+            }
+        });
+
+        reset_email_password()
+    });
+
+    function reset_email_password(){
+        $('#email').val('');
+        $('#pwd').val('');
+    }
+
+    function hide_alerts(){
+        $('#login-error').hide();
+        $('#signup-error').hide();
+        $('#signup-success').hide();
+    }
+
+</script>
+
+</html>

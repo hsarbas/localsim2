@@ -1,0 +1,89 @@
+<div id="create-ptstop" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <form>
+            <div class="modal-content">
+
+                <!-- header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create Public Transport Zone</h4>
+                </div>
+
+                <!-- body -->
+                <div class="modal-body container-fluid">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="table-bordered form-fields">
+                                <label for="ptstop-label">Label:</label>
+                                <input title="label" type="text" class="form-control" id="ptstop-label">
+                            </div>
+
+                            <div class="table-bordered form-fields">
+                                <label for="ptstop-dist">Dwell time (lognormal distribution):</label>
+                                <div class="table form-fields" id="ptstop-dist">
+                                    <div class="row form-fields-row">
+                                        <label class="col-sm-4" for="ptstop-mean">Mean:</label>
+                                        <div class="col-sm-8"><input title="label" type="text" class="form-control" id="ptstop-mean"></div>
+                                    </div>
+                                    <div class="row form-fields-row">
+                                        <label class="col-sm-4" for="ptstop-std-dev">Standard deviation:</label>
+                                        <div class="col-sm-8"><input title="label" type="text" class="form-control" id="ptstop-std-dev"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-success" id="ptstop-submit">Create bus terminal zone</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+    let ptstop_modal = $('#create-ptstop');
+    let ptstop_submit = $('#ptstop-submit');
+
+    ptstop_submit.click(function(){
+        app.create_ptstop_popup.do_();
+    });
+
+    ptstop_modal.on('hidden.bs.modal', function(){
+        $(this).find('form').trigger('reset');
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            app.keypress_callback(e);
+        });
+    });
+
+    ptstop_modal.on('shown.bs.modal', function () {
+        $('#ptstop-label').focus();
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            if (e.which == ENTER_KEY) {
+                e.preventDefault();
+
+                ptstop_submit.click();
+            }
+        });
+    });
+
+    ptstop_modal.draggable({
+        handle: ".modal-header, .modal-footer"
+    });
+
+    $('#ptstop-add').click(function(){
+        var input = $(document.createElement('input'));
+        input.attr("type", "osm");
+        input.trigger('click');
+
+    });
+</script>

@@ -1,0 +1,77 @@
+<div id="create-restrict" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <form>
+            <div class="modal-content">
+
+                <!-- header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create Type Restriction Zone</h4>
+                </div>
+
+                <!-- body -->
+                <div class="modal-body container-fluid">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="table-bordered form-fields">
+                                <label for="restrict-bias">Bias:</label>
+                                <input title="bias" type="text" class="form-control" id="restrict-bias">
+                            </div>
+                            <div class="table-bordered form-fields">
+                                <label for="restrict-priority">Priority vehicles:</label>
+                                <select multiple class="form-control" id="restrict-priority">
+                                    <option>Car</option>
+                                    <option>Jeep</option>
+                                    <option>Bus</option>
+                                    <option>Truck</option>
+                                    <option>Motorcycle</option>
+                                    <option>Tricycle</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-success" id="restrict-submit">Create type restriction zone</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    let restrict_modal = $('#create-restrict');
+    let restrict_submit = $('#restrict-submit');
+
+    restrict_submit.click(function(){
+        app.create_restrict_popup.do_();
+    });
+
+    restrict_modal.on('hidden.bs.modal', function(){
+        $(this).find('form').trigger('reset');
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            app.keypress_callback(e);
+        });
+    });
+
+    restrict_modal.on('shown.bs.modal', function () {
+        $('#restrict-bias').focus();
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            if (e.which == ENTER_KEY) {
+                e.preventDefault();
+
+                restrict_submit.click();
+            }
+        });
+    });
+
+    restrict_modal.draggable({
+        handle: ".modal-header, .modal-footer"
+    });
+</script>

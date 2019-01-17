@@ -1,0 +1,309 @@
+<div id="traffic-data" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-long">
+
+        <!-- Modal content-->
+        <form>
+            <div class="modal-content">
+
+                <!-- header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Traffic Data</h4>
+                </div>
+
+                <!-- body -->
+                <div class="modal-body">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#traffic-data-entry">Entry Points</a></li>
+                        <li><a data-toggle="tab" href="#traffic-data-matrix">Route Matrix</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="traffic-data-entry" class="tab-pane fade in active">
+                            <div class="row">
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <div class="table-bordered form-fields">
+                                                <label for="traffic-data-entry-roads">Road:</label>
+                                                <select class="form-control" id="traffic-data-entry-roads" size="15">
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="form-group">
+                                            <div class="table-bordered form-fields">
+                                                <label for="traffic-data-type-dist">Vehicle type distribution:</label>
+                                                <div class="table form-fields" id="traffic-data-type-dist">
+                                                    <div class="row form-fields-row">
+                                                        <label class="col-sm-4" for="traffic-data-type-car">Car:</label>
+                                                        <div class="col-sm-8"><input title="label" type="text" class="form-control" id="traffic-data-type-car"></div>
+                                                    </div>
+
+                                                    <div class="row form-fields-row">
+                                                        <label class="col-sm-4" for="traffic-data-type-jeep">Jeepney:</label>
+                                                        <div class="col-sm-8"><input title="label" type="text" class="form-control" id="traffic-data-type-jeep"></div>
+                                                    </div>
+
+                                                    <div class="row form-fields-row">
+                                                        <label class="col-sm-4" for="traffic-data-type-bus">Bus:</label>
+                                                        <div class="col-sm-8"><input title="label" type="text" class="form-control" id="traffic-data-type-bus"></div>
+                                                    </div>
+
+                                                    <div class="row form-fields-row">
+                                                        <label class="col-sm-4" for="traffic-data-type-truck">Truck:</label>
+                                                        <div class="col-sm-8"><input title="label" type="text" class="form-control" id="traffic-data-type-truck"></div>
+                                                    </div>
+
+                                                    <div class="row form-fields-row">
+                                                        <label class="col-sm-4" for="traffic-data-type-motorcycle">Motorcycle:</label>
+                                                        <div class="col-sm-8"><input title="label" type="text" class="form-control" id="traffic-data-type-motorcycle"></div>
+                                                    </div>
+
+                                                    <div class="row form-fields-row">
+                                                        <label class="col-sm-4" for="traffic-data-type-tricycle">Tricycle:</label>
+                                                        <div class="col-sm-8"><input title="label" type="text" class="form-control" id="traffic-data-type-tricycle"></div>
+                                                    </div>
+
+                                                </div>
+                                                <button type="button" class="btn btn-default btn-popup btn-success" id="traffic-data-entry-update">Update</button>
+                                                <button type="button" class="btn btn-default btn-popup btn-warning" id="traffic-data-entry-default">Default</button>
+                                            </div>
+
+                                            <div class="table-bordered form-fields">
+                                                <label for="volumes">Volume distribution</label>
+                                                <div class="table-bordered form-fields" id="volumes">
+                                                    <label for="traffic-data-entry-interval-input">Interval:</label>
+                                                    <input type="text" name="Interval" id="traffic-data-entry-interval-input">
+                                                    <label for="traffic-data-entry-interval-select"></label><select id="traffic-data-entry-interval-select">
+                                                        <option>min</option>
+                                                        <option>hr</option>
+                                                    </select>
+                                                </div>
+                                                <div class="table-bordered form-fields">
+                                                    <div class="table form-fields">
+                                                        <label for="traffic-data-entry-intervals">Time(hh:mm)   : Vehicle count(v) : Flow Rate (hfr):</label>
+                                                    </div>
+                                                    <div class="table form-fields" id="traffic-data-entry-intervals">
+
+                                                    </div>
+
+                                                    <button type="button" class="btn btn-default btn-popup" id="traffic-data-entry-add">Add entry</button>
+                                                    <button type="button" class="btn btn-default btn-popup" id="traffic-data-entry-delete">Delete last entry</button>
+                                                    <button type="button" class="btn btn-success btn-popup" id="traffic-data-entry-save">Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                            </div>
+                        </div>
+
+                        <div id="traffic-data-matrix" class="tab-pane fade">
+                            <div class="row table-bordered form-fields">
+                                <div class="col-sm-4"><label>Routing mode:</label></div>
+                                <div class="col-sm-8">
+                                    <label class="radio-inline"><input type="radio" name="traffic-data-matrix-assignment" value="dynamic" id="traffic-data-matrix-assignment-dynamic">Dynamic</label>
+                                    <label class="radio-inline"><input type="radio" name="traffic-data-matrix-assignment" value="static" id="traffic-data-matrix-assignment-static">Static</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <div class="table-bordered form-fields">
+                                            <label for="traffic-data-matrix-roads">Road:</label>
+                                            <select class="form-control" id="traffic-data-matrix-roads" size="15">
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <div class="table-bordered form-fields">
+                                            <label>Dynamic Routing Origin-Destination Demand:</label>
+
+                                            <div class="form-fields" id="traffic-data-matrix-dynamic-dist">
+
+                                            </div>
+
+                                            <button type="button" class="btn btn-default btn-popup btn-success" id="traffic-data-matrix-dynamic-dist-update">Update</button>
+                                            <button type="button" class="btn btn-default btn-popup btn-warning" id="traffic-data-matrix-dynamic-dist-default">Default</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <div class="table-bordered form-fields">
+                                            <label>Static Routing Road Demand:</label>
+
+                                            <div class="form-fields">
+                                                <label class="col-sm-4">Road:</label>
+                                                <label class="col-sm-8">Car turning percentage:</label>
+                                                <div class="row" id="traffic-data-matrix-dist-car">
+
+                                                </div>
+
+                                                <label class="col-sm-4">Road:</label>
+                                                <label class="col-sm-8">Jeepney turning percentage:</label>
+                                                <div class="row" id="traffic-data-matrix-dist-jeep">
+
+                                                </div>
+
+                                                <label class="col-sm-4">Road:</label>
+                                                <label class="col-sm-8">Bus turning percentage:</label>
+                                                <div class="row" id="traffic-data-matrix-dist-bus">
+
+                                                </div>
+
+                                                <label class="col-sm-4">Road:</label>
+                                                <label class="col-sm-8">Truck turning percentage:</label>
+                                                <div class="row" id="traffic-data-matrix-dist-truck">
+
+                                                </div>
+
+                                                <label class="col-sm-4">Road:</label>
+                                                <label class="col-sm-8">Motorcycle turning percentage:</label>
+                                                <div class="row" id="traffic-data-matrix-dist-motorcycle">
+
+                                                </div>
+
+                                                <label class="col-sm-4">Road:</label>
+                                                <label class="col-sm-8">Tricycle turning percentage:</label>
+                                                <div class="row" id="traffic-data-matrix-dist-tricycle">
+
+                                                </div>
+                                            </div>
+
+                                            <button type="button" class="btn btn-default btn-popup btn-success" id="traffic-data-matrix-static-dist-update">Update</button>
+                                            <button type="button" class="btn btn-default btn-popup btn-warning" id="traffic-data-matrix-static-dist-default">Default</button>
+                                        </div>
+
+                                        <!--<div class="table-bordered form-fields">-->
+                                            <!--<label for="traffic-data-matrix-onset">Onset Distance (m):</label>-->
+                                            <!--<input title="flow-rate" type="text" class="form-control" id="traffic-data-matrix-onset">-->
+                                            <!--<button type="button" class="btn btn-default btn-popup btn-success" id="traffic-data-matrix-save">Save</button>-->
+                                        <!--</div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-success" id="traffic-data-done">Done</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+
+    let traffic_modal = $("#traffic-data");
+    let traffic_data_done = $('#traffic-data-done');
+    let traffic_data_entry_update_btn = $('#traffic-data-entry-update');
+    let traffic_data_entry_default_btn = $('#traffic-data-entry-default');
+    let traffic_data_matrix_update_btn = $('#traffic-data-matrix-static-dist-update');
+    let traffic_data_matrix_default_btn = $('#traffic-data-matrix-static-dist-default');
+    let traffic_data_matrix_dynamic_btn = $('#traffic-data-matrix-assignment-dynamic');
+    let traffic_data_matrix_static_btn = $('#traffic-data-matrix-assignment-static');
+    let traffic_data_matrix_dynamic_save = $('#traffic-data-matrix-dynamic-dist-update');
+    let traffic_data_matrix_dynamic_default = $('#traffic-data-matrix-dynamic-dist-default');
+
+    $('#traffic-data-entry-roads').change(function(){
+        app.traffic_data_popup.on_tf_select();
+    });
+
+    $('#traffic-data-entry-save').click(function(){
+        app.traffic_data_popup.tf_save_option();
+    });
+
+    $('#traffic-data-entry-add').click(function(){
+        app.traffic_data_popup.tf_add_option();
+    });
+
+    $('#traffic-data-entry-delete').click(function(){
+        app.traffic_data_popup.tf_delete_option();
+    });
+
+    $('#traffic-data-matrix-roads').change(function(){
+        app.traffic_data_popup.on_rd_select();
+    });
+
+    $('#traffic-data-matrix-save').click(function(){
+        app.traffic_data_popup.rd_save_option();
+    });
+
+    traffic_data_done.click(function(){
+        app.traffic_data_popup.do_();
+    });
+
+    traffic_modal.on('hidden.bs.modal', function(){
+        $(this).find('form').trigger('reset');
+        $('#traffic-data-entry-save').text('Save');
+        $('#traffic-data-matrix-save').text('Save');
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            app.keypress_callback(e);
+        });
+    });
+
+    traffic_modal.on('shown.bs.modal', function () {
+        $('#traffic-data-done').focus();
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            if (e.which == ENTER_KEY) {
+                e.preventDefault();
+
+                traffic_data_done.click();
+            }
+        });
+    });
+
+    traffic_modal.draggable({
+        handle: ".modal-header, .modal-footer"
+    });
+
+    traffic_data_entry_update_btn.click(function(){
+        app.traffic_data_popup.on_tf_update();
+    });
+
+    traffic_data_entry_default_btn.click(function(){
+        app.traffic_data_popup.on_tf_default();
+    });
+
+    traffic_data_matrix_update_btn.click(function(){
+        app.traffic_data_popup.on_rd_update();
+    });
+
+    traffic_data_matrix_default_btn.click(function(){
+        app.traffic_data_popup.on_rd_default();
+    });
+
+    traffic_data_matrix_dynamic_btn.click(function(){
+        app.traffic_data_popup.on_dynamic_routing();
+    });
+
+    traffic_data_matrix_dynamic_save.click(function(){
+        app.traffic_data_popup.dynamic_routing_save();
+    });
+
+    traffic_data_matrix_dynamic_default.click(function(){
+        app.traffic_data_popup.dynamic_routing_default();
+    });
+
+    traffic_data_matrix_static_btn.click(function(){
+        app.traffic_data_popup.on_static_routing();
+    });
+
+</script>

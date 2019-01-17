@@ -1,0 +1,80 @@
+<div id="create-stoplight" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <form>
+            <div class="modal-content">
+
+                <!-- header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create Stoplight</h4>
+                </div>
+
+                <!-- body -->
+                <div class="modal-body container-fluid">
+                    <div class="table-bordered form-fields">
+                        <label>Time(sec)</label>
+                        <div class="row form-fields-row">
+                            <div class="col-sm-5"><p>Red:</p></div>
+                            <div class="col-sm-7"><input title="red" type="text" class="form-control" id="stoplight-red-time"></div>
+                        </div>
+                        <div class="row form-fields-row">
+                            <div class="col-sm-5"><p>Green:</p></div>
+                            <div class="col-sm-7"><input title="green" type="text" class="form-control" id="stoplight-green-time"></div>
+                        </div>
+                        <div class="row form-fields-row">
+                            <div class="col-sm-5"><p>Yellow:</p></div>
+                            <div class="col-sm-7"><input title="yellow" type="text" class="form-control" id="stoplight-yellow-time"></div>
+                        </div>
+                        <div class="row form-fields-row">
+                            <div class="col-sm-5"><p>Start time:</p></div>
+                            <div class="col-sm-7"><input title="start-time" type="text" class="form-control" id="stoplight-start-time"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-success" id="stoplight-submit">Create stoplight</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+    let stoplight_modal = $('#create-stoplight');
+    let stoplight_submit = $('#stoplight-submit');
+
+    stoplight_submit.click(function(){
+        app.create_stoplight_popup.do_();
+    });
+
+    stoplight_modal.on('hidden.bs.modal', function(){
+        $(this).find('form').trigger('reset');
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            app.keypress_callback(e);
+        });
+    });
+
+    stoplight_modal.on('shown.bs.modal', function () {
+        $('#stoplight-red-time').focus();
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            if (e.which == ENTER_KEY) {
+                e.preventDefault();
+
+                stoplight_submit.click();
+            }
+        });
+    });
+
+    stoplight_modal.draggable({
+        handle: ".modal-header, .modal-footer"
+    });
+
+</script>

@@ -1,0 +1,90 @@
+<div id="inspect-map" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <form>
+            <div class="modal-content">
+
+                <!-- header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Inspect Map</h4>
+                </div>
+
+                <!-- body -->
+                <div class="modal-body">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#uroads">Links</a></li>
+                        <li><a data-toggle="tab" href="#iroads">Transition Links</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="uroads" class="tab-pane fade in active">
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="table-bordered form-fields">
+                                        <select size="10" multiple class="form-control" id="inspect-uroads" ondblclick="double_click(this.value)">
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="iroads" class="tab-pane fade">
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="table-bordered form-fields">
+                                        <select size="10" multiple class="form-control" id="inspect-iroads" ondblclick="double_click(this.value)">
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+
+    function double_click(value){
+        app.inspect_map_popup.on_double_click(value);
+    }
+
+    $('#inspect-uroads').change(function(){
+        document.getElementById("inspect-iroads").value = "";
+        let value = $(this).val()[0];
+        app.inspect_map_popup.on_select(value);
+    });
+
+    $('#inspect-iroads').change(function(){
+        document.getElementById("inspect-uroads").value = "";
+        let value = $(this).val()[0];
+        app.inspect_map_popup.on_select(value);
+    });
+
+    let inspect_map_modal = $('#inspect-map');
+
+    inspect_map_modal.on('hidden.bs.modal', function(){
+        app.inspect_map_popup.reset_colors();
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            app.keypress_callback(e);
+        });
+    });
+
+    inspect_map_modal.on('shown.bs.modal', function(){
+        $(document).off('keydown');
+    });
+
+    inspect_map_modal.draggable({
+        handle: ".modal-header, .modal-footer"
+    });
+
+
+</script>

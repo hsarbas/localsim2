@@ -1,0 +1,51 @@
+<div id="load-progress" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <form>
+            <div class="modal-content">
+
+                <!-- header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Load Map File</h4>
+                </div>
+
+                <!-- body -->
+                <div class="modal-body container-fluid">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="table-bordered form-fields">
+                                <label for="load-spinner">Loading road network...</label>
+                                <div class="loader" id="load-spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+
+    let load_progress_modal = $("#load-progress");
+
+    load_progress_modal.on('hidden.bs.modal', function(){
+        $(this).find('form').trigger('reset');
+        $(document).off('keydown');
+        $(document).keydown(function(e){
+            app.keypress_callback(e);
+        });
+    });
+
+    load_progress_modal.on('shown.bs.modal', function(){
+        $(document).off('keydown');
+    });
+
+    load_progress_modal.draggable({
+        handle: ".modal-header, .modal-footer"
+    });
+
+</script>

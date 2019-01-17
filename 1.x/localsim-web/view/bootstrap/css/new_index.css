@@ -1,0 +1,35 @@
+body, html {
+    height: 100%;
+}
+
+.bg {
+    /* The image used */
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background: url("../img/bg-img.jpg") repeat center;
+    background-size: cover;
+}
+
+#logo{
+    width: 100%;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+#login-container{
+    width: 65%;
+}
+
+#pwd{
+    margin-bottom: 10px;
+}
+
+#login-btn{
+    margin-right: 10px;
+}
+
+.login-label{
+    color: white;
+}
