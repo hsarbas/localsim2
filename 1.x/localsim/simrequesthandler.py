@@ -186,6 +186,8 @@ class SimRequestHandler(BaseHTTPRequestHandler):
             self.send_error(404, 'File not Found')
 
     def do_POST(self):
+        """Handles the POST requests (especially the raw scene data)"""
+
         global _shared_data
         global result
 
@@ -389,6 +391,8 @@ class SimRequestHandler(BaseHTTPRequestHandler):
 
 
 class SimRunHandler(object):
+    """Handler object that takes in the data from the client and runs the simulator"""
+
     def __init__(self):
         self.off_sim = sim.Simulator()
         self.running = None
@@ -422,6 +426,8 @@ class SimRunHandler(object):
         _remove_tmp_files()
 
     def load(self, filename):
+        """Deserializes the scene from JSON to Scene object"""
+
         if filename:
             self.reset_map()
 

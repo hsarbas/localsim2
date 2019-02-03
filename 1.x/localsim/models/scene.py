@@ -93,6 +93,8 @@ def serialize(scene_obj, filename):
 
 
 def deserialize(filename, scene):
+    """Lone method to deserialize JSON file into a Scene object"""
+
     zip_file = zipfile.ZipFile(filename)
     zip_file.extractall()
 
@@ -152,6 +154,8 @@ def x_deserialize(filename):
 
 
 class Scene(object):
+    """Scene object to represent the road map"""
+
     def __init__(self):
         self.iroads = []
         self.uroads = []

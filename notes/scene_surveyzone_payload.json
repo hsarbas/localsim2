@@ -1,0 +1,387 @@
+RUN 6000 static _xtsyvw002 true
+node:{
+    "head": [
+        {
+            "id": 33,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                215,
+                403,
+                "src"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 34,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                779,
+                401,
+                "dst"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 35,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                967,
+                400,
+                "src"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 36,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                1490,
+                398,
+                "dst"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 37,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                875,
+                810,
+                "src"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 38,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                876,
+                487,
+                "dst"
+            ],
+            "kws": {}
+        }
+    ]
+};
+uroad:{
+    "head": [
+        {
+            "id": 39,
+            "cls": "localsim.models.infra.road.road.UninterruptedRoad",
+            "ars": [
+                "link-1",
+                {
+                    "__foreign__": true,
+                    "id": 33,
+                    "cls": "localsim.models.infra.road.node.Node"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 34,
+                    "cls": "localsim.models.infra.road.node.Node"
+                },
+                4,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 40,
+            "cls": "localsim.models.infra.road.road.UninterruptedRoad",
+            "ars": [
+                "link-2",
+                {
+                    "__foreign__": true,
+                    "id": 35,
+                    "cls": "localsim.models.infra.road.node.Node"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 36,
+                    "cls": "localsim.models.infra.road.node.Node"
+                },
+                4,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 41,
+            "cls": "localsim.models.infra.road.road.UninterruptedRoad",
+            "ars": [
+                "link-3",
+                {
+                    "__foreign__": true,
+                    "id": 37,
+                    "cls": "localsim.models.infra.road.node.Node"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 38,
+                    "cls": "localsim.models.infra.road.node.Node"
+                },
+                4,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        }
+    ]
+};
+iroad:{
+    "head": [
+        {
+            "id": 42,
+            "cls": "localsim.models.infra.road.road.InterruptedRoad",
+            "ars": [
+                "t_link-4",
+                {
+                    "__foreign__": true,
+                    "id": 41,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 40,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    2,
+                    3
+                ],
+                [
+                    2,
+                    3
+                ],
+                2,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 43,
+            "cls": "localsim.models.infra.road.road.InterruptedRoad",
+            "ars": [
+                "t_link-5",
+                {
+                    "__foreign__": true,
+                    "id": 39,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 40,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    0,
+                    1
+                ],
+                [
+                    0,
+                    1
+                ],
+                2,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        }
+    ]
+};
+control:{
+    "head": []
+};
+dispatcher:{
+    "head": [
+        {
+            "id": 44,
+            "cls": "localsim.models.meta.traffic.Entry",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 39,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "0,300": [
+                        80,
+                        0.06666666666666667
+                    ]
+                },
+                0,
+                {}
+            ],
+            "kws": {}
+        },
+        {
+            "id": 45,
+            "cls": "localsim.models.meta.traffic.Entry",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 41,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "0,300": [
+                        100,
+                        0.08333333333333333
+                    ]
+                },
+                0,
+                {}
+            ],
+            "kws": {}
+        }
+    ]
+};
+route:{
+    "head": [
+        {
+            "id": 46,
+            "cls": "localsim.models.meta.traffic.Route",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 39,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    {
+                        "__foreign__": true,
+                        "id": 43,
+                        "cls": "localsim.models.infra.road.road.InterruptedRoad"
+                    }
+                ],
+                0
+            ],
+            "kws": {
+                "onset": 564,
+                "emergency_stop": 111,
+                "offset": 83
+            }
+        },
+        {
+            "id": 47,
+            "cls": "localsim.models.meta.traffic.Route",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 41,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    {
+                        "__foreign__": true,
+                        "id": 42,
+                        "cls": "localsim.models.infra.road.road.InterruptedRoad"
+                    }
+                ],
+                0
+            ],
+            "kws": {
+                "onset": 323,
+                "emergency_stop": 111,
+                "offset": 83
+            }
+        }
+    ]
+};
+landmark:{
+    "head": []
+};
+surveyor:{
+    "head": [
+        {
+            "id": 48,
+            "cls": "localsim.models.infra.survey_zone.SurveyZone",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 40,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                255.69220308436547,
+                2,
+                154.99504261357322,
+                "Unique"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 49,
+            "cls": "localsim.models.infra.survey_zone.SurveyZone",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 39,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                213.99156235293984,
+                2,
+                134.0062496489841,
+                "Unique"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 50,
+            "cls": "localsim.models.infra.survey_zone.SurveyZone",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 41,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                53.99354928437967,
+                1,
+                100.99951595781641,
+                "Unique"
+            ],
+            "kws": {}
+        }
+    ]
+};
+data:{
+    "head": []
+};
+config:{
+    "head": [
+        {
+            "id": 51,
+            "cls": "localsim.config.ConfigObject",
+            "ars": [],
+            "kws": {
+                "px2m_factor": 0.18,
+                "desired_velocity": 23.33,
+                "minimum_headway": 1,
+                "safe_time_headway": 1.6,
+                "acceleration_threshold": 0.3,
+                "politeness_factor": 0.554,
+                "safe_braking_deceleration": 4
+            }
+        }
+    ]
+};
+conflict_zone:{
+    "head": []
+};
