@@ -102,6 +102,10 @@ class Toolbar{
         return button;
     }
 
+    /**
+     * COMMENT
+     * Creates toolbar buttons and connects them to the Control objects in Main.js
+     */
     init_buttons(gc){
         this.default_control = app.select_control;
         let button_list = this.button_list;

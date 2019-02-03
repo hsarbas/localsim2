@@ -19,6 +19,13 @@ function dummy_encode(group, cached){
     return group + JSON.stringify(built, null, 4) + ';\n';
 }
 
+/**
+ * COMMENT
+ * Serializes objects into JSON format
+ * @param {Object} objs Objects to serialize into JSON
+ * @param {String} group Key of JSON object in parent JSON
+ * @param {Boolean} cached 
+ */
 function serial_encode(objs, group, cached){
     let encoded = [];
     for(let obj of objs){
@@ -84,6 +91,15 @@ function save(filename, value){
     })
 }
 
+/**
+ * COMMENT
+ * Function to send data to the server
+ * @param {Integer} duration Duration of simulation
+ * @param {String} routing_mode Routing mode (static, dynamic, etc.)
+ * @param {String} rand_string Random string
+ * @param {Boolean} animated Whether or not the simulation will be animated
+ * @param {Object} value JSON of the scene
+ */
 function stream(duration, routing_mode, rand_string, animated, value){
     // Function to stream data
 

@@ -1,3 +1,11 @@
+/**
+ * COMMENT
+ * File of Control classes responsible for allowing the user to create road elements on the canvas
+ *      left_press is called upon left-clicking in the canvas
+ *      double_click when double-clicking in the canvas
+ *      so on so forth.
+ */
+
 class SelectControl{
     constructor(){
         this.view = null;

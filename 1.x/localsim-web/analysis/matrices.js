@@ -1,3 +1,8 @@
+/**
+ * COMMENT
+ * Generator function for random events
+ * TODO: Fully understand what it's yielding (if it's important)
+ */
 
 function* random_event_generator(distribution, limit=null){
     if(!distribution){

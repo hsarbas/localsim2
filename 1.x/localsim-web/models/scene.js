@@ -481,6 +481,13 @@ class Scene{
         purge_cache();
     }
 
+    /**
+     * COMMENT
+     * Serializes the scene into a JSON then streams it over to the server
+     * @param {*} duration 
+     * @param {*} animated 
+     * @param {*} rand_string 
+     */
     serial_play(duration, animated, rand_string){
         let a = serial_encode(this.collect_nodes(), "node:", true);
         let b = serial_encode(this.uroads, "uroad:", true);

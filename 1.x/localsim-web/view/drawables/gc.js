@@ -1,3 +1,8 @@
+/**
+ * COMMENT
+ * Class for the canvas and canvas functions
+ * Anything dealing with the canvas is usually found here
+ */
 class GraphicsContext{
 
     constructor(parent){
@@ -57,6 +62,10 @@ class GraphicsContext{
         }
     }
 
+    /**
+     * COMMENT
+     * Called upon starting a new path on the canvas
+     */
     start_trace(x, y, radius, trace_width, color1, color2){
         this.vars.set('trace_start_point', [x, y]);
         this.vars.set('trace_radius', radius);

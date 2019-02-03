@@ -1,3 +1,9 @@
+/**
+ * COMMENT
+ * File containing functions for creating road elements Javascript-side
+ *      Note that the app variable refers to the Main object in main.js
+ */
+
 function create_node(x, y, dir){
     return new Node(x, y, dir);
 }

@@ -1,0 +1,358 @@
+{
+    "1000": [
+        {
+            "id": 0,
+            "lane": 2,
+            "lc_delay": 4.5,
+            "lc_dest_dir": -1,
+            "pos": 54.9,
+            "road": "link-1",
+            "type": "truck"
+        }
+    ],
+    "1025": [
+        {
+            "id": 0,
+            "lane": 2,
+            "lc_delay": 4.75,
+            "lc_dest_dir": -1,
+            "pos": 57.06,
+            "road": "link-1",
+            "type": "truck"
+        }
+    ],
+    "1050": [
+        {
+            "id": 0,
+            "lane": 2,
+            "lc_delay": 5.0,
+            "lc_dest_dir": -1,
+            "pos": 59.04,
+            "road": "link-1",
+            "type": "truck"
+        }
+    ],
+    "1075": [
+        {
+            "id": 0,
+            "lane": 1,
+            "lc_delay": 0.25,
+            "lc_dest_dir": -1,
+            "pos": 60.84,
+            "road": "link-1",
+            "type": "truck"
+        }
+    ],
+    "1100": [
+        {
+            "id": 0,
+            "lane": 1,
+            "lc_delay": 0.5,
+            "lc_dest_dir": -1,
+            "pos": 63.0,
+            "road": "link-1",
+            "type": "truck"
+        }
+    ],
+    "1125": [
+        {
+            "id": 0,
+            "lane": 1,
+            "lc_delay": 0.75,
+            "lc_dest_dir": -1,
+            "pos": 65.34,
+            "road": "link-1",
+            "type": "truck"
+        }
+    ],
+    "1150": [
+        {
+            "id": 0,
+            "lane": 1,
+            "lc_delay": 1.0,
+            "lc_dest_dir": -1,
+            "pos": 67.86,
+            "road": "link-1",
+            "type": "truck"
+        }
+    ],
+    "1175": [
+        {
+            "id": 0,
+            "lane": 1,
+            "lc_delay": 1.25,
+            "lc_dest_dir": -1,
+            "pos": 70.56,
+            "road": "link-1",
+            "type": "truck"
+        }
+    ],
+    "1200": [
+        {
+            "id": 0,
+            "lane": 1,
+            "lc_delay": 1.5,
+            "lc_dest_dir": -1,
+            "pos": 73.44,
+            "road": "link-1",
+            "type": "truck"
+        }
+    ],
+    "1225": [
+        {
+            "id": 0,
+            "lane": 1,
+            "lc_delay": 1.75,
+            "lc_dest_dir": -1,
+            "pos": 76.68,
+            "road": "link-1",
+            "type": "truck"
+        }
+    ],
+    "1250": [
+        {
+            "id": 0,
+            "lane": 1,
+            "lc_delay": 2.0,
+            "lc_dest_dir": -1,
+            "pos": 80.1,
+            "road": "link-1",
+            "type": "truck"
+        }
+    ],
+    "1275": [
+        {
+            "id": 0,
+            "lane": 1,
+            "lc_delay": 2.25,
+            "lc_dest_dir": -1,
+            "pos": 83.7,
+            "road": "link-1",
+            "type": "truck"
+        }
+    ],
+    "1300": [
+        {
+            "id": 0,
+            "lane": 1,
+            "lc_delay": 2.5,
+            "lc_dest_dir": -1,
+            "pos": 87.48,
+            "road": "link-1",
+            "type": "truck"
+        }
+    ],
+    "1325": [
+        {
+            "id": 0,
+            "lane": 1,
+            "lc_delay": 2.75,
+            "lc_dest_dir": -1,
+            "pos": 91.44,
+            "road": "link-1",
+            "type": "truck"
+        }
+    ],
+    "1350": [
+        {
+            "id": 0,
+            "lane": 1,
+            "lc_delay": 3.0,
+            "lc_dest_dir": -1,
+            "pos": 95.58,
+            "road": "link-1",
+            "type": "truck"
+        }
+    ],
+    "1375": [
+        {
+            "id": 0,
+            "lane": 1,
+            "lc_delay": 3.25,
+            "lc_dest_dir": -1,
+            "pos": 99.9,
+            "road": "link-1",
+            "type": "truck"
+        }
+    ],
+    "1400": [
+        {
+            "id": 0,
+            "lane": 1,
+            "lc_delay": 3.5,
+            "lc_dest_dir": -1,
+            "pos": 2.7,
+            "road": "t_link-5",
+            "type": "truck"
+        },
+        {
+            "id": 1,
+            "lane": 1,
+            "lc_delay": 3.407478053764924,
+            "lc_dest_dir": 0,
+            "pos": 0.0,
+            "road": "link-3",
+            "type": "bus"
+        }
+    ],
+    "1425": [
+        {
+            "id": 0,
+            "lane": 1,
+            "lc_delay": 3.75,
+            "lc_dest_dir": -1,
+            "pos": 7.2,
+            "road": "t_link-5",
+            "type": "truck"
+        },
+        {
+            "id": 1,
+            "lane": 1,
+            "lc_delay": 3.657478053764924,
+            "lc_dest_dir": 0,
+            "pos": 1.98,
+            "road": "link-3",
+            "type": "bus"
+        }
+    ],
+    "1450": [
+        {
+            "id": 0,
+            "lane": 1,
+            "lc_delay": 4.0,
+            "lc_dest_dir": -1,
+            "pos": 11.88,
+            "road": "t_link-5",
+            "type": "truck"
+        },
+        {
+            "id": 1,
+            "lane": 1,
+            "lc_delay": 3.907478053764924,
+            "lc_dest_dir": 0,
+            "pos": 4.14,
+            "road": "link-3",
+            "type": "bus"
+        }
+    ],
+    "1475": [
+        {
+            "id": 0,
+            "lane": 1,
+            "lc_delay": 4.25,
+            "lc_dest_dir": -1,
+            "pos": 16.74,
+            "road": "t_link-5",
+            "type": "truck"
+        },
+        {
+            "id": 1,
+            "lane": 1,
+            "lc_delay": 4.157478053764924,
+            "lc_dest_dir": 0,
+            "pos": 6.3,
+            "road": "link-3",
+            "type": "bus"
+        }
+    ],
+    "1500": [
+        {
+            "id": 0,
+            "lane": 1,
+            "lc_delay": 4.5,
+            "lc_dest_dir": -1,
+            "pos": 21.6,
+            "road": "t_link-5",
+            "type": "truck"
+        },
+        {
+            "id": 1,
+            "lane": 1,
+            "lc_delay": 4.407478053764924,
+            "lc_dest_dir": 0,
+            "pos": 8.46,
+            "road": "link-3",
+            "type": "bus"
+        }
+    ],
+    "1525": [
+        {
+            "id": 0,
+            "lane": 1,
+            "lc_delay": 4.75,
+            "lc_dest_dir": -1,
+            "pos": 26.64,
+            "road": "t_link-5",
+            "type": "truck"
+        },
+        {
+            "id": 1,
+            "lane": 1,
+            "lc_delay": 4.657478053764924,
+            "lc_dest_dir": 0,
+            "pos": 10.62,
+            "road": "link-3",
+            "type": "bus"
+        }
+    ],
+    "1550": [
+        {
+            "id": 0,
+            "lane": 1,
+            "lc_delay": 5.0,
+            "lc_dest_dir": -1,
+            "pos": 4.49,
+            "road": "link-2",
+            "type": "truck"
+        },
+        {
+            "id": 1,
+            "lane": 1,
+            "lc_delay": 4.907478053764924,
+            "lc_dest_dir": 0,
+            "pos": 12.78,
+            "road": "link-3",
+            "type": "bus"
+        }
+    ],
+    "1575": [
+        {
+            "id": 0,
+            "lane": 1,
+            "lc_delay": 5.25,
+            "lc_dest_dir": 0,
+            "pos": 9.71,
+            "road": "link-2",
+            "type": "truck"
+        },
+        {
+            "id": 1,
+            "lane": 1,
+            "lc_delay": 5.157478053764924,
+            "lc_dest_dir": 0,
+            "pos": 14.94,
+            "road": "link-3",
+            "type": "bus"
+        }
+    ],
+    "1600": [
+        {
+            "id": 0,
+            "lane": 1,
+            "lc_delay": 5.5,
+            "lc_dest_dir": 0,
+            "pos": 14.93,
+            "road": "link-2",
+            "type": "truck"
+        },
+        {
+            "id": 1,
+            "lane": 2,
+            "lc_delay": 0.25,
+            "lc_dest_dir": 1,
+            "pos": 16.92,
+            "road": "link-3",
+            "type": "bus"
+        }
+    ]
+}

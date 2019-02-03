@@ -1,3 +1,8 @@
+/**
+ * COMMENT
+ * Base class for any object that takes in and fires callbacks
+ */
+
 class Signal{
 
     constructor(){

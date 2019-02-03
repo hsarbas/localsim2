@@ -7,6 +7,10 @@ class Main{
         this.play_duration = null;
         this.animation_speed = 70;
 
+        /**
+         * COMMENT
+         * Control objects (for drawing road elements in canvas)
+         */
         this.no_action_control = new NoActionControl();
         this.select_control = new SelectControl();
         this.uroad_create_control = new URoadCreateControl();
@@ -886,6 +890,13 @@ class Main{
             acceleration_threshold, politeness_factor, safe_braking_deceleration);
     }
 
+    /**
+     * COMMENT
+     * Glue code that runs the simulation and sends the duration to the server.
+     * @param {*} animated 
+     * @param {*} runs 
+     * @param {*} duration 
+     */
     glue_code(animated, runs, duration){
         this.play_duration = duration;
         this.gc.animated = animated;
@@ -904,12 +915,21 @@ class Main{
         
     }
 
+    /**
+     * COMMENT
+     * Sends the data of the road map / scene to the server in a JSON payload
+     * @param {*} duration 
+     */
     send_to_server(duration){
         this.rand = random_unique();
         this.gc.scene.serial_play(duration, this.gc.animated, this.rand);
         console.log('Server is simulating...');
     }
 
+    /**
+     * COMMENT, DEPRECATED (?)
+     * Asks for the simulation data (position of each agent per timestep)
+     */
     from_server_INIT(){
         $.ajax({
             type: 'POST',
@@ -941,6 +961,10 @@ class Main{
         });
     }
 
+    /**
+     * COMMENT
+     * Asks for the simulation data (position of each agent per timestep)
+     */
     from_server_POST(){
         $.ajax({
             type: 'POST',
