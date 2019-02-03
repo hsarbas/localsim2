@@ -3,6 +3,8 @@ import weakref
 
 
 class Signal(object):
+    """Collects a dictionary of events connected to callbacks, and fires callbacks when prompted."""
+
     events = None
     __callbacks = None
 
@@ -64,6 +66,8 @@ class Signal(object):
 
 
 class Clock(Signal):
+    """Iterator based on the Signal object; acts as a clock."""
+
     events = ['fine', 'stop', 'coarse']
 
     def __init__(self, dt_fine, end=None, dt_coarse=None):

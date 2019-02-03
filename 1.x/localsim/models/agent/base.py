@@ -27,6 +27,8 @@ DELIB_SIDE = 'SIDE'
 
 
 class AbstractAgent(signal.Signal):
+    """Implements the car agent; uses the car-following models; extends the Signal class."""
+
     __metaclass__ = ABCMeta
     events = ['move', 'destroy', 'intention_enter', 'intention_exit']
 
@@ -881,6 +883,8 @@ class AbstractAgent(signal.Signal):
 
 
 class AgentManager(signal.Signal):
+    """Manages agents; extends the Signal class"""
+
     events = ['new_agent', 'kill_agent', 'move_agent', 'update_agent']
 
     def __init__(self):

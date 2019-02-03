@@ -245,7 +245,7 @@ if __name__ == '__main__':
     #             print 'Invalid arguments!\n'
     #             sys.exit()
 
-    port = 80
+    port = 3000
     if len(sys.argv) > 1:
         try:
             port = int(sys.argv[1])

@@ -15,6 +15,8 @@ config = localsim.conf()
 
 
 class Actuator(object):
+    """Given an agent and the agent manager, determines the agent's next action, considering routing and laning."""
+
     def __init__(self, agent, agent_manager):
         self._agent = weakref.ref(agent)
         self._agent_manager = weakref.ref(agent_manager)

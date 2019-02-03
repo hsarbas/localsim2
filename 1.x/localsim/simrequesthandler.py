@@ -50,6 +50,8 @@ def _remove_tmp_files():
 
 
 class SimRequestHandler(BaseHTTPRequestHandler):
+    """Handles HTTP requests from the browser meant for the simulator."""
+
     def __init__(self, *args):
         BaseHTTPRequestHandler.__init__(self, *args)
         self.off_sim = sim.Simulator()

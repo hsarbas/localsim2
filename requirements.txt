@@ -1,0 +1,5 @@
+numpy
+scipy
+matplotlib
+pyexcel
+pyside2
