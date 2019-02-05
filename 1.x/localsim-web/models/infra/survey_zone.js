@@ -1,3 +1,9 @@
+/*
+** QUESTIONS:
+    1. What do the events mean? (move, change, update, destroy, fine, stop, coarse)
+    2. What is Map()?
+*/
+
 let _zone_id_counter = count();
 
 class AbstractSurveyor extends Signal{
@@ -5,18 +11,19 @@ class AbstractSurveyor extends Signal{
         super();
 
         this.events = ['move', 'update', 'destroy'];
-
+        //pos is starting point of survey zone(?)
         this.id = _zone_id_counter.next().value.toString(16);
         this.road = road;
         this.pos = pos;
         this.zone = zone;
         this.lane = lane;
-        this.exit = this.pos + this.zone;
+        this.exit = this.pos + this.zone; //starting point + size of the zone(?)
         this.active = is_on;
 
         this.clock = null;
         this.agent_manager = null;
 
+        //'change' and 'move' are the two events connected to road(?)
         this.road.connect(this, 'change', this._signal_callback);
         this.road.connect(this, 'move', this._signal_callback);
     }

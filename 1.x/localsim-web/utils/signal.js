@@ -81,6 +81,7 @@ class Signal{
         }
     }
 
+    //what is kwargs?
     fire(event_, kwargs=null){
         let source = this;
         if(this.events.includes(event_)){
