@@ -12,6 +12,14 @@ class Signal{
 
     }
 
+    /**
+     * Connects the callback to a Signal subclass object and a user-defined event
+     * The callbacks are fired upon specifying an event in fire()
+     * 
+     * @param {Object} obj Object (whose class extends Signal) where the event comes from (?)
+     * @param {String} event Key for certain user-defined actions
+     * @param {Func} callback Values / Functions to be called when a specific event is specified
+     */
     connect(obj, event, callback){
         this.__obj = obj;
 
@@ -25,6 +33,9 @@ class Signal{
                 let weak_key = this.__obj;
                 let method_name = callback.name;
 
+                /**
+                 * Assign to key 'event' a Map of (what will be) weak keys (the obj) to callback names
+                 */
                 if(!this.__callbacks.has(event)){
                     this.__callbacks.set(event, new Map()); // WeakMaps are not iterable
                 }
@@ -68,6 +79,7 @@ class Signal{
                         }
                         else{
                             let index = this.__callbacks.get(event).get(weak_key).indexOf(method_name);
+                            // Does this disconnect even work? index is never used
                         }
                     }
                 }
@@ -81,7 +93,12 @@ class Signal{
         }
     }
 
-    //what is kwargs?
+    /**
+     * Fires all callbacks for an event_
+     * 
+     * @param {String} event_ The event triggered; whose callbacks will be fired
+     * @param {Object} kwargs Keyword arguments
+     */
     fire(event_, kwargs=null){
         let source = this;
         if(this.events.includes(event_)){

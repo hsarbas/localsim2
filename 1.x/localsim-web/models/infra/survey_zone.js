@@ -28,6 +28,13 @@ class AbstractSurveyor extends Signal{
         this.road.connect(this, 'move', this._signal_callback);
     }
 
+    /**
+     * Survey Zone callback that is connected to other Signals
+     * In this case, it's connected to the move and change events in Road
+     * and the fine and stop events in Clock
+     * 
+     * @param {String} event The event which occurred and prompted this callback
+     */
     _signal_callback(event, source){
         if(event == 'change' || event == 'move'){
             if(this.road.length >= this.exit){
@@ -68,6 +75,13 @@ class AbstractSurveyor extends Signal{
         this.clear();
     }
 
+    /**
+     * Upon dragging the Survey Zone, the new position is set here.
+     * It fires the move event, calling a responder in DSurveyZone
+     * (Said responder was connected to all events in this object during construction)
+     * 
+     * @param {Float} new_pos The new position
+     */
     set_pos(new_pos){
         if(new_pos != this.pos){
             this.pos = new_pos;
