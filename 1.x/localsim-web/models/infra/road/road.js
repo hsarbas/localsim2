@@ -10,6 +10,7 @@ class AbstractRoad extends Signal{
         this._priority = priority;
         this.type_ = type_;
         this.z_axis = z_axis;
+        //what are split_nodes?
         this.segments = new SegmentCollection(src, dst, split_nodes);
         this.src = this.segments.src;
         this.dst = this.segments.dst;
@@ -46,6 +47,7 @@ class AbstractRoad extends Signal{
         return this._lane_width;
     }
 
+    //coordinates of source and destination of road?
     set_length(d2){
         let segment = this.segments.segments[this.segments.segments.length-1];
         let x1 = segment.src.x;
