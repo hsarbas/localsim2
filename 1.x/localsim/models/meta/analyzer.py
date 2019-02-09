@@ -31,6 +31,7 @@ class SpaceMeanSpeedAnalyzer(AbstractAnalyzer):
 
         for t in range(300, self.time_ended/1000 + 1, 300):
 
+            #Does this also get total number of agents that passed through a survey zone (throughput)?
             for survey in self.log:
                 total_time = 0
                 agent_count = 0
@@ -49,12 +50,16 @@ class SpaceMeanSpeedAnalyzer(AbstractAnalyzer):
 
                 if agent_count > 0:
                     ave_time = total_time / agent_count
+                    #What is this computing?
                     u_table[t][survey] = 3.6 * self.log[survey]['survey_length']/ave_time
                 else:
                     u_table[t][survey] = None
 
         for survey in survey_totals:
             if survey_totals[survey]['agent_count'] > 0:
+                ###trying to display the throughput### FRANCIS PATEST PLEASE
+                ###u_table['Throughput'][survey] = survey_totals[survey]['agent_count']
+                ###end of attempt by luis###
                 u_table['Average'][survey] = 3.6 * self.log[survey]['survey_length'] / \
                                              (survey_totals[survey]['total_time'] /
                                               survey_totals[survey]['agent_count'])
