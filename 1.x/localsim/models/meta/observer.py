@@ -74,7 +74,7 @@ class TimeSpeedObserver(AbstractObserver):
             road = extras['road']
             self.distance_observer[agent.id] += config.to_m(road.length)
             self.route_observer[agent.id].append(str(road.label))
-            
+
             if event == 'new_agent':
                 self.time_observer[agent.id] = dict()
                 self.time_observer[agent.id]['entry'] = road.label
@@ -208,6 +208,9 @@ class SurveyEntryExitObserver(AbstractObserver):
             surveys = extras['survey']
 
         self.observed_surveys = []
+        ###FLORES ADDING EXIT COUNT###
+        self.exit_observer = collections.defaultdict(int)
+        ###END OF FLORES ADDED
         self.running_log = collections.defaultdict(
             lambda: collections.defaultdict(lambda: {'entry': None, 'exit': None}, survey_length=None))
 
@@ -231,11 +234,20 @@ class SurveyEntryExitObserver(AbstractObserver):
 
                 if pos and survey().pos < pos < survey().exit and self.running_log[survey().id][agent.id]['entry'] is None:
                     self.running_log[survey().id][agent.id]['entry'] = time
-
+###needed for throughput:
                 elif pos and pos > survey().exit and self.running_log[survey().id][agent.id]['entry'] is not None \
                         and self.running_log[survey().id][agent.id]['exit'] is None:
                     self.running_log[survey().id][agent.id]['exit'] = time
+                    ###FLORES ADDED
+                    self.exit_count[survey().id] += 1
+                    ###END OF FLORES ADDED
 
     def result(self):
         log = copy.deepcopy(self.running_log)
         return dict(log=log, time_ended=self.actual_clock.now)
+
+###FLROES ADDED
+    def returnExitCount(self):
+        throughputFlores = copy.deepcopy(self.exit_count)
+        return throughputFlores
+###END OF FLORES ADDED

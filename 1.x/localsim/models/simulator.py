@@ -29,6 +29,7 @@ class Engine(object):
 
         self.agent_counter = observer.Counter(self.agent_manager, self.scene)
         self.observer = observer.TimeSpeedObserver(self.agent_manager, self.scene)
+        ###important for throughput:
         self.u_observer = observer.SurveyEntryExitObserver(self.agent_manager, self.scene, survey=self.uroad_survey)
         self.los_observer = observer.RoadEntryExitObserver(self.agent_manager, self.scene, road=self.active_roads)
 
@@ -80,6 +81,9 @@ class Engine(object):
         time_elapsed = self.sim_clock.end / 1000
         # agents = self.agent_counter.result()
         time_speed_total, ave_time, ave_speed = self.observer.result()
+        ###FLORES ADDED
+        exit_count = self.u_observer.returnExitCount()
+        ###END OF FLORES ADDED
         rows_dict = collections.OrderedDict()
 
         rows_dict['Observation period (s)'] = {val: time_elapsed*10}
@@ -89,6 +93,9 @@ class Engine(object):
         self.data['Summary'] = dict(col_names=[des, val], rows=rows_dict)
         self.data['Travel time'] = dict(col_names=[route, travel_time], rows=ave_time)
         self.data['Travel speed'] = dict(col_names=[route, travel_speed], rows=ave_speed)
+        ###FLORES ADDED###
+        self.data['Throughput'] = dict(col_names=['Survey ID', 'Throughput'], rows=exit_count)
+        ###END OF FLORES ADDED###
 
         if self.active_roads:
             los_analyzer = analyzer.LOSAnalyzer(self.los_observer)
@@ -145,6 +152,3 @@ class Engine(object):
                                                      state: init_state, time: c.init_state[1]}
 
         self.data['Signal Cycle'] = dict(col_names=[pos, r, g, y, state, time], rows=stoplight_rows_dict)
-
-
-
