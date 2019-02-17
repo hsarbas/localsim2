@@ -239,7 +239,7 @@ class SurveyEntryExitObserver(AbstractObserver):
                         and self.running_log[survey().id][agent.id]['exit'] is None:
                     self.running_log[survey().id][agent.id]['exit'] = time
                     ###FLORES ADDED
-                    self.exit_count[survey().id] += 1
+                    self.exit_observer[survey().id] += 1
                     ###END OF FLORES ADDED
 
     def result(self):
@@ -248,6 +248,6 @@ class SurveyEntryExitObserver(AbstractObserver):
 
 ###FLROES ADDED
     def returnExitCount(self):
-        throughputFlores = copy.deepcopy(self.exit_count)
+        throughputFlores = copy.deepcopy(self.exit_observer)
         return throughputFlores
 ###END OF FLORES ADDED
