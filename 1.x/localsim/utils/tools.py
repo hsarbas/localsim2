@@ -216,6 +216,8 @@ def decompose(velocity, theta):
 
 
 def sort_data(data):
+    """Sorts the data into the pages of the exported spreadsheet after a simulation."""
+
     sorted_data = collections.OrderedDict()
     for key in data:
         if key in ['Summary', 'Signal Cycle', 'Travel time', 'Travel speed']:

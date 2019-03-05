@@ -10,6 +10,8 @@ config = localsim.conf()
 
 
 class Engine(object):
+    """The actual simulator engine class. Contains methods for step incrementing, callback firing, and processing the analyzers and data."""
+
     def __init__(self, sim_clock, scene, agent_manager=None, **extras):
         self.scene = scene
         self.agent_manager = agent_manager if agent_manager else base.AgentManager()

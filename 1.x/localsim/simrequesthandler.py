@@ -217,7 +217,7 @@ class SimRequestHandler(BaseHTTPRequestHandler):
             """
             try:
                 [sp, cd, cl, ss, f] = raw.split('\r\n', 4)
-                savefile = path.join(up(up(_rootdir)), 'tmp', cd.split('\"')[3])
+                savefile = path.join(up(_rootdir), 'tmp', cd.split('\"')[3])
                 [fi, sp, ss] = f.rsplit('\r\n', 2)
                 if not savefile.endswith('.lmf'):
                     raise IOError

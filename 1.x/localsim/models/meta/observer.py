@@ -9,6 +9,8 @@ config = localsim.conf()
 
 
 class AbstractObserver(object):
+    """Abstract class defining an Observer; requires a scene and clock for reference."""
+
     __metaclass__ = abc.ABCMeta
 
     def __init__(self, agent_manager, scene, **extras):
@@ -29,6 +31,8 @@ class AbstractObserver(object):
 
 
 class Counter(AbstractObserver):
+    """Observer that counts number of agents created and destroyed"""
+
     def __init__(self, agent_manager, scene, **extras):
         super(Counter, self).__init__(agent_manager, scene, **extras)
         self.created = 0
@@ -48,6 +52,16 @@ class Counter(AbstractObserver):
 
 
 class TimeSpeedObserver(AbstractObserver):
+    """
+    Observer that tracks each agent's time, distance, and eventually speed.
+
+    distance_observer: dict[agent]
+    time_observer: dict[agent][entry, exit, time]
+    ave_time_dict: dict[route][ave_time]
+    ave_speed_dict: dict[route][ave_speed] (For each road / route)
+    result_dict: dict[ave_time, ave_speed] (For whole network)
+    """
+
     def __init__(self, agent_manager, scene, **extras):
         super(TimeSpeedObserver, self).__init__(agent_manager, scene, **extras)
 
@@ -156,6 +170,12 @@ class TimeSpeedObserver(AbstractObserver):
 
 
 class RoadEntryExitObserver(AbstractObserver):
+    """
+    Observer that logs the entry and exit of agents on each road
+
+    running_log: dict[road][road_length, road_lanes, agent][entry, exit]
+    """
+
     def __init__(self, agent_manager, scene, **extras):
         super(RoadEntryExitObserver, self).__init__(agent_manager, scene, **extras)
 
@@ -199,6 +219,12 @@ class RoadEntryExitObserver(AbstractObserver):
 
 
 class SurveyEntryExitObserver(AbstractObserver):
+    """
+    Observer that logs the entry and exit of agents on each survey zone
+
+    running_log: dict[survey_zone][survey_length, survey_lanes, agent][entry, exit]
+    """
+
     def __init__(self, agent_manager, scene, **extras):
         super(SurveyEntryExitObserver, self).__init__(agent_manager, scene, **extras)
 

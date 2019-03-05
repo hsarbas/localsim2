@@ -111,6 +111,13 @@ class DensityAnalyzer(AbstractAnalyzer):
 
 
 class VolumeAnalyzer(AbstractAnalyzer):
+    """
+    Computes the volume of vehicles processed by the roads
+
+    Note: only computes in 5-minute intervals, as well as total and average volume
+    Simulation time must be at least 300 seconds for the loop below to run at least once
+    """
+
     def __init__(self, q_zones, time_ended):
         super(VolumeAnalyzer, self).__init__()
         self.labels = [zone().id for zone in q_zones]
@@ -139,7 +146,12 @@ class VolumeAnalyzer(AbstractAnalyzer):
 
 
 class CVCCAnalyzer(AbstractAnalyzer):
-    # Counts the total amount of vehicles that passed through the zone at a given timestep
+    """
+    Counts the total amount of vehicles that passed through the zone at a given timestep
+
+    Cumulative sum of volume for each zone
+    """
+
     def __init__(self, cvcc_zones, time_ended):
         super(CVCCAnalyzer, self).__init__()
         self.label = [zone().id for zone in cvcc_zones]
