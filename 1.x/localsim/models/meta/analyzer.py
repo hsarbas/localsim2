@@ -57,9 +57,10 @@ class SpaceMeanSpeedAnalyzer(AbstractAnalyzer):
 
         for survey in survey_totals:
             if survey_totals[survey]['agent_count'] > 0:
-                ###trying to display the throughput### FRANCIS PATEST PLEASE
-                ###u_table['Throughput'][survey] = survey_totals[survey]['agent_count']
-                ###end of attempt by luis###
+                '''
+                Outputs through every 5 minutes per survey zone and places the information in Speed sheet of the excel
+                '''
+                u_table['Throughput'][survey] = survey_totals[survey]['agent_count']
                 u_table['Average'][survey] = 3.6 * self.log[survey]['survey_length'] / \
                                              (survey_totals[survey]['total_time'] /
                                               survey_totals[survey]['agent_count'])
