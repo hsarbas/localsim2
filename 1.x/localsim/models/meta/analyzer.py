@@ -57,10 +57,9 @@ class SpaceMeanSpeedAnalyzer(AbstractAnalyzer):
 
         for survey in survey_totals:
             if survey_totals[survey]['agent_count'] > 0:
-                '''
-                Outputs through every 5 minutes per survey zone and places the information in Speed sheet of the excel
-                '''
+                ###Displays throughput per survey zone in the 'Speed' spreadsheet
                 u_table['Throughput'][survey] = survey_totals[survey]['agent_count']
+
                 u_table['Average'][survey] = 3.6 * self.log[survey]['survey_length'] / \
                                              (survey_totals[survey]['total_time'] /
                                               survey_totals[survey]['agent_count'])
@@ -112,13 +111,6 @@ class DensityAnalyzer(AbstractAnalyzer):
 
 
 class VolumeAnalyzer(AbstractAnalyzer):
-    """
-    Computes the volume of vehicles processed by the roads
-
-    Note: only computes in 5-minute intervals, as well as total and average volume
-    Simulation time must be at least 300 seconds for the loop below to run at least once
-    """
-
     def __init__(self, q_zones, time_ended):
         super(VolumeAnalyzer, self).__init__()
         self.labels = [zone().id for zone in q_zones]
@@ -147,12 +139,7 @@ class VolumeAnalyzer(AbstractAnalyzer):
 
 
 class CVCCAnalyzer(AbstractAnalyzer):
-    """
-    Counts the total amount of vehicles that passed through the zone at a given timestep
-
-    Cumulative sum of volume for each zone
-    """
-
+    # Counts the total amount of vehicles that passed through the zone at a given timestep
     def __init__(self, cvcc_zones, time_ended):
         super(CVCCAnalyzer, self).__init__()
         self.label = [zone().id for zone in cvcc_zones]
