@@ -35,18 +35,34 @@ class SpaceMeanSpeedAnalyzer(AbstractAnalyzer):
             for survey in self.log:
                 total_time = 0
                 agent_count = 0
+                total_delay = 0
                 for agent in self.log[survey]:
                     if not isinstance(self.log[survey][agent], numbers.Number):
                         if self.log[survey][agent]['exit'] is not None and (t - 299) < self.log[survey][agent]['exit'] < t:
-                            total_time += self.log[survey][agent]['exit']-self.log[survey][agent]['entry']
+                            actual_time = self.log[survey][agent]['exit']-self.log[survey][agent]['entry']
+                            total_time += actual_time
                             agent_count += 1
+                            '''
+                            Ideal time is the length of the survey zone divided by the maximum speed of the agent.
+                            Agent's maximum speed is min(survey zone speed limit, max speed of the agent).
+                            Delay is the actual time minus the ideal time.
+                            This gets the average delay per survey zone.
+                            '''
+                            ideal_speed = min(self.log[survey][agent]['vel_max'], self.log[survey]['survey_speed'])
+                            ideal_time = self.log[survey]['survey_length'] / ideal_speed
+                            time_delay = actual_time - ideal_time
+                            total_delay += time_delay
 
                 if 'total_time' in survey_totals[survey].keys():
                     survey_totals[survey]['total_time'] += total_time
                     survey_totals[survey]['agent_count'] += agent_count
+                    ###STILL UNSURE ABOUT THIS
+                    survey_totals[survey]['total_delay'] += total_delay
                 else:
                     survey_totals[survey]['total_time'] = total_time
                     survey_totals[survey]['agent_count'] = agent_count
+                    ###STILL UNSURE ABOUT THIS
+                    survey_totals[survey]['total_delay'] = total_delay
 
                 if agent_count > 0:
                     ave_time = total_time / agent_count
@@ -57,9 +73,11 @@ class SpaceMeanSpeedAnalyzer(AbstractAnalyzer):
 
         for survey in survey_totals:
             if survey_totals[survey]['agent_count'] > 0:
-                ###trying to display the throughput### FRANCIS PATEST PLEASE
-                ###u_table['Throughput'][survey] = survey_totals[survey]['agent_count']
-                ###end of attempt by luis###
+                ###Displays throughput per survey zone in the 'Speed' spreadsheet
+                u_table['Throughput'][survey] = survey_totals[survey]['agent_count']
+                ###Displays average delay per survey zone in the 'Speed' spreadsheet
+                u_table['Average Delay'][survey] = survey_totals[survey]['total_delay'] / survey_totals[survey]['agent_count']
+
                 u_table['Average'][survey] = 3.6 * self.log[survey]['survey_length'] / \
                                              (survey_totals[survey]['total_time'] /
                                               survey_totals[survey]['agent_count'])
