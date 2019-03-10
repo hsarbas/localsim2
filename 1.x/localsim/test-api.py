@@ -3,6 +3,6 @@ from localsim import simrequesthandler as API
 
 api = API.API()
 
-api.set_runner('test-api')
-api.load(path.join(path.dirname(__file__), '..', '..', 'maps', 'tri-leg-loaded.lmf'))
+api.set_runner('overloaded')
+api.load(path.join(path.dirname(__file__), '..', '..', 'cases', 'tri-leg-overloaded-proper.lmf'))
 api.run(36000, 'static', '_wjbowacwm', False)
