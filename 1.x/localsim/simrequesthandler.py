@@ -452,15 +452,17 @@ class API(object):
 
         return result
 
-    def init_runner(self):
+    def set_runner(self, filename=None):
         self.runner = SimRunHandler()
+        if filename:
+            self.runner.set_file_name(filename)
 
     def load(self, savefile):
         '''Loads the scene (based off the do_POST -> --- option in the SimRequestHandler)'''
 
-        self.runner.x_load(savefile)
+        self.runner.load(savefile)
 
-    def run(self):
+    def run(self, duration, routing_mode, rand_strings, animated):
         '''Runs the simulator (based off the do_POST -> RUN option in the SimRequestHandler)'''
 
         global _shared_data
@@ -473,6 +475,12 @@ class API(object):
         size = -1
         rand_string = ''
 
+        self.runner.rand_string = rand_string
+        self.runner.off_sim.animated = True if animated == 'true' else False
+        proc = Thread(target=self.runner.play, args=(int(duration), routing_mode))
+        proc.daemon = False # So the file can be saved
+        proc.start()
+
 
 class SimRunHandler(object):
     """Handler object that takes in the data from the client and runs the simulator"""
@@ -481,10 +489,14 @@ class SimRunHandler(object):
         self.off_sim = sim.Simulator()
         self.running = None
         self.rand_string = ''
+        self.file_name = None
 
     def reset_map(self):
         self.off_sim.reset()
         self.running = None
+
+    def set_file_name(self, filename):
+        self.file_name = filename
 
     @staticmethod
     def save(filename, raw_data, mode):
@@ -580,7 +592,7 @@ class SimRunHandler(object):
                         data = self.off_sim.simulator.data
                         sorted_data = tools.sort_data(data)
                         fname = path.join(path.dirname(__file__), '..', 'tmp',
-                                          'result%s.xls' % self.rand_string)
+                                          'result%s.xls' % (self.file_name if self.file_name else self.rand_string))
                         tools.export_to_xls(fname, sorted_data)
 
                         summary = data['Summary']['rows']
@@ -597,7 +609,7 @@ class SimRunHandler(object):
                 data = self.off_sim.simulator.data
                 sorted_data = tools.sort_data(data)
                 fname = path.join(path.dirname(__file__), '..', 'tmp',
-                                  'result%s.xls' % self.rand_string)
+                                  'result%s.xls' % (self.file_name if self.file_name else self.rand_string))
                 tools.export_to_xls(fname, sorted_data)
 
                 summary = data['Summary']['rows']
@@ -613,7 +625,7 @@ class SimRunHandler(object):
 
             data = self.off_sim.simulator.data
             sorted_data = tools.sort_data(data)
-            fname = path.join(path.dirname(__file__), '..', 'tmp', 'result%s.xls' % self.rand_string)
+            fname = path.join(path.dirname(__file__), '..', 'tmp', 'result%s.xls' % (self.file_name if self.file_name else self.rand_string))
             tools.export_to_xls(fname, sorted_data)
 
             summary = data['Summary']['rows']
