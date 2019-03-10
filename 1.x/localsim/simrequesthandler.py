@@ -390,6 +390,90 @@ class SimRequestHandler(BaseHTTPRequestHandler):
             path_ = getcwd()
 
 
+class API(object):
+    '''Handles requests via some API'''
+
+    def __init__(self, *args):
+        '''Same as the SimRequestHandler, but without the BaseHTTPRequestHandler'''
+
+        self.off_sim = sim.Simulator()
+
+        db = sqlite3.connect('server.db')
+        conn = db.cursor()
+        conn.execute('''CREATE TABLE IF NOT EXISTS users(
+                        email TEXT PRIMARY KEY NOT NULL UNIQUE,
+                        pw TEXT NOT NULL
+                      );''')
+        db.commit()
+        db.close()
+
+    @staticmethod
+    def _valid_file(path_, **kwargs):
+        web_path = path.join(getcwd(), 'localsim-web')
+        server_path = path.join(getcwd(), 'localsim')
+        result = None
+
+        try:
+            temps = kwargs['temp']
+        except KeyError:
+            temps = []
+
+        # http://address.com/ or http://address.com/index.html
+        if path_ in ['/', '/index.html']:
+            result = path.join(web_path, 'view', 'html', 'index.html')
+
+        # http://address.com/ or http://address.com/login.html
+        elif path_ in ['/login.html']:
+            result = path.join(web_path, 'view', 'html', 'login.html')
+
+        # http://address.com/main.html
+        elif path_ in ['/main.html']:
+            result = path.join(web_path, 'view', 'html', 'main.html')
+
+        # js/css files located in view/bootstrap/, views/js/, views/drawables
+        elif path_ in ['bootstrap', 'js', 'drawables']:
+            result = path.join(web_path, 'view', *temps)
+
+        # html files located in view/html/
+        elif path_ in ['modals', 'rc_menu.html']:
+            result = path.join(web_path, 'view', 'html', *temps)
+
+        # javascript models here
+        elif path_ in ['analysis', 'controller', 'models', 'serializer', 'utils']:
+            result = path.join(web_path, *temps)
+
+        #  other files located at localsim/tmp
+        elif path_ in ['tmp']:
+            result = path.join(getcwd(), *temps)
+
+        # other files located at localsim/temp
+        elif path_ in ['temp']:
+            result = path.join(getcwd(), *temps)
+
+        return result
+
+    def init_runner(self):
+        self.runner = SimRunHandler()
+
+    def load(self, savefile):
+        '''Loads the scene (based off the do_POST -> --- option in the SimRequestHandler)'''
+
+        self.runner.x_load(savefile)
+
+    def run(self):
+        '''Runs the simulator (based off the do_POST -> RUN option in the SimRequestHandler)'''
+
+        global _shared_data
+        global result
+
+        _rootdir = path.dirname(__file__)
+        _absfile = path.abspath(__file__)
+        up = path.dirname
+        status = None
+        size = -1
+        rand_string = ''
+
+
 class SimRunHandler(object):
     """Handler object that takes in the data from the client and runs the simulator"""
 
