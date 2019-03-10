@@ -88,7 +88,7 @@ class TimeSpeedObserver(AbstractObserver):
             road = extras['road']
             self.distance_observer[agent.id] += config.to_m(road.length)
             self.route_observer[agent.id].append(str(road.label))
-            
+
             if event == 'new_agent':
                 self.time_observer[agent.id] = dict()
                 self.time_observer[agent.id]['entry'] = road.label
@@ -254,6 +254,8 @@ class SurveyEntryExitObserver(AbstractObserver):
                 if self.running_log[survey().id]['survey_length'] is None:
                     self.running_log[survey().id]['survey_length'] = config.to_m(survey().zone)
                     self.running_log[survey().id]['survey_lanes'] = survey().road.lanes
+                    #Adding the survey().road.speed_limit in the running log
+                    self.running_log[survey().id]['survey_speed'] = survey().road.speed_limit
 
                 if pos and survey().pos < pos < survey().exit and self.running_log[survey().id][agent.id]['entry'] is None:
                     self.running_log[survey().id][agent.id]['entry'] = time
@@ -261,6 +263,8 @@ class SurveyEntryExitObserver(AbstractObserver):
                 elif pos and pos > survey().exit and self.running_log[survey().id][agent.id]['entry'] is not None \
                         and self.running_log[survey().id][agent.id]['exit'] is None:
                     self.running_log[survey().id][agent.id]['exit'] = time
+                    #Adding the agent.vel_max in the running log
+                    self.running_log[survey().id][agent.id]['vel_max'] = agent.vel_max
 
     def result(self):
         log = copy.deepcopy(self.running_log)

@@ -60,7 +60,7 @@ class SimRequestHandler(BaseHTTPRequestHandler):
         conn = db.cursor()
         conn.execute('''CREATE TABLE IF NOT EXISTS users(
                         email TEXT PRIMARY KEY NOT NULL UNIQUE,
-                        pw TEXT NOT NULL 
+                        pw TEXT NOT NULL
                       );''')
         db.commit()
         db.close()
@@ -149,7 +149,7 @@ class SimRequestHandler(BaseHTTPRequestHandler):
         try:
             if not mimetype:
                 raise InvalidMimeType
-                
+
             if path_:
                 # Open file as binary for non-text mimetypes (eg .lmf, .zip, .png)
                 if mimetype.endswith('octet-stream') or mimetype.startswith('image') or mimetype.startswith('video'):
