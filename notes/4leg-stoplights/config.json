@@ -1,0 +1,18 @@
+{
+    "head": [
+        {
+            "id": 486,
+            "cls": "localsim.config.ConfigObject",
+            "ars": [],
+            "kws": {
+                "px2m_factor": 0.18,
+                "desired_velocity": 23.33,
+                "minimum_headway": 1,
+                "safe_time_headway": 1.6,
+                "acceleration_threshold": 0.3,
+                "politeness_factor": 0.554,
+                "safe_braking_deceleration": 4
+            }
+        }
+    ]
+}

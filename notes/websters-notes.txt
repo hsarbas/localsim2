@@ -1,0 +1,24 @@
+Given an approach you can obtain:
+
+- Volume (pcu/hr)
+- Saturation flow rate (pcu/hr)
+
+Calculate y values: y = Volume / Satflow
+
+Webster's Equation for Optimal Cycle Time:
+
+C = (1.5L + 5) / (1 - Y)
+    L   = lost time to startup and all red
+        = 4*2 + 4*2 (4 approaches, 2 s red time, 2 s startup time)
+        = 16
+    Y   = sum of all critical y values
+        = 2*y_left + 2*y_through
+        y_left = 0.1*(450 ... 1800) / 2000 (magic number from book)
+        y_through = 0.8*(450 ... 1800) / 2000 (magic number from book)
+    Y   = 2*0.9*(450...1800) / 2000
+        = 0.405 ... 0.999
+        => 0.4 ... 0.9
+
+C   = (1.5*16 + 5) / (1 - Y)
+    = [49,58,73,97,145,290] (rounded up)
+    => [50 ... 300]

@@ -1,0 +1,140 @@
+{
+    "head": [
+        {
+            "id": 474,
+            "cls": "localsim.models.meta.traffic.Route",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 438,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    {
+                        "__foreign__": true,
+                        "id": 446,
+                        "cls": "localsim.models.infra.road.road.InterruptedRoad"
+                    },
+                    {
+                        "__foreign__": true,
+                        "id": 447,
+                        "cls": "localsim.models.infra.road.road.InterruptedRoad"
+                    },
+                    {
+                        "__foreign__": true,
+                        "id": 448,
+                        "cls": "localsim.models.infra.road.road.InterruptedRoad"
+                    }
+                ],
+                0
+            ],
+            "kws": {
+                "onset": 750,
+                "emergency_stop": 111,
+                "offset": 83
+            }
+        },
+        {
+            "id": 475,
+            "cls": "localsim.models.meta.traffic.Route",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 440,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    {
+                        "__foreign__": true,
+                        "id": 452,
+                        "cls": "localsim.models.infra.road.road.InterruptedRoad"
+                    },
+                    {
+                        "__foreign__": true,
+                        "id": 453,
+                        "cls": "localsim.models.infra.road.road.InterruptedRoad"
+                    },
+                    {
+                        "__foreign__": true,
+                        "id": 454,
+                        "cls": "localsim.models.infra.road.road.InterruptedRoad"
+                    }
+                ],
+                0
+            ],
+            "kws": {
+                "onset": 750,
+                "emergency_stop": 111,
+                "offset": 83
+            }
+        },
+        {
+            "id": 476,
+            "cls": "localsim.models.meta.traffic.Route",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 443,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    {
+                        "__foreign__": true,
+                        "id": 449,
+                        "cls": "localsim.models.infra.road.road.InterruptedRoad"
+                    },
+                    {
+                        "__foreign__": true,
+                        "id": 450,
+                        "cls": "localsim.models.infra.road.road.InterruptedRoad"
+                    },
+                    {
+                        "__foreign__": true,
+                        "id": 451,
+                        "cls": "localsim.models.infra.road.road.InterruptedRoad"
+                    }
+                ],
+                0
+            ],
+            "kws": {
+                "onset": 750,
+                "emergency_stop": 111,
+                "offset": 83
+            }
+        },
+        {
+            "id": 477,
+            "cls": "localsim.models.meta.traffic.Route",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 445,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    {
+                        "__foreign__": true,
+                        "id": 455,
+                        "cls": "localsim.models.infra.road.road.InterruptedRoad"
+                    },
+                    {
+                        "__foreign__": true,
+                        "id": 456,
+                        "cls": "localsim.models.infra.road.road.InterruptedRoad"
+                    },
+                    {
+                        "__foreign__": true,
+                        "id": 457,
+                        "cls": "localsim.models.infra.road.road.InterruptedRoad"
+                    }
+                ],
+                0
+            ],
+            "kws": {
+                "onset": 750,
+                "emergency_stop": 111,
+                "offset": 83
+            }
+        }
+    ]
+}

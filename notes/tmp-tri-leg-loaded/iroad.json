@@ -1,0 +1,192 @@
+{
+    "head": [
+        {
+            "id": 19,
+            "cls": "localsim.models.infra.road.road.InterruptedRoad",
+            "ars": [
+                "trans-qhall2uave",
+                {
+                    "__foreign__": true,
+                    "id": 13,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 14,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    0,
+                    1,
+                    2
+                ],
+                [
+                    0,
+                    1,
+                    2
+                ],
+                3,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 20,
+            "cls": "localsim.models.infra.road.road.InterruptedRoad",
+            "ars": [
+                "trans-uave2qhall",
+                {
+                    "__foreign__": true,
+                    "id": 15,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 16,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    0,
+                    1,
+                    2
+                ],
+                [
+                    0,
+                    1,
+                    2
+                ],
+                3,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 21,
+            "cls": "localsim.models.infra.road.road.InterruptedRoad",
+            "ars": [
+                "trans-uave2fa",
+                {
+                    "__foreign__": true,
+                    "id": 15,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 17,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    2
+                ],
+                [
+                    1
+                ],
+                1,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 22,
+            "cls": "localsim.models.infra.road.road.InterruptedRoad",
+            "ars": [
+                "trans-qhall2fa",
+                {
+                    "__foreign__": true,
+                    "id": 13,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 17,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    0
+                ],
+                [
+                    0
+                ],
+                1,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 23,
+            "cls": "localsim.models.infra.road.road.InterruptedRoad",
+            "ars": [
+                "trans-fa2qhall",
+                {
+                    "__foreign__": true,
+                    "id": 18,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 16,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    1
+                ],
+                [
+                    2
+                ],
+                1,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 24,
+            "cls": "localsim.models.infra.road.road.InterruptedRoad",
+            "ars": [
+                "trans-fa2uave",
+                {
+                    "__foreign__": true,
+                    "id": 18,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 14,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    0
+                ],
+                [
+                    0
+                ],
+                1,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        }
+    ]
+}

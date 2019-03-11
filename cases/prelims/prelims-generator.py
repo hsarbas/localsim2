@@ -22,6 +22,15 @@ _tmp_files = dict(
 # The paths will change
 ###
 
+## Traffic Demand:
+## - Symmetric, 450 to 1800
+##
+## Stoplight cycle:
+## - 50 to 300
+
+traffic_demand = range(450,901,50)
+stoplight_cycle = range(50,301,50)
+
 def _remove_tmp_files():
     for f in _tmp_files.values():
         try:
@@ -30,20 +39,24 @@ def _remove_tmp_files():
             print 'Removing tmp files error:', e
 
 ### Extract the base map
-zip_file = zipfile.ZipFile('tri-leg-loaded.lmf')
+## Filename: 4leg-<trafficdemand>-<cycletime>.lmf
+zip_file = zipfile.ZipFile('4leg-450-150.lmf')
 zip_file.extractall()
 
 ### Process the files
-with open(_tmp_files['dispatcher'], 'r+') as f:
-    data = json.load(f)
-    for dispatcher in data['head']:
-        dispatcher['ars'][1]['0,3600'][0] = 1800
-        dispatcher['ars'][1]['0,3600'][1] = dispatcher['ars'][1]['0,3600'][1] * 3
-    f.seek(0)
-    json.dump(data, f, indent=4)
-    f.truncate()
 
-### Write to a new output file
-output_file = zipfile.ZipFile('tri-leg-overloaded.lmf', 'w')
-for f in _tmp_files.iteritems():
-    output_file.write(f[1])
+for demand in traffic_demand:
+    with open(_tmp_files['dispatcher'], 'r+') as f:
+        data = json.load(f)
+        for dispatcher in data['head']:
+            scaleby = float(demand) / dispatcher['ars'][1]['0,3600'][0]
+            dispatcher['ars'][1]['0,3600'][0] = demand
+            dispatcher['ars'][1]['0,3600'][1] = dispatcher['ars'][1]['0,3600'][1] * scaleby
+        f.seek(0)
+        json.dump(data, f, indent=4)
+        f.truncate()
+
+    ### Write to a new output file
+    output_file = zipfile.ZipFile('4leg-{}-150.lmf'.format(demand), 'w')
+    for f in _tmp_files.iteritems():
+        output_file.write(f[1])

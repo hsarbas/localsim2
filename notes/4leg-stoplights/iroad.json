@@ -1,0 +1,372 @@
+{
+    "head": [
+        {
+            "id": 446,
+            "cls": "localsim.models.infra.road.road.InterruptedRoad",
+            "ars": [
+                "West_to_East",
+                {
+                    "__foreign__": true,
+                    "id": 438,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 442,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    1,
+                    2
+                ],
+                [
+                    1,
+                    2
+                ],
+                2,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 447,
+            "cls": "localsim.models.infra.road.road.InterruptedRoad",
+            "ars": [
+                "West_to_North",
+                {
+                    "__foreign__": true,
+                    "id": 438,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 441,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    0
+                ],
+                [
+                    0
+                ],
+                1,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 448,
+            "cls": "localsim.models.infra.road.road.InterruptedRoad",
+            "ars": [
+                "West_to_South",
+                {
+                    "__foreign__": true,
+                    "id": 438,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 444,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    3
+                ],
+                [
+                    3
+                ],
+                1,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 449,
+            "cls": "localsim.models.infra.road.road.InterruptedRoad",
+            "ars": [
+                "East_to_West",
+                {
+                    "__foreign__": true,
+                    "id": 443,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 439,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    1,
+                    2
+                ],
+                [
+                    1,
+                    2
+                ],
+                2,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 450,
+            "cls": "localsim.models.infra.road.road.InterruptedRoad",
+            "ars": [
+                "East_to_North",
+                {
+                    "__foreign__": true,
+                    "id": 443,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 441,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    3
+                ],
+                [
+                    3
+                ],
+                1,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 451,
+            "cls": "localsim.models.infra.road.road.InterruptedRoad",
+            "ars": [
+                "East_to_South",
+                {
+                    "__foreign__": true,
+                    "id": 443,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 444,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    0
+                ],
+                [
+                    0
+                ],
+                1,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 452,
+            "cls": "localsim.models.infra.road.road.InterruptedRoad",
+            "ars": [
+                "North_to_South",
+                {
+                    "__foreign__": true,
+                    "id": 440,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 444,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    1,
+                    2
+                ],
+                [
+                    1,
+                    2
+                ],
+                2,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 453,
+            "cls": "localsim.models.infra.road.road.InterruptedRoad",
+            "ars": [
+                "North_to_West",
+                {
+                    "__foreign__": true,
+                    "id": 440,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 439,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    3
+                ],
+                [
+                    3
+                ],
+                1,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 454,
+            "cls": "localsim.models.infra.road.road.InterruptedRoad",
+            "ars": [
+                "North_to_East",
+                {
+                    "__foreign__": true,
+                    "id": 440,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 442,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    0
+                ],
+                [
+                    0
+                ],
+                1,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 455,
+            "cls": "localsim.models.infra.road.road.InterruptedRoad",
+            "ars": [
+                "South_to_North",
+                {
+                    "__foreign__": true,
+                    "id": 445,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 441,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    1,
+                    2
+                ],
+                [
+                    1,
+                    2
+                ],
+                2,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 456,
+            "cls": "localsim.models.infra.road.road.InterruptedRoad",
+            "ars": [
+                "South_to_East",
+                {
+                    "__foreign__": true,
+                    "id": 445,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 442,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    3
+                ],
+                [
+                    3
+                ],
+                1,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 457,
+            "cls": "localsim.models.infra.road.road.InterruptedRoad",
+            "ars": [
+                "South_to_West",
+                {
+                    "__foreign__": true,
+                    "id": 445,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 439,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                [
+                    0
+                ],
+                [
+                    0
+                ],
+                1,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        }
+    ]
+}
