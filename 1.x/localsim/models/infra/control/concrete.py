@@ -1,13 +1,25 @@
 import base
 from localsim.analysis import matrices
 
-
+"""
+NOTES:
+- Sum of a stoplight's red, green, and yellow times corresponds to the cycle time
+- Current goal is to change the timings every n cycle times (making cycle time dynamic)
+- Function that achieves current goal must be able to do so for all stoplights
+- *IMPORTANT* The animation for stoplights is static and will not reflect any changes 
+made to the timings, HOWEVER since the animation for agents is dynamic, they will respond
+to the changes made to the stoplights.
+"""
 class StopLight(base.AbstractDynamicControl):
     RED = 0
     GREEN = 1
     YELLOW = 2
     STATES = [RED, GREEN, YELLOW]
 
+    """
+    'phase' is the list containing the duration of each color
+    self.phase[0] corresponds to the red time, 1 to green time and 2 to yellow time
+    """
     def __init__(self, road, pos, lane, phase, state=None, start=0):
         state = state if state else StopLight.RED
         super(StopLight, self).__init__(road, pos, lane, state, start)
@@ -21,8 +33,11 @@ class StopLight(base.AbstractDynamicControl):
         return None
 
     def update(self):
+        ###This is for updating the state of a traffic signal (see: base.py _signal_callback in AbstractDynamicControl)
         if self.state[1] == self.phase[self.state[0]]:
             self.state = [StopLight.STATES[(self.state[0] + 1) % len(StopLight.STATES)], 0]
+            ###as part of a test, every change in color results in an increase to red time by 30 seconds:
+            #self.phase[0] += 30
 
     def deconstruct(self):
         fullpath = '.'.join([self.__class__.__module__, self.__class__.__name__])

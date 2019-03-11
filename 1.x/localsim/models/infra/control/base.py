@@ -92,6 +92,7 @@ class AbstractDynamicControl(signal.Signal):
         self.road.connect('change', self._signal_callback)
         self.road.connect('move', self._signal_callback)
 
+###everytime the clock signals 'coarse', updates the state of the traffic signal
     def _signal_callback(self, event, source, **extras):
         if event in ['change', 'move']:  # road signal
             self.fire('move')
