@@ -39,6 +39,14 @@ class StopLight(base.AbstractDynamicControl):
             ###as part of a test, every change in color results in an increase to red time by 30 seconds:
             #self.phase[0] += 30
 
+    '''
+    *UNTESTED*
+    Call this function to alter the phase times of a traffic signal; this is modeled after the update function
+    '''
+    def alter_phase(self, new_timings):
+        for i in range(3):
+            self.phase[i] = new_timings[i]
+
     def deconstruct(self):
         fullpath = '.'.join([self.__class__.__module__, self.__class__.__name__])
         args = [self.road, self.pos, self.lane, list(self.phase)]
