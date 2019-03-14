@@ -38,6 +38,7 @@ class Engine(object):
             entry.run(self.agent_manager)
             entry.connect('dispatch', self._signal_callback)
 
+        # Add the agent manager's clock into the control (see control/base.py for function definition)
         for c_list in list(self.scene.controls.values()):
             for c in c_list:
                 if isinstance(c, control.StopLight):

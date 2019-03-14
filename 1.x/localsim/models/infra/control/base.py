@@ -92,12 +92,12 @@ class AbstractDynamicControl(signal.Signal):
         self.road.connect('change', self._signal_callback)
         self.road.connect('move', self._signal_callback)
 
-###everytime the clock signals 'coarse', updates the state of the traffic signal
+    # Everytime the clock signals 'coarse', updates the state of the traffic signal
     def _signal_callback(self, event, source, **extras):
         if event in ['change', 'move']:  # road signal
             self.fire('move')
         elif event == 'coarse':  # clock signal
-        #this if statement ensures updates only happen at or after the start time
+        # Ensures updates only happen at or after the start time
             if (self.clock.now / 1000) >= self.init_state[1]:
                 if self._init_pass:
                     self.state = [1, 0]
@@ -109,6 +109,7 @@ class AbstractDynamicControl(signal.Signal):
         elif event == 'stop':  # clock signal
             self.reset()
 
+    # Sets the control's clock; Connects callbacks to clock events 'coarse' and 'stop'
     def run(self, clock):
         self.reset()
         self.clock = clock
