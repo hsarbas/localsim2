@@ -97,12 +97,15 @@ class AbstractDynamicControl(signal.Signal):
         if event in ['change', 'move']:  # road signal
             self.fire('move')
         elif event == 'coarse':  # clock signal
+        #this if statement ensures updates only happen at or after the start time
             if (self.clock.now / 1000) >= self.init_state[1]:
                 if self._init_pass:
                     self.state = [1, 0]
                     self._init_pass = False
                 self._state[1] += 1
                 self.update()
+                #FOR TESTING IF ALTER_PHASE WORKS **DOESN'T WORK**
+                self.alter_phase([60,1,1])
         elif event == 'stop':  # clock signal
             self.reset()
 
