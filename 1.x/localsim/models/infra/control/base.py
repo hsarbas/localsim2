@@ -172,6 +172,11 @@ class AbstractDynamicControl(signal.Signal):
     def trigger(self, curr_pos, curr_lane, ssd):
         pass
 
+    '''For the method in concrete.py'''
+    @abstractmethod
+    def alter_phase(self, new_timings):
+        pass
+
     @property
     def pos(self):
         return self._pos
