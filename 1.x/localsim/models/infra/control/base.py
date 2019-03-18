@@ -103,9 +103,9 @@ class AbstractDynamicControl(signal.Signal):
                     self.state = [1, 0]
                     self._init_pass = False
                 self._state[1] += 1
-                self.update()
-                #FOR TESTING IF ALTER_PHASE WORKS **DOESN'T WORK**
+                #FOR TESTING IF ALTER_PHASE WORKS **DOESN'T WORK IF PUT AFTER SELF.UPDATE()**
                 self.alter_phase([60,1,1])
+                self.update()
         elif event == 'stop':  # clock signal
             self.reset()
 
@@ -172,10 +172,12 @@ class AbstractDynamicControl(signal.Signal):
     def trigger(self, curr_pos, curr_lane, ssd):
         pass
 
-    '''For the method in concrete.py'''
+    '''For the method in concrete.py
+    **apparently not needed**
     @abstractmethod
     def alter_phase(self, new_timings):
         pass
+    '''
 
     @property
     def pos(self):
