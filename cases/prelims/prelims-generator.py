@@ -40,23 +40,32 @@ def _remove_tmp_files():
 
 ### Extract the base map
 ## Filename: 4leg-<trafficdemand>-<cycletime>.lmf
-zip_file = zipfile.ZipFile('4leg-450-150.lmf')
+zip_file = zipfile.ZipFile('4leg-new-450-150.lmf')
 zip_file.extractall()
 
 ### Process the files
+
+center_lanes = [246,247,248,249]
 
 for demand in traffic_demand:
     with open(_tmp_files['dispatcher'], 'r+') as f:
         data = json.load(f)
         for dispatcher in data['head']:
-            scaleby = float(demand) / dispatcher['ars'][1]['0,3600'][0]
-            dispatcher['ars'][1]['0,3600'][0] = demand
-            dispatcher['ars'][1]['0,3600'][1] = dispatcher['ars'][1]['0,3600'][1] * scaleby
+            if (dispatcher['ars'][2] == 0):
+                continue
+
+            lane_scaleby = 1
+            if (dispatcher['id'] in center_lanes):
+                lane_scaleby = 2
+
+            scaleby = float(demand) / 450.0
+            dispatcher['ars'][1]['0,3600'][0] = demand * lane_scaleby
+            dispatcher['ars'][1]['0,3600'][1] = 0.125 * scaleby
         f.seek(0)
         json.dump(data, f, indent=4)
         f.truncate()
 
     ### Write to a new output file
-    output_file = zipfile.ZipFile('4leg-{}-150.lmf'.format(demand), 'w')
+    output_file = zipfile.ZipFile('output/4leg-new-{}-150.lmf'.format(demand), 'w')
     for f in _tmp_files.iteritems():
         output_file.write(f[1])
