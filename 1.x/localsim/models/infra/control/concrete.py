@@ -34,18 +34,33 @@ class StopLight(base.AbstractDynamicControl):
 
     def update(self):
         ###This is for updating the state of a traffic signal (see: base.py _signal_callback in AbstractDynamicControl)
-        if self.state[1] == self.phase[self.state[0]]:
+        if self.state[1] >= self.phase[self.state[0]]:
             self.state = [StopLight.STATES[(self.state[0] + 1) % len(StopLight.STATES)], 0]
-            ###as part of a test, every change in color results in an increase to red time by 30 seconds:
-            #self.phase[0] += 30
+
+            # print("Current timings: {}".format(self.phase))
+            # print("State {} at time {}".format(self.state[0], self.state[1]))
+            # print("{} Cycles".format(self.cyclecount))
+            # print("~~~")
 
     '''
-    *UNTESTED*
+    Updates phasing (whether by changing the phase times, or the actual green times) depending on whether or not the setting for it is enabled
+    '''
+    def update_phase(self):
+        '''
+        Counts the number of cycles. After 2 cycles, the count is reset and new phase timings are sent.
+        '''
+        if self.state == [self.init_state[0], 0] and self.cyclecount < 2:
+            self.cyclecount = self.cyclecount + 1
+        if self.cyclecount == 2:
+            self.cyclecount = 0
+            self.alter_phase([60,1,1])
+
+
+    '''
     Call this function to alter the phase times of a traffic signal; this is modeled after the update function
     '''
     def alter_phase(self, new_timings):
-        for i in range(3):
-            self.phase[i] = new_timings[i]
+        self.phase = new_timings
 
     def deconstruct(self):
         fullpath = '.'.join([self.__class__.__module__, self.__class__.__name__])
