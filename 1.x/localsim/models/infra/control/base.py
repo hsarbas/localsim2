@@ -18,6 +18,7 @@ class AbstractStaticControl(signal.Signal):
         self._zone = zone  # area of effect of control
         self._pos = pos  # distance from source node
 
+
         self.exit = self.pos + self.zone
         self.road.connect('change', self._signal_callback)
         self.road.connect('move', self._signal_callback)
@@ -85,7 +86,8 @@ class AbstractDynamicControl(signal.Signal):
         self._init_state = [state, start]
 
         self._state = [self.init_state[0], 0]
-        self.cyclecount = 0
+        self.cyclecount = 0 #This is for counting the cycles
+        self.statelist = [] #This is for storing outputs from linear solver
 
         self._clock = None
         self._init_pass = True

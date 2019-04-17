@@ -6,7 +6,7 @@ NOTES:
 - Sum of a stoplight's red, green, and yellow times corresponds to the cycle time
 - Current goal is to change the timings every n cycle times (making cycle time dynamic)
 - Function that achieves current goal must be able to do so for all stoplights
-- *IMPORTANT* The animation for stoplights is static and will not reflect any changes 
+- *IMPORTANT* The animation for stoplights is static and will not reflect any changes
 made to the timings, HOWEVER since the animation for agents is dynamic, they will respond
 to the changes made to the stoplights.
 """
@@ -31,6 +31,19 @@ class StopLight(base.AbstractDynamicControl):
                 return dict(type=self.__class__.__name__, entrydist=self.pos - curr_pos, state=self.state[0],
                             id=self.id, lane=self.lane)
         return None
+
+    '''
+    This function is meant to replace def update().
+    This function is called per second.
+    This function changes the state of a traffic light depending on the input from the linear solver
+    in the form of a number (0 - RED, 1 - GREEN, 2- YELLOW)) then appends that number
+    to the stoplight object's list.
+    '''
+    def new_update(self):
+        self.phase = [1,1,1] #Sets phase timings to 1 second
+        LSOutput = 0 #Output from the linear solver = 3 which means RED
+        self.state =  [StopLight.STATES[LSOutput], 0]
+        self.statelist.append(LSOutput)
 
     def update(self):
         ###This is for updating the state of a traffic signal (see: base.py _signal_callback in AbstractDynamicControl)
