@@ -41,9 +41,7 @@ class StopLight(base.AbstractDynamicControl):
     '''
     def new_update(self):
         self.phase = [1,1,1] #Sets phase timings to 1 second
-        LSOutput = 0 #Output from the linear solver = 3 which means RED
-        self.state =  [StopLight.STATES[LSOutput], 0]
-        self.statelist.append(LSOutput)
+        self.state =  [StopLight.STATES[self.statelist[self.stateindex]], 0]
 
     def update(self):
         ###This is for updating the state of a traffic signal (see: base.py _signal_callback in AbstractDynamicControl)

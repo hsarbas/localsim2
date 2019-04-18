@@ -88,6 +88,7 @@ class AbstractDynamicControl(signal.Signal):
         self._state = [self.init_state[0], 0]
         self.cyclecount = 0 #This is for counting the cycles
         self.statelist = [] #This is for storing outputs from linear solver
+        self.stateindex = 0 #This is the index for iterating through statelist
 
         self._clock = None
         self._init_pass = True
@@ -106,8 +107,17 @@ class AbstractDynamicControl(signal.Signal):
                     self.state = [1, 0]
                     self._init_pass = False
                 self._state[1] += 1
-                self.update()
-                self.update_phase()
+                LSOutput = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1] #Output from linear solver
+                if not self.statelist:
+                    self.statelist = LSOutput
+                self.new_update() #This calls the update function in concrete.py
+                if self.stateindex < len(self.statelist):
+                    self.stateindex = self.stateindex + 1
+                else: #Resets stateindex and increments cyclecount by 1
+                    self.cyclecount = self.cyclecount + 1
+                    self.stateindex = 0
+                '''self.update()
+                self.update_phase()'''
         elif event == 'stop':  # clock signal
             self.reset()
 
