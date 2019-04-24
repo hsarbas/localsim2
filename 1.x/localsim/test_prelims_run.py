@@ -7,5 +7,5 @@ api = API.API()
 
 for demand in traffic_demand:
     for cycle in stoplight_cycle:
-        os.system("python test-api.py {} {} {}".format(demand, cycle, "_wjbowacwm"))
+        os.system("python test_case_run.py {} {} {}".format(demand, cycle, "_wjbowacwm"))
         print("\n~~~\nDone with {} {}!\n~~~\n".format(demand, cycle))
