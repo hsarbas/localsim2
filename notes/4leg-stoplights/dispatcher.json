@@ -1,0 +1,112 @@
+{
+    "head": [
+        {
+            "id": 470,
+            "cls": "localsim.models.meta.traffic.Entry",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 438,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "0,3600": [
+                        600,
+                        0.041666666666666664
+                    ]
+                },
+                {
+                    "car": 1,
+                    "bus": 0,
+                    "truck": 0,
+                    "motorcycle": 0,
+                    "jeep": 0,
+                    "tricycle": 0
+                },
+                {}
+            ],
+            "kws": {}
+        },
+        {
+            "id": 471,
+            "cls": "localsim.models.meta.traffic.Entry",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 440,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "0,3600": [
+                        600,
+                        0.041666666666666664
+                    ]
+                },
+                {
+                    "car": 1,
+                    "bus": 0,
+                    "truck": 0,
+                    "motorcycle": 0,
+                    "jeep": 0,
+                    "tricycle": 0
+                },
+                {}
+            ],
+            "kws": {}
+        },
+        {
+            "id": 472,
+            "cls": "localsim.models.meta.traffic.Entry",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 443,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "0,3600": [
+                        600,
+                        0.041666666666666664
+                    ]
+                },
+                {
+                    "car": 1,
+                    "bus": 0,
+                    "truck": 0,
+                    "motorcycle": 0,
+                    "jeep": 0,
+                    "tricycle": 0
+                },
+                {}
+            ],
+            "kws": {}
+        },
+        {
+            "id": 473,
+            "cls": "localsim.models.meta.traffic.Entry",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 445,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "0,3600": [
+                        600,
+                        0.041666666666666664
+                    ]
+                },
+                {
+                    "car": 1,
+                    "bus": 0,
+                    "truck": 0,
+                    "motorcycle": 0,
+                    "jeep": 0,
+                    "tricycle": 0
+                },
+                {}
+            ],
+            "kws": {}
+        }
+    ]
+}

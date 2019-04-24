@@ -1,0 +1,132 @@
+{
+    "head": [
+        {
+            "id": 478,
+            "cls": "localsim.models.infra.survey_zone.SurveyZone",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 443,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                1.9550332823250587,
+                1,
+                741.9762488408843,
+                "Unique"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 479,
+            "cls": "localsim.models.infra.survey_zone.SurveyZone",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 445,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                3.4581746391820865,
+                2,
+                738.0025614898167,
+                "Unique"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 480,
+            "cls": "localsim.models.infra.survey_zone.SurveyZone",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 438,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                2.4999999999998295,
+                3,
+                738,
+                "Unique"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 481,
+            "cls": "localsim.models.infra.survey_zone.SurveyZone",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 440,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                0.20880354477651508,
+                1,
+                734.032509577099,
+                "Unique"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 482,
+            "cls": "localsim.models.infra.survey_zone.SurveyZone",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 444,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                0.5,
+                1,
+                32,
+                "Unique"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 483,
+            "cls": "localsim.models.infra.survey_zone.SurveyZone",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 442,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                0,
+                1,
+                30,
+                "Unique"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 484,
+            "cls": "localsim.models.infra.survey_zone.SurveyZone",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 439,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                1.821796056728875,
+                1,
+                31.999920280910146,
+                "Unique"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 485,
+            "cls": "localsim.models.infra.survey_zone.SurveyZone",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 441,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                2.579109959852948,
+                3,
+                39.98630533056733,
+                "Unique"
+            ],
+            "kws": {}
+        }
+    ]
+}

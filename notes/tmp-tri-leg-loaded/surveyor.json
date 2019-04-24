@@ -1,0 +1,100 @@
+{
+    "head": [
+        {
+            "id": 31,
+            "cls": "localsim.models.infra.survey_zone.SurveyZone",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 13,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                218.75,
+                2,
+                112.22222222222229,
+                "Unique"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 32,
+            "cls": "localsim.models.infra.survey_zone.SurveyZone",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 16,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                0.41666666666662877,
+                0,
+                113.33333333333337,
+                "Unique"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 33,
+            "cls": "localsim.models.infra.survey_zone.SurveyZone",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 18,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                113.88888888888891,
+                1,
+                105.55555555555554,
+                "Unique"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 34,
+            "cls": "localsim.models.infra.survey_zone.SurveyZone",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 17,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                0.6494529007601874,
+                0,
+                107.78866418060525,
+                "Unique"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 35,
+            "cls": "localsim.models.infra.survey_zone.SurveyZone",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 15,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                227.7813745132894,
+                1,
+                106.678361842904,
+                "Unique"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 36,
+            "cls": "localsim.models.infra.survey_zone.SurveyZone",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 14,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                1.7712110479538328,
+                1,
+                108.93806241018684,
+                "Unique"
+            ],
+            "kws": {}
+        }
+    ]
+}

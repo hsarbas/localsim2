@@ -1,0 +1,268 @@
+{
+    "head": [
+        {
+            "id": 458,
+            "cls": "localsim.models.infra.control.concrete.StopLight",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 438,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                743.4999999999998,
+                0,
+                [
+                    122,
+                    25,
+                    3
+                ]
+            ],
+            "kws": {
+                "state": 0,
+                "start": 0
+            }
+        },
+        {
+            "id": 459,
+            "cls": "localsim.models.infra.control.concrete.StopLight",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 438,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                743.4999999999998,
+                1,
+                [
+                    107,
+                    40,
+                    3
+                ]
+            ],
+            "kws": {
+                "state": 0,
+                "start": 30
+            }
+        },
+        {
+            "id": 460,
+            "cls": "localsim.models.infra.control.concrete.StopLight",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 438,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                742.4999999999998,
+                2,
+                [
+                    107,
+                    40,
+                    3
+                ]
+            ],
+            "kws": {
+                "state": 0,
+                "start": 30
+            }
+        },
+        {
+            "id": 461,
+            "cls": "localsim.models.infra.control.concrete.StopLight",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 443,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                746.8950818776253,
+                0,
+                [
+                    122,
+                    25,
+                    3
+                ]
+            ],
+            "kws": {
+                "state": 0,
+                "start": 0
+            }
+        },
+        {
+            "id": 462,
+            "cls": "localsim.models.infra.control.concrete.StopLight",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 443,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                746.9641604512577,
+                1,
+                [
+                    107,
+                    40,
+                    3
+                ]
+            ],
+            "kws": {
+                "state": 0,
+                "start": 30
+            }
+        },
+        {
+            "id": 463,
+            "cls": "localsim.models.infra.control.concrete.StopLight",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 443,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                748.0365230705025,
+                2,
+                [
+                    107,
+                    40,
+                    3
+                ]
+            ],
+            "kws": {
+                "state": 0,
+                "start": 30
+            }
+        },
+        {
+            "id": 464,
+            "cls": "localsim.models.infra.control.concrete.StopLight",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 440,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                741.2035277022256,
+                0,
+                [
+                    122,
+                    25,
+                    3
+                ]
+            ],
+            "kws": {
+                "state": 0,
+                "start": 75
+            }
+        },
+        {
+            "id": 465,
+            "cls": "localsim.models.infra.control.concrete.StopLight",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 440,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                742.2827653011309,
+                1,
+                [
+                    107,
+                    40,
+                    3
+                ]
+            ],
+            "kws": {
+                "state": 0,
+                "start": 105
+            }
+        },
+        {
+            "id": 466,
+            "cls": "localsim.models.infra.control.concrete.StopLight",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 440,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                742.36578357797,
+                2,
+                [
+                    107,
+                    40,
+                    3
+                ]
+            ],
+            "kws": {
+                "state": 0,
+                "start": 105
+            }
+        },
+        {
+            "id": 467,
+            "cls": "localsim.models.infra.control.concrete.StopLight",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 445,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                745.6145590514981,
+                0,
+                [
+                    122,
+                    25,
+                    3
+                ]
+            ],
+            "kws": {
+                "state": 0,
+                "start": 75
+            }
+        },
+        {
+            "id": 468,
+            "cls": "localsim.models.infra.control.concrete.StopLight",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 445,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                744.544330923318,
+                1,
+                [
+                    107,
+                    40,
+                    3
+                ]
+            ],
+            "kws": {
+                "state": 0,
+                "start": 105
+            }
+        },
+        {
+            "id": 469,
+            "cls": "localsim.models.infra.control.concrete.StopLight",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 445,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                744.4807861282073,
+                2,
+                [
+                    107,
+                    40,
+                    3
+                ]
+            ],
+            "kws": {
+                "state": 0,
+                "start": 105
+            }
+        }
+    ]
+}

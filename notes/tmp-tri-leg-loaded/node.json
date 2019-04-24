@@ -1,0 +1,124 @@
+{
+    "head": [
+        {
+            "id": 1,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                998.75,
+                117.5,
+                "src"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 2,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                665.75,
+                117.5,
+                "dst"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 3,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                556.25,
+                117.5,
+                "src"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 4,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                222.5,
+                116.25,
+                "dst"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 5,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                220,
+                187.5,
+                "src"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 6,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                555,
+                188.75,
+                "dst"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 7,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                666.25,
+                188.75,
+                "src"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 8,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                996.25,
+                188.75,
+                "dst"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 9,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                588.75,
+                223.75,
+                "src"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 10,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                587.5,
+                443.75,
+                "dst"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 11,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                637.5,
+                445,
+                "src"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 12,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                637.5,
+                223.75,
+                "dst"
+            ],
+            "kws": {}
+        }
+    ]
+}
