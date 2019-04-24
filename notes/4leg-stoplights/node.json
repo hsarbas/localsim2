@@ -1,0 +1,164 @@
+{
+    "head": [
+        {
+            "id": 422,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                361.50000000000017,
+                1296,
+                "src"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 423,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                1111.5000000000002,
+                1296,
+                "dst"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 424,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                1111.833333333333,
+                1204.8333333333335,
+                "src"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 425,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                361.8352017495017,
+                1203.1592303610482,
+                "dst"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 426,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                1207,
+                363.6666666666667,
+                "src"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 427,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                1204.1698314714026,
+                1113.6613267450566,
+                "dst"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 428,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                1302.5,
+                1112.5,
+                "src"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 429,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                1305.0252382113442,
+                362.50425123073137,
+                "dst"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 430,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                1390,
+                1297.5,
+                "src"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 431,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                2140,
+                1297.5,
+                "dst"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 432,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                2140,
+                1208.3333333333333,
+                "src"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 433,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                1390.0040577059895,
+                1205.8662414178925,
+                "dst"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 434,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                1207.5,
+                1387.5,
+                "src"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 435,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                1207.5,
+                2137.5,
+                "dst"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 436,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                1307.5,
+                2137.5,
+                "src"
+            ],
+            "kws": {}
+        },
+        {
+            "id": 437,
+            "cls": "localsim.models.infra.road.node.Node",
+            "ars": [
+                1304.9916528245778,
+                1387.5041945487644,
+                "dst"
+            ],
+            "kws": {}
+        }
+    ]
+}

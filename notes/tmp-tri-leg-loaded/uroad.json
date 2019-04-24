@@ -1,0 +1,148 @@
+{
+    "head": [
+        {
+            "id": 13,
+            "cls": "localsim.models.infra.road.road.UninterruptedRoad",
+            "ars": [
+                "qhall2uave-1",
+                {
+                    "__foreign__": true,
+                    "id": 1,
+                    "cls": "localsim.models.infra.road.node.Node"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 2,
+                    "cls": "localsim.models.infra.road.node.Node"
+                },
+                3,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 14,
+            "cls": "localsim.models.infra.road.road.UninterruptedRoad",
+            "ars": [
+                "qhall2uave-2",
+                {
+                    "__foreign__": true,
+                    "id": 3,
+                    "cls": "localsim.models.infra.road.node.Node"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 4,
+                    "cls": "localsim.models.infra.road.node.Node"
+                },
+                3,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 15,
+            "cls": "localsim.models.infra.road.road.UninterruptedRoad",
+            "ars": [
+                "uave2qhall-1",
+                {
+                    "__foreign__": true,
+                    "id": 5,
+                    "cls": "localsim.models.infra.road.node.Node"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 6,
+                    "cls": "localsim.models.infra.road.node.Node"
+                },
+                3,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 16,
+            "cls": "localsim.models.infra.road.road.UninterruptedRoad",
+            "ars": [
+                "uave2qhall-2",
+                {
+                    "__foreign__": true,
+                    "id": 7,
+                    "cls": "localsim.models.infra.road.node.Node"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 8,
+                    "cls": "localsim.models.infra.road.node.Node"
+                },
+                3,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 17,
+            "cls": "localsim.models.infra.road.road.UninterruptedRoad",
+            "ars": [
+                "chk2fa",
+                {
+                    "__foreign__": true,
+                    "id": 9,
+                    "cls": "localsim.models.infra.road.node.Node"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 10,
+                    "cls": "localsim.models.infra.road.node.Node"
+                },
+                2,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        },
+        {
+            "id": 18,
+            "cls": "localsim.models.infra.road.road.UninterruptedRoad",
+            "ars": [
+                "fa2chk",
+                {
+                    "__foreign__": true,
+                    "id": 11,
+                    "cls": "localsim.models.infra.road.node.Node"
+                },
+                {
+                    "__foreign__": true,
+                    "id": 12,
+                    "cls": "localsim.models.infra.road.node.Node"
+                },
+                2,
+                22,
+                100,
+                "major",
+                0,
+                0
+            ],
+            "kws": {}
+        }
+    ]
+}

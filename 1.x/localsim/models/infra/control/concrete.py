@@ -1,13 +1,25 @@
 import base
 from localsim.analysis import matrices
 
-
+"""
+NOTES:
+- Sum of a stoplight's red, green, and yellow times corresponds to the cycle time
+- Current goal is to change the timings every n cycle times (making cycle time dynamic)
+- Function that achieves current goal must be able to do so for all stoplights
+- *IMPORTANT* The animation for stoplights is static and will not reflect any changes
+made to the timings, HOWEVER since the animation for agents is dynamic, they will respond
+to the changes made to the stoplights.
+"""
 class StopLight(base.AbstractDynamicControl):
     RED = 0
     GREEN = 1
     YELLOW = 2
     STATES = [RED, GREEN, YELLOW]
 
+    """
+    'phase' is the list containing the duration of each color
+    self.phase[0] corresponds to the red time, 1 to green time and 2 to yellow time
+    """
     def __init__(self, road, pos, lane, phase, state=None, start=0):
         state = state if state else StopLight.RED
         super(StopLight, self).__init__(road, pos, lane, state, start)
@@ -20,9 +32,46 @@ class StopLight(base.AbstractDynamicControl):
                             id=self.id, lane=self.lane)
         return None
 
+    '''
+    This function is meant to replace def update().
+    This function is called per second.
+    This function changes the state of a traffic light depending on the input from the linear solver
+    in the form of a number (0 - RED, 1 - GREEN, 2- YELLOW)) then appends that number
+    to the stoplight object's list.
+    '''
+    def new_update(self):
+        self.phase = [1,1,1] #Sets phase timings to 1 second
+        self.state =  [StopLight.STATES[self.statelist[self.stateindex]], 0]
+
     def update(self):
-        if self.state[1] == self.phase[self.state[0]]:
+        ###This is for updating the state of a traffic signal (see: base.py _signal_callback in AbstractDynamicControl)
+        if self.state[1] >= self.phase[self.state[0]]:
             self.state = [StopLight.STATES[(self.state[0] + 1) % len(StopLight.STATES)], 0]
+
+            # print("Current timings: {}".format(self.phase))
+            # print("State {} at time {}".format(self.state[0], self.state[1]))
+            # print("{} Cycles".format(self.cyclecount))
+            # print("~~~")
+
+    '''
+    Updates phasing (whether by changing the phase times, or the actual green times) depending on whether or not the setting for it is enabled
+    '''
+    def update_phase(self):
+        '''
+        Counts the number of cycles. After 2 cycles, the count is reset and new phase timings are sent.
+        '''
+        if self.state == [self.init_state[0], 0] and self.cyclecount < 2:
+            self.cyclecount = self.cyclecount + 1
+        if self.cyclecount == 2:
+            self.cyclecount = 0
+            self.alter_phase([60,1,1])
+
+
+    '''
+    Call this function to alter the phase times of a traffic signal; this is modeled after the update function
+    '''
+    def alter_phase(self, new_timings):
+        self.phase = new_timings
 
     def deconstruct(self):
         fullpath = '.'.join([self.__class__.__module__, self.__class__.__name__])

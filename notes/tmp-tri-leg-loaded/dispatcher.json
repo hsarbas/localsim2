@@ -1,0 +1,71 @@
+{
+    "head": [
+        {
+            "id": 25,
+            "cls": "localsim.models.meta.traffic.Entry",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 13,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "0,3600": [
+                        600,
+                        0.05555555555555555
+                    ]
+                },
+                {
+                    "car": 1,
+                    "bus": 0,
+                    "truck": 0,
+                    "motorcycle": 0,
+                    "jeep": 0,
+                    "tricycle": 0
+                },
+                {}
+            ],
+            "kws": {}
+        },
+        {
+            "id": 26,
+            "cls": "localsim.models.meta.traffic.Entry",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 15,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "0,3600": [
+                        600,
+                        0.05555555555555555
+                    ]
+                },
+                0,
+                {}
+            ],
+            "kws": {}
+        },
+        {
+            "id": 27,
+            "cls": "localsim.models.meta.traffic.Entry",
+            "ars": [
+                {
+                    "__foreign__": true,
+                    "id": 18,
+                    "cls": "localsim.models.infra.road.road.UninterruptedRoad"
+                },
+                {
+                    "0,3600": [
+                        600,
+                        0.08333333333333333
+                    ]
+                },
+                0,
+                {}
+            ],
+            "kws": {}
+        }
+    ]
+}

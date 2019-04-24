@@ -18,6 +18,7 @@ class AbstractStaticControl(signal.Signal):
         self._zone = zone  # area of effect of control
         self._pos = pos  # distance from source node
 
+
         self.exit = self.pos + self.zone
         self.road.connect('change', self._signal_callback)
         self.road.connect('move', self._signal_callback)
@@ -85,6 +86,9 @@ class AbstractDynamicControl(signal.Signal):
         self._init_state = [state, start]
 
         self._state = [self.init_state[0], 0]
+        self.cyclecount = 0 #This is for counting the cycles
+        self.statelist = [] #This is for storing outputs from linear solver
+        self.stateindex = 0 #This is the index for iterating through statelist
 
         self._clock = None
         self._init_pass = True
@@ -92,19 +96,32 @@ class AbstractDynamicControl(signal.Signal):
         self.road.connect('change', self._signal_callback)
         self.road.connect('move', self._signal_callback)
 
+    # Everytime the clock signals 'coarse', updates the state of the traffic signal
     def _signal_callback(self, event, source, **extras):
         if event in ['change', 'move']:  # road signal
             self.fire('move')
         elif event == 'coarse':  # clock signal
+        # Ensures updates only happen at or after the start time
             if (self.clock.now / 1000) >= self.init_state[1]:
                 if self._init_pass:
                     self.state = [1, 0]
                     self._init_pass = False
                 self._state[1] += 1
-                self.update()
+                LSOutput = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1] #Output from linear solver
+                if not self.statelist:
+                    self.statelist = LSOutput
+                self.new_update() #This calls the update function in concrete.py
+                if self.stateindex < len(self.statelist)-1:
+                    self.stateindex = self.stateindex + 1
+                else: #Resets stateindex and increments cyclecount by 1
+                    self.cyclecount = self.cyclecount + 1
+                    self.stateindex = 0
+                '''self.update()
+                self.update_phase()'''
         elif event == 'stop':  # clock signal
             self.reset()
 
+    # Sets the control's clock; Connects callbacks to clock events 'coarse' and 'stop'
     def run(self, clock):
         self.reset()
         self.clock = clock
@@ -166,6 +183,10 @@ class AbstractDynamicControl(signal.Signal):
 
     @abstractmethod
     def trigger(self, curr_pos, curr_lane, ssd):
+        pass
+
+    @abstractmethod
+    def update_phase(self):
         pass
 
     @property
