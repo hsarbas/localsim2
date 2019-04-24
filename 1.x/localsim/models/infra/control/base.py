@@ -111,7 +111,7 @@ class AbstractDynamicControl(signal.Signal):
                 if not self.statelist:
                     self.statelist = LSOutput
                 self.new_update() #This calls the update function in concrete.py
-                if self.stateindex < len(self.statelist):
+                if self.stateindex < len(self.statelist)-1:
                     self.stateindex = self.stateindex + 1
                 else: #Resets stateindex and increments cyclecount by 1
                     self.cyclecount = self.cyclecount + 1
