@@ -25,6 +25,12 @@ class StopLight(base.AbstractDynamicControl):
         super(StopLight, self).__init__(road, pos, lane, state, start)
         self.phase = list(phase)
 
+        self.cycle_count = 0 #This is for counting the cycles
+        self.state_list = [] #This is for storing outputs from linear solver
+
+        # For testing purposes; REMOVE ONCE FINISHED
+        self.state_list = [0,0,0,0,0,0,0,0,0,0,0,0,1,1,1]
+
     def trigger(self, curr_pos, curr_lane, ssd=0.0):
         if self.lane == curr_lane and curr_pos <= self.pos <= curr_pos + ssd:
             if self.state[0] in [StopLight.RED, StopLight.YELLOW]:
@@ -39,9 +45,16 @@ class StopLight(base.AbstractDynamicControl):
     in the form of a number (0 - RED, 1 - GREEN, 2- YELLOW)) then appends that number
     to the stoplight object's list.
     '''
-    def new_update(self):
+    def update_controlled(self):
+        if self.state_index >= len(self.state_list):
+            # Increments the number of cycles; resets the state index to 0 (first state)
+            self.cycle_count += 1
+            self.state_index = 0
+
+        # FIRE 'recompute' HERE IF cycle_count REACHES SOME THRESHOLD
+
         self.phase = [1,1,1] #Sets phase timings to 1 second
-        self.state =  [StopLight.STATES[self.statelist[self.stateindex]], 0]
+        self.state =  [StopLight.STATES[self.state_list[self.state_index]], 0]
 
     def update(self):
         ###This is for updating the state of a traffic signal (see: base.py _signal_callback in AbstractDynamicControl)

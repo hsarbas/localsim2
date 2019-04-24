@@ -78,7 +78,7 @@ class AbstractStaticControl(signal.Signal):
 class AbstractDynamicControl(signal.Signal):
     events = ['move', 'update', 'destroy']
 
-    def __init__(self, road, pos, lane, state, start):
+    def __init__(self, road, pos, lane, state, start, controlled=False):
         self.id = 'dcontrol-' + hex(_id_counter.next())
         self._road = weakref.ref(road)
         self._pos = pos
@@ -86,15 +86,19 @@ class AbstractDynamicControl(signal.Signal):
         self._init_state = [state, start]
 
         self._state = [self.init_state[0], 0]
-        self.cyclecount = 0 #This is for counting the cycles
-        self.statelist = [] #This is for storing outputs from linear solver
-        self.stateindex = 0 #This is the index for iterating through statelist
 
         self._clock = None
         self._init_pass = True
 
         self.road.connect('change', self._signal_callback)
         self.road.connect('move', self._signal_callback)
+
+        # For dynamic stoplights
+        self.controlled = controlled
+        self.state_index = -1 #This is the index for iterating through state_list; starts at -1 because it increments /before/ the update
+
+        # For testing dynamic by itself; REMOVE ONCE FINISHED
+        self.controlled = True
 
     # Everytime the clock signals 'coarse', updates the state of the traffic signal
     def _signal_callback(self, event, source, **extras):
@@ -106,18 +110,13 @@ class AbstractDynamicControl(signal.Signal):
                 if self._init_pass:
                     self.state = [1, 0]
                     self._init_pass = False
-                self._state[1] += 1
-                LSOutput = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1] #Output from linear solver
-                if not self.statelist:
-                    self.statelist = LSOutput
-                self.new_update() #This calls the update function in concrete.py
-                if self.stateindex < len(self.statelist)-1:
-                    self.stateindex = self.stateindex + 1
-                else: #Resets stateindex and increments cyclecount by 1
-                    self.cyclecount = self.cyclecount + 1
-                    self.stateindex = 0
-                '''self.update()
-                self.update_phase()'''
+                self._state[1] += 1 # Increments the time of the current state
+                if self.controlled:
+                    self.state_index += 1 # Increments the current state (for controlled)
+                    self.update_controlled()
+                else:
+                    self.update()
+                    # self.update_phase()
         elif event == 'stop':  # clock signal
             self.reset()
 
