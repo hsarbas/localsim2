@@ -107,4 +107,4 @@ venv.bak/
 *.xls
 
 # tmp files
-*/tmp/
+tmp/
