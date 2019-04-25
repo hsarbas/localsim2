@@ -2,6 +2,7 @@ from localsim.models.agent import base, senses
 from localsim.models.infra.control import concrete as control
 from localsim.models.meta import observer, analyzer, conflict_manager
 from localsim.utils.tools import mps_to_kph
+from localsim.models import tso_controller
 import localsim
 import collections
 
@@ -14,6 +15,7 @@ class Engine(object):
 
     def __init__(self, sim_clock, scene, agent_manager=None, **extras):
         self.scene = scene
+        self.tso_controller = tso_controller.TSO(self.scene)
         self.agent_manager = agent_manager if agent_manager else base.AgentManager()
         self.sim_clock = sim_clock
         self.conflict_manager = conflict_manager.ConflictManager(sim_clock, scene, self.agent_manager)

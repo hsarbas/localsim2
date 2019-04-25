@@ -67,6 +67,7 @@ class StopLight(base.AbstractDynamicControl):
             # print("~~~")
 
     '''
+    UNUSED
     Updates phasing (whether by changing the phase times, or the actual green times) depending on whether or not the setting for it is enabled
     '''
     def update_phase(self):

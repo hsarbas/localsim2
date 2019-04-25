@@ -97,9 +97,6 @@ class AbstractDynamicControl(signal.Signal):
         self.controlled = controlled
         self.state_index = -1 #This is the index for iterating through state_list; starts at -1 because it increments /before/ the update
 
-        # For testing dynamic by itself; REMOVE ONCE FINISHED
-        self.controlled = True
-
     # Everytime the clock signals 'coarse', updates the state of the traffic signal
     def _signal_callback(self, event, source, **extras):
         if event in ['change', 'move']:  # road signal
@@ -178,6 +175,10 @@ class AbstractDynamicControl(signal.Signal):
 
     @abstractmethod
     def update(self):
+        pass
+
+    @abstractmethod
+    def update_controlled(self):
         pass
 
     @abstractmethod
