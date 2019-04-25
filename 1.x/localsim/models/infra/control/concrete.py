@@ -27,6 +27,7 @@ class StopLight(base.AbstractDynamicControl):
 
         self.cycle_count = 0 #This is for counting the cycles
         self.state_list = [] #This is for storing outputs from linear solver
+        self.epoch = 0 #This is for counting TSO runs; for syncing
 
         # For testing purposes; REMOVE ONCE FINISHED
         self.state_list = [0,0,0,0,0,0,0,0,0,0,0,0,1,1,1]
@@ -52,6 +53,10 @@ class StopLight(base.AbstractDynamicControl):
             self.state_index = 0
 
         # FIRE 'recompute' HERE IF cycle_count REACHES SOME THRESHOLD
+        # epoch here will be updated
+        if (self.cycle_count >= 3):
+            self.fire('recompute')
+            self.cycle_count = 0
 
         self.phase = [1,1,1] #Sets phase timings to 1 second
         self.state =  [StopLight.STATES[self.state_list[self.state_index]], 0]

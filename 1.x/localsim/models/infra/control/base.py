@@ -76,7 +76,7 @@ class AbstractStaticControl(signal.Signal):
 
 
 class AbstractDynamicControl(signal.Signal):
-    events = ['move', 'update', 'destroy']
+    events = ['move', 'update', 'destroy', 'recompute']
 
     def __init__(self, road, pos, lane, state, start, controlled=False):
         self.id = 'dcontrol-' + hex(_id_counter.next())
@@ -103,7 +103,8 @@ class AbstractDynamicControl(signal.Signal):
             self.fire('move')
         elif event == 'coarse':  # clock signal
         # Ensures updates only happen at or after the start time
-            if (self.clock.now / 1000) >= self.init_state[1]:
+        # Add a bypass if controlled; we wouldn't be needing this constraint
+            if (self.clock.now / 1000) >= self.init_state[1] or self.controlled:
                 if self._init_pass:
                     self.state = [1, 0]
                     self._init_pass = False
