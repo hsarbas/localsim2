@@ -2,7 +2,7 @@ from localsim.models.agent import base, senses
 from localsim.models.infra.control import concrete as control
 from localsim.models.meta import observer, analyzer, conflict_manager
 from localsim.utils.tools import mps_to_kph
-from localsim.models import tso_controller
+from localsim.models.tso import controller as tso_controller
 import localsim
 import collections
 
