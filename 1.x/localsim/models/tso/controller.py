@@ -1,6 +1,7 @@
 import collections
 import weakref
 import time
+import pandas as pd
 
 from localsim.models.tso import const
 from localsim.models import scene
@@ -11,8 +12,9 @@ from localsim.models.infra import survey_zone
 class TSO(object):
     '''Maintains a set of stoplights and survey zones, then passes information from them over to the linear solver later on.'''
 
-    def __init__(self, scene):
+    def __init__(self, scene, vol_observer):
         self.scene = scene
+        self.vol_observer = vol_observer
         self.controls = scene.controls
         self.survey_zones = scene.surveyors
         self.epoch = 0
@@ -39,6 +41,9 @@ class TSO(object):
             # TODO: Store greentimes in each epoch (since it seems like the shit here is asynchronous)
             if self.epoch <= source.epoch:
                 # New stoplight has reached new epoch
+
+                # 1. Get the state of the network
+                print(self.vol_observer.result()['log'])
                 print("Running solver...")
                 time.sleep(10)
                 self.epoch += 1

@@ -269,3 +269,57 @@ class SurveyEntryExitObserver(AbstractObserver):
     def result(self):
         log = copy.deepcopy(self.running_log)
         return dict(log=log, time_ended=self.actual_clock.now)
+
+
+class SurveyVolumeObserver(AbstractObserver):
+    """
+    Observer that logs the number of agents on each survey zone at each time step
+    The TSO controller gets this dictionary of values for processing and piping to the linear solver
+
+    running_log: dict[survey_zone][agent_count]
+    running_log: dict[survey_zone][survey_length, survey_lanes, agent][entry, exit]
+    """
+
+    def __init__(self, agent_manager, scene, **extras):
+        super(SurveyVolumeObserver, self).__init__(agent_manager, scene, **extras)
+
+        surveys = None
+
+        if 'survey' in extras:
+            surveys = extras['survey']
+
+        self.observed_surveys = []
+        self.running_log = collections.defaultdict(
+            lambda: collections.defaultdict(lambda: {'entry': None, 'exit': None}, volume=0))
+
+        for i in range(0, len(surveys)):
+            if surveys[i]:
+                self.observed_surveys.append(surveys[i])
+
+        agent_manager.connect('update_agent', self._observe)
+
+    def _observe(self, event, source, **extras):
+        road = extras['road']
+        agent = extras['agent']
+        time = float(self.actual_clock.now)/1000
+        pos = extras['pos']
+
+        for survey in self.observed_surveys:
+            if road.label == survey().road.label:
+                if pos and survey().pos < pos < survey().exit and self.running_log[survey().id][agent.id]['entry'] is None:
+                    # Agent has entered the survey zone; increment the volume
+                    self.running_log[survey().id][agent.id]['entry'] = time
+                    self.running_log[survey().id]['volume'] += 1
+
+                elif pos and pos > survey().exit and self.running_log[survey().id][agent.id]['entry'] is not None \
+                        and self.running_log[survey().id][agent.id]['exit'] is None:
+                    # Agent is leaving the survey zone; decrement the volume
+                    self.running_log[survey().id]['volume'] -= 1
+                    if self.running_log[survey().id]['volume'] < 0:
+                        self.running_log[survey().id]['volume'] = 0
+                    self.running_log[survey().id][agent.id]['exit'] = time
+
+    def result(self):
+        # Remove the agent entry and exit times
+        log = {k: self.running_log[k]['volume'] for k in self.running_log}
+        return dict(log=log, time_ended=self.actual_clock.now)

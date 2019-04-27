@@ -15,7 +15,6 @@ class Engine(object):
 
     def __init__(self, sim_clock, scene, agent_manager=None, **extras):
         self.scene = scene
-        self.tso_controller = tso_controller.TSO(self.scene)
         self.agent_manager = agent_manager if agent_manager else base.AgentManager()
         self.sim_clock = sim_clock
         self.conflict_manager = conflict_manager.ConflictManager(sim_clock, scene, self.agent_manager)
@@ -35,6 +34,9 @@ class Engine(object):
         self.observer = observer.TimeSpeedObserver(self.agent_manager, self.scene)
         self.u_observer = observer.SurveyEntryExitObserver(self.agent_manager, self.scene, survey=self.uroad_survey)
         self.los_observer = observer.RoadEntryExitObserver(self.agent_manager, self.scene, road=self.active_roads)
+        self.vol_observer = observer.SurveyVolumeObserver(self.agent_manager, self.scene, survey=self.uroad_survey)
+
+        self.tso_controller = tso_controller.TSO(self.scene, self.vol_observer)
 
         for road, entry in self.scene.dispatcher.items():
             entry.run(self.agent_manager)
