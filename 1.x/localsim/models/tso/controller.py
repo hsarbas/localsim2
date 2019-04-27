@@ -18,8 +18,8 @@ class TSO(object):
         self.controls = scene.controls
         self.survey_zones = scene.surveyors
         self.epoch = 0
-        self.cell_map = weakref.WeakKeyDictionary() # survey_zone -> tuple
-        self.ctm = {} # tuple -> value
+        self.cell_map = {} # survey.id -> tuple
+        self.ctm = collections.defaultdict(lambda: 0) # tuple -> value
 
         for road in self.controls:
             for control in self.controls[road]:
@@ -30,11 +30,7 @@ class TSO(object):
             for survey in self.survey_zones[road]:
                 # Get the hex portion of the ID
                 survey_id = survey.id.split()[0][2:]
-                self.cell_map[survey] = const.SURVEY_ZONE_MAPPING[survey_id]
-
-        # Check if the cell_map is correctly yeah
-        for survey in self.cell_map:
-            print("{} --> {}".format(survey.id.split()[0], self.cell_map[survey]))
+                self.cell_map[survey.id] = const.SURVEY_ZONE_MAPPING[survey_id]
 
     def _signal_callback(self, event, source, **extras):
         if event == 'recompute':
@@ -43,7 +39,11 @@ class TSO(object):
                 # New stoplight has reached new epoch
 
                 # 1. Get the state of the network
-                print(self.vol_observer.result()['log'])
+                network_state = self.vol_observer.result()['log'] # survey.id --> volume (int)
+                for k in network_state:
+                    self.ctm[self.cell_map[k]] += network_state[k]
+
+                print(self.ctm)
                 print("Running solver...")
                 time.sleep(10)
                 self.epoch += 1
