@@ -59,7 +59,7 @@ class StopLight(base.AbstractDynamicControl):
             self.cycle_count = 0
 
         self.phase = [1,1,1] #Sets phase timings to 1 second
-        print("{}: at state {}".format(self.road.label, self.state_index))
+        #print("{}: at state {}".format(self.road.label, self.state_index))
         self.state =  [StopLight.STATES[self.state_list[self.state_index]], 0]
 
     def update(self):
