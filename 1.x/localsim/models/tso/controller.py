@@ -26,9 +26,6 @@ def initial_greentimes():
 
     return dfg_matrix
 
-def stub(ctm):
-    return pd.read_pickle('greentimes.pkl')
-
 def stoplight_timings(df, cell):
     # Obtain a list of phase timings for involved phases
     phase_timings = map(
@@ -36,7 +33,7 @@ def stoplight_timings(df, cell):
         const.REVERSE_PHASE_MAPPING[cell]
     )
 
-    print(phase_timings)
+    #print(phase_timings)
 
     # Reduce the phase timings into 1 list
     signal_timings = phase_timings[0]
@@ -63,7 +60,7 @@ def stoplight_timings(df, cell):
             output += [s] * const.TIME_STEP
 
     # Process the output
-    print("{}: {}".format(cell, output))
+    #print("{}: {}".format(cell, output))
     return output
 
 class TSO(object):
@@ -94,6 +91,11 @@ class TSO(object):
                 survey_id = survey.id.split()[0][2:]
                 self.cell_map[survey.id] = const.SURVEY_ZONE_MAPPING[survey_id]
 
+    def recompute_ctm(self):
+        # Recomputes the CTM and processes the dataframe into a matrix (like in initial_greentimes)
+        # STUB
+        return pd.read_pickle('greentimes.pkl')
+
     def _signal_callback(self, event, source, **extras):
         if event == 'recompute':
             # TODO: Store greentimes in each epoch (since it seems like the shit here is asynchronous)
@@ -107,7 +109,7 @@ class TSO(object):
 
                 # 2. Pass the state to the solver, then solve
                 print("Running solver...")
-                _result = stub(self.ctm)
+                _result = self.recompute_ctm()
                 self.greentimes.append(_result)
                 self.epoch += 1
 
