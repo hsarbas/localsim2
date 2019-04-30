@@ -51,21 +51,6 @@ class Constraint5AltPhasingModel(BaseModel):
         self._g_count = len(self.g_vars)
         self._vars_count = self._g_count + self._x_count + self._y_count
 
-        # Start has to be here to be considered an MIP start
-        # Set initial solution
-        if self.preload is not None:
-            print("Preloading!")
-            start = {}
-            for c in self.set_C:
-                if c not in self.set_C_O:
-                    start[self.x_vars[(c, 0)]] = float(self.preload[c])
-
-            for p in self.set_Phases:
-                start[self.g_vars[(p, 0)]] = 0
-
-            print(start)
-            self.model.add_mip_start(SolveSolution(self.model, start, obj=-55.109118922451536))
-
 
     def generate_constraints(self):
         super(Constraint5AltPhasingModel, self).generate_constraints()

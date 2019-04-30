@@ -174,7 +174,7 @@ class BaseModel(object):
             (self.model.add_constraint(
                 ct=(
                     self.x_vars[(i,0)]
-                    == 0
+                    == (0 if self.preload is None else int(self.preload[i]))
                 ),
                 ctname="init_rest_{}".format(i)
             ))
