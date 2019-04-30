@@ -122,8 +122,23 @@ class CTMSolver(object):
 
     def recompute(self, ctm):
         # Recomputes the CTM given a network state dictionary
-        # STUB FIRST
-        pass
+        self.reset_model(ctm)
+        self.model.generate()
+        runtime = self.model.solve(log_output=True)
+        print("Done solving!")
+        _, _, dfg = self.model.return_solution()
+
+        # Convert the raw greentimes dataframe into a matrix (timestep vs phase)
+        dfg_matrix = dfg.sort_values(by='timestep').pivot(index='timestep', columns='cell', values='is_green').astype('int16')
+        timerange, phases = dfg_matrix.shape
+
+        # Add padded allred times on top of the first green of a phase
+        # This overwritten green time will be added back in the stoplight_timings function
+        for t in range(1,timerange):
+            for p in range(phases):
+                if dfg_matrix.iloc[t,p] == 1 and dfg_matrix.iloc[t-1,p] == 0:
+                    dfg_matrix.iloc[t,:] = [2]*phases
+        return dfg
 
 
 class TSO(object):
@@ -175,9 +190,8 @@ class TSO(object):
 
                 # 2. Pass the state to the solver, then solve
                 print("Running solver...")
-                # _result = self.ctm_solver.recompute(self.ctm)
-                # self.greentimes.append(_result)
-                self.greentimes.append(self.greentimes[0]) # Just extend for now
+                _result = self.ctm_solver.recompute(self.ctm)
+                self.greentimes.append(_result)
 
             print("Setting greentimes...")
             # 3. Set the greentimes
