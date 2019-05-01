@@ -98,16 +98,25 @@ class ParentModel(object):
 
         # Define sets CF_LT, CC_LR, CC_RT once I know what they fucking are
 
+        # Pairs of CONFLICTING left and through turns
         self.set_CF_LT = [
             ((2, LEFT_TURN, i), (2, THROUGH_TURN, j))
             for i in range(APPROACHES)
             for j in range(APPROACHES) if j != i
+        ] + [
+            ((2, LEFT_TURN, i), (2, LEFT_TURN, j))
+            for i in range(APPROACHES)
+            for j in range(i) if (i - j != 2)
+        ] + [
+            ((2, THROUGH_TURN, i), (2, THROUGH_TURN, j))
+            for i in range(APPROACHES)
+            for j in range(i) if (i - j != 2)
         ]
 
         self.set_CC_LR = [
             ((2, LEFT_TURN, i), (2, RIGHT_TURN, j))
             for i in range(APPROACHES)
-            for j in range(APPROACHES) if (i - j == 2 or j - i == 2)
+            for j in range(APPROACHES) if (i - j != 2 and j - i != 2)
         ]
 
         self.set_CC_RT = [
@@ -130,13 +139,13 @@ class ParentModel(object):
         self.set_H1 = [
             (2, LEFT_TURN, WESTBOUND), (2, RIGHT_TURN, NORTHBOUND),
             (2, THROUGH_TURN, EASTBOUND), (2, RIGHT_TURN, EASTBOUND),
-            (2, LEFT_TURN, SOUTHBOUND), (2, RIGHT_TURN, WESTBOUND),
-            (2, THROUGH_TURN, SOUTHBOUND), (2, RIGHT_TURN, SOUTHBOUND),
+            (2, LEFT_TURN, EASTBOUND), (2, RIGHT_TURN, SOUTHBOUND),
+            (2, THROUGH_TURN, WESTBOUND), (2, RIGHT_TURN, WESTBOUND),
         ]
 
         self.set_H2 = [
-            (2, LEFT_TURN, EASTBOUND), (2, RIGHT_TURN, SOUTHBOUND),
-            (2, THROUGH_TURN, WESTBOUND), (2, RIGHT_TURN, WESTBOUND),
+            (2, LEFT_TURN, SOUTHBOUND), (2, RIGHT_TURN, WESTBOUND),
+            (2, THROUGH_TURN, SOUTHBOUND), (2, RIGHT_TURN, SOUTHBOUND),
             (2, LEFT_TURN, NORTHBOUND), (2, RIGHT_TURN, EASTBOUND),
             (2, THROUGH_TURN, NORTHBOUND), (2, RIGHT_TURN, NORTHBOUND),
         ]

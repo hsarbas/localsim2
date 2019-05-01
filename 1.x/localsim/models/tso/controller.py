@@ -12,42 +12,6 @@ from localsim.models.tso.ctmmodels.ringbarrier import DTSimplexRingBarrier as Ne
 from localsim.models.tso.ctmmodels.parentmodel import ParentModel as OldModel
 
 
-def stoplight_timings(df, cell):
-    # Obtain a list of phase timings for involved phases
-    phase_timings = map(
-        lambda c: list(df[c].values),
-        const.REVERSE_PHASE_MAPPING[cell]
-    )
-
-    #print(phase_timings)
-
-    # Reduce the phase timings into 1 list
-    signal_timings = phase_timings[0]
-    for pt in phase_timings:
-        for s in range(len(signal_timings)):
-            if pt[s] != 2:
-                # If it's an allred timestep, no need to perform the OR operation; otherwise, do so
-                signal_timings[s] |= pt[s]
-
-    # Convert into seconds
-    output = []
-    for ndx, s in enumerate(signal_timings):
-        # Check if the signal timing in question is a padded, allred step
-        if s == 2:
-            output += [0] * const.TIME_STEP # Add the allred period
-
-            # Check if the next signal is a green; it means that this time step was written over a green light
-            #   so it needs to be added back
-            if ndx < len(signal_timings) - 1 and signal_timings[ndx + 1] == 1:
-                output += [1] * const.TIME_STEP
-            else:
-                output += [0] * const.TIME_STEP
-        else:
-            output += [s] * const.TIME_STEP
-
-    # Process the output
-    #print("{}: {}".format(cell, output))
-    return output
 
 
 class CTMSolver(object):
@@ -140,6 +104,49 @@ class CTMSolver(object):
                     dfg_matrix.iloc[t,:] = [2]*phases
         return dfg
 
+    def stoplight_timings(self, df, cell):
+        signal_timings = []
+
+        if self.is_new_model:
+            # Obtain a list of phase timings for involved phases
+            phase_timings = map(
+                lambda c: list(df[c].values),
+                const.REVERSE_PHASE_MAPPING[cell]
+            )
+
+            #print(phase_timings)
+
+            # Reduce the phase timings into 1 list
+            signal_timings = phase_timings[0]
+            for pt in phase_timings:
+                for s in range(len(signal_timings)):
+                    if pt[s] != 2:
+                        # If it's an allred timestep, no need to perform the OR operation; otherwise, do so
+                        signal_timings[s] |= pt[s]
+        else:
+            # Just get the column in the df that has that cell
+            signal_timings = list(df[cell].values)
+
+        # Convert into seconds
+        output = []
+        for ndx, s in enumerate(signal_timings):
+            # Check if the signal timing in question is a padded, allred step
+            if s == 2:
+                output += [0] * const.TIME_STEP # Add the allred period
+
+                # Check if the next signal is a green; it means that this time step was written over a green light
+                #   so it needs to be added back
+                if ndx < len(signal_timings) - 1 and signal_timings[ndx + 1] == 1:
+                    output += [1] * const.TIME_STEP
+                else:
+                    output += [0] * const.TIME_STEP
+            else:
+                output += [s] * const.TIME_STEP
+
+        # Process the output
+        #print("{}: {}".format(cell, output))
+        return output
+
 
 class TSO(object):
     '''Maintains a set of stoplights and survey zones, then passes information from them over to the linear solver later on.'''
@@ -166,7 +173,7 @@ class TSO(object):
                 control.controlled = True
                 control.connect('recompute', self._signal_callback)
 
-                control.state_list = stoplight_timings(self.greentimes[0], const.STOPLIGHT_MAPPING[road.label])
+                control.state_list = self.ctm_solver.stoplight_timings(self.greentimes[0], const.STOPLIGHT_MAPPING[road.label])
                 #print("{} greentimes: \n{}\n".format(road.label, control.state_list))
 
         for road in self.survey_zones:
@@ -195,6 +202,6 @@ class TSO(object):
 
             print("Setting greentimes...")
             # 3. Set the greentimes
-            source.state_list = stoplight_timings(self.greentimes[source.epoch], const.STOPLIGHT_MAPPING[source.road.label])
+            source.state_list = self.ctm_solver.stoplight_timings(self.greentimes[source.epoch], const.STOPLIGHT_MAPPING[source.road.label])
 
             source.epoch += 1
