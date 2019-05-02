@@ -29,7 +29,7 @@ class SpaceMeanSpeedAnalyzer(AbstractAnalyzer):
         u_table = collections.defaultdict(lambda: collections.defaultdict())
         survey_totals = collections.defaultdict(lambda: collections.defaultdict())
 
-        for t in range(300, self.time_ended/1000 + 1, 300):
+        for t in range(60, self.time_ended/1000 + 1, 60):
 
             #Does this also get total number of agents that passed through a survey zone (throughput)?
             for survey in self.log:
