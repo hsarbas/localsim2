@@ -12,8 +12,6 @@ from localsim.models.tso.ctmmodels.ringbarrier import DTSimplexRingBarrier as Ne
 from localsim.models.tso.ctmmodels.parentmodel import ParentModel as OldModel
 
 
-
-
 class CTMSolver(object):
     '''Handles the CTM MILP solver (and which models to use)'''
 
@@ -84,13 +82,28 @@ class CTMSolver(object):
 
         return dfg_matrix
 
-    def recompute(self, ctm):
+    def recompute(self, ctm, epoch):
         # Recomputes the CTM given a network state dictionary
         self.reset_model(ctm)
         self.model.generate()
         runtime = self.model.solve(log_output=True)
         print("Done solving!")
         _, _, dfg = self.model.return_solution()
+        obj_values = self.model.return_objective_value()
+
+        # Save the obtained values somewhere
+        filename = "d{}".format(self.demand)
+        if self.is_new_model:
+            filename += '_epoch{}_a{}_b{}_c{}'.format(epoch, *self.weights)
+        else:
+            filename += '_epoch{}_old'.format(epoch)
+
+        fo = open("results_{}.csv".format(filename), "w")
+        fo.write("Runtime,Delay,Throughput,ObjValue\n")
+        fo.write("{},{},{},{}".format(runtime, *obj_values))
+        fo.close()
+
+        dfg.to_pickle('greentimes_{}.pkl'.format(filename))
 
         # Convert the raw greentimes dataframe into a matrix (timestep vs phase)
         dfg_matrix = dfg.sort_values(by='timestep').pivot(index='timestep', columns='cell', values='is_green').astype('int16')
@@ -197,7 +210,7 @@ class TSO(object):
 
                 # 2. Pass the state to the solver, then solve
                 print("Running solver...")
-                _result = self.ctm_solver.recompute(self.ctm)
+                _result = self.ctm_solver.recompute(self.ctm, self.epoch)
                 self.greentimes.append(_result)
 
             print("Setting greentimes...")
