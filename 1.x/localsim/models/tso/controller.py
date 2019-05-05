@@ -68,19 +68,16 @@ class CTMSolver(object):
             _, _, dfg = self.model.return_solution()
            # Track the objective values later on
 
-        print("Now converting the greentimes...")
-        # Convert the raw greentimes dataframe into a matrix (timestep vs phase)
-        dfg_matrix = dfg.sort_values(by='timestep').pivot(index='timestep', columns='cell', values='is_green').astype('int16')
-        timerange, phases = dfg_matrix.shape
+        timerange, phases = dfg.shape
 
         # Add padded allred times on top of the first green of a phase
         # This overwritten green time will be added back in the stoplight_timings function
         for t in range(1,timerange):
             for p in range(phases):
-                if dfg_matrix.iloc[t,p] == 1 and dfg_matrix.iloc[t-1,p] == 0:
-                    dfg_matrix.iloc[t,:] = [2]*phases
+                if dfg.iloc[t,p] == 1 and dfg.iloc[t-1,p] == 0:
+                    dfg.iloc[t,:] = [2]*phases
 
-        return dfg_matrix
+        return dfg
 
     def recompute(self, ctm, epoch):
         # Recomputes the CTM given a network state dictionary
@@ -105,40 +102,21 @@ class CTMSolver(object):
 
         dfg.to_pickle('greentimes_{}.pkl'.format(filename))
 
-        # Convert the raw greentimes dataframe into a matrix (timestep vs phase)
-        dfg_matrix = dfg.sort_values(by='timestep').pivot(index='timestep', columns='cell', values='is_green').astype('int16')
-        timerange, phases = dfg_matrix.shape
+        timerange, phases = dfg.shape
 
         # Add padded allred times on top of the first green of a phase
         # This overwritten green time will be added back in the stoplight_timings function
         for t in range(1,timerange):
             for p in range(phases):
-                if dfg_matrix.iloc[t,p] == 1 and dfg_matrix.iloc[t-1,p] == 0:
-                    dfg_matrix.iloc[t,:] = [2]*phases
+                if dfg.iloc[t,p] == 1 and dfg.iloc[t-1,p] == 0:
+                    dfg.iloc[t,:] = [2]*phases
+
         return dfg
 
     def stoplight_timings(self, df, cell):
         signal_timings = []
 
-        if self.is_new_model:
-            # Obtain a list of phase timings for involved phases
-            phase_timings = map(
-                lambda c: list(df[c].values),
-                const.REVERSE_PHASE_MAPPING[cell]
-            )
-
-            #print(phase_timings)
-
-            # Reduce the phase timings into 1 list
-            signal_timings = phase_timings[0]
-            for pt in phase_timings:
-                for s in range(len(signal_timings)):
-                    if pt[s] != 2:
-                        # If it's an allred timestep, no need to perform the OR operation; otherwise, do so
-                        signal_timings[s] |= pt[s]
-        else:
-            # Just get the column in the df that has that cell
-            signal_timings = list(df[cell].values)
+        signal_timings = list(df[cell].values)
 
         # Convert into seconds
         output = []
