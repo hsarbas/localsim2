@@ -8,8 +8,8 @@ from localsim.models.infra.control import concrete as control
 from localsim.models.infra import survey_zone
 
 from localsim.models.tso import const, settings
-from localsim.models.tso.ctmmodels.ringbarrier import DTSimplexRingBarrier as NewModel
-from localsim.models.tso.ctmmodels.parentmodel import ParentModel as OldModel
+from ctmmodels.ringbarrier import DTSimplexRingBarrier as NewModel
+from ctmmodels.parentmodel import ParentModel as OldModel
 
 
 class CTMSolver(object):
