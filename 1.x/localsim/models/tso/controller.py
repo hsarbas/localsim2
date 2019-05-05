@@ -52,9 +52,9 @@ class CTMSolver(object):
 
         dfg = None
         try:
-            filename = 'initial_greentimes_d{}'.format(self.demand)
+            filename = 'initial-greentimes/greentimes_d{}'.format(self.demand)
             if self.is_new_model:
-                filename += '_a{}_b{}_c{}.pkl'.format(*self.weights)
+                filename += '_new_a{}_b{}_c{}.pkl'.format(*self.weights)
             else:
                 filename += '_old.pkl'
             dfg = pd.read_pickle(filename)
