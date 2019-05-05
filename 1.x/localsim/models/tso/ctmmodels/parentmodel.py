@@ -245,7 +245,8 @@ class ParentModel(object):
         ]
 
         constraint_init = {
-            'src': init_src
+            'src': init_src,
+            'rest': init_rest
         }
 
         # 1. Note: Kronecker delta was removed; might be added back if we don't get the results we want
@@ -622,7 +623,9 @@ class ParentModel(object):
         df_g_raw['cell'] = df_g_raw['index'].apply(lambda x: x[0])
         df_g_raw['timestep'] = df_g_raw['index'].apply(lambda x: x[1])
 
-        df_g = df_g_raw[['timestep', 'cell', 'is_green']]
+        df_g_stacked = df_g_raw[['timestep', 'cell', 'is_green']]
+
+        df_g = df_g_stacked.sort_values(by='timestep').pivot(index='timestep', columns='cell', values='is_green').astype('int16')
 
         return df_x, df_y, df_g
 
@@ -633,4 +636,20 @@ class ParentModel(object):
         return pd.concat([df_M, df_F], axis=1)
 
     def return_objective_value(self):
-        return self.model.objective_value
+        D_term = sum(
+            sum(
+                self.x_vars[(i,t)].solution_value - sum(
+                    self.y_vars[(i,j,t)].solution_value
+                    for j in self.S[i])
+                for i in self.set_C if i not in self.set_C_S)
+            for t in self.set_T)
+
+        T_term = sum(
+            sum(
+                self.x_vars[(i,t)].solution_value
+                for i in self.set_C_S)
+            for t in self.set_T)
+
+        Obj_value = self.model.objective_value
+
+        return (D_term, T_term, Obj_value)

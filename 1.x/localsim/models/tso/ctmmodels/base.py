@@ -261,9 +261,37 @@ class BaseModel(object):
             for j in self.set_C if j not in self.set_C_O
         ]
 
+        flowrate_3 = [
+            (self.model.add_constraint(
+                ct=(
+                    self.model.sum(self.y_vars[(i,j,t)] for j in self.S[i])
+                    - self.F[i]
+                    <= 0
+                ),
+                ctname="flowrate_succcap_{}^{}".format(i,t)
+            ))
+            for t in self.set_T
+            for i in self.set_C if i not in self.set_C_S
+        ]
+
+        flowrate_4 = [
+            (self.model.add_constraint(
+                ct=(
+                    self.model.sum(self.y_vars[(i,j,t)] for i in self.P[j])
+                    - self.F[j]
+                    <= 0
+                ),
+                ctname="flowrate_predcap_{}^{}".format(j,t)
+            ))
+            for t in self.set_T
+            for j in self.set_C if j not in self.set_C_O
+        ]
+
         constraint_flowrate = {
             'source_cap': flowrate_1,
-            'sink_cap': flowrate_2
+            'sink_cap': flowrate_2,
+            'succ_cap': flowrate_3,
+            'pred_cap': flowrate_4,
         }
 
         turnratios = [

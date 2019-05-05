@@ -1,5 +1,6 @@
 import docplex.mp.model as cpx
 from docplex.mp.solution import SolveSolution
+from numpy import sum as npsum
 import pandas as pd
 import time
 
@@ -148,9 +149,33 @@ class Constraint5AltPhasingModel(BaseModel):
         df_g_raw['cell'] = df_g_raw['index'].apply(lambda x: x[0])
         df_g_raw['timestep'] = df_g_raw['index'].apply(lambda x: x[1])
 
-        df_g = df_g_raw[['timestep', 'cell', 'is_green']]
+        df_g_stacked = df_g_raw[['timestep', 'cell', 'is_green']]
+        df_g_converted = pd.DataFrame(columns=['timestep', 'cell', 'is_green'])
+
+        for row in df_g_stacked.itertuples():
+            raw = row[1:]
+            converteds = [(raw[0], c, int(raw[2])) for c in self.Phase_map[raw[1]]]
+            for entry in converteds:
+                df_g_converted.loc[-1] = entry
+                df_g_converted.index += 1
+
+        df_g = df_g_converted.sort_values(by='timestep').pivot_table(index='timestep', columns='cell', values='is_green', aggfunc=npsum)
+        df_g = df_g.replace(2,1)
 
         return df_x, df_y, df_g
+
+    def return_phases(self):
+        df_g_raw = pd.DataFrame.from_dict(self.g_vars, orient="index", 
+                                          columns = ["variable_object"])
+
+        df_g_raw.reset_index(inplace=True)
+        df_g_raw["is_green"] = df_g_raw["variable_object"].apply(lambda item: item.solution_value)
+        df_g_raw['cell'] = df_g_raw['index'].apply(lambda x: x[0])
+        df_g_raw['timestep'] = df_g_raw['index'].apply(lambda x: x[1])
+
+        df_g = df_g_raw[['timestep', 'cell', 'is_green']]
+        df_g.is_green = pd.to_numeric(df_g.is_green, 'is_green', downcast='integer')
+        return df_g
 
 
 class Constraint6AltPhasingModel(Constraint5AltPhasingModel):
