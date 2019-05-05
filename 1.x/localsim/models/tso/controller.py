@@ -36,12 +36,13 @@ class CTMSolver(object):
                 alpha=self.weights[0],
                 beta=self.weights[1],
                 gamma=self.weights[2],
-                preload=None,
+                preload=preload,
                 **self.parameters
             )
         else:
             self.model = OldModel(
                 demand=self.demand,
+                preload=preload,
                 **self.parameters
             )
 
