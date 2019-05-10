@@ -3,13 +3,14 @@ from localsim.utils import signal, tools
 
 
 class Simulator(object):
-    def __init__(self):
+    def __init__(self, settings={}):
         self.clock = None
         self.scene = None
         self.state = None
         self.simulator = None
         self.animated = None
         self.extras = {'los': [], 'quk': [], 'cvcc': [], 'stoplight': dict()}
+        self.settings = settings
 
     def reset(self):
         self.scene = scene.Scene()
@@ -22,7 +23,7 @@ class Simulator(object):
             self.scene.routing_mode = routing_mode
             self.simulator = simulator.Engine(self.clock, self.scene, uroad=self.extras['los'],
                                               uroad_survey=self.extras['quk'], iroad_survey=self.extras['cvcc'],
-                                              stoplight=self.extras['stoplight'])
+                                              stoplight=self.extras['stoplight'], settings=self.settings)
         else:
             self.simulator = None
             self.clock = None

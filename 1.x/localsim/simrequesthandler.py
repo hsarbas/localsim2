@@ -407,8 +407,8 @@ class API(object):
         db.commit()
         db.close()
 
-    def set_runner(self, filename=None):
-        self.runner = SimRunHandler()
+    def set_runner(self, settings={}, filename=None):
+        self.runner = SimRunHandler(settings)
         if filename:
             self.runner.set_file_name(filename)
 
@@ -440,8 +440,8 @@ class API(object):
 class SimRunHandler(object):
     """Handler object that takes in the data from the client and runs the simulator"""
 
-    def __init__(self):
-        self.off_sim = sim.Simulator()
+    def __init__(self, settings={}):
+        self.off_sim = sim.Simulator(settings)
         self.running = None
         self.rand_string = ''
         self.file_name = None

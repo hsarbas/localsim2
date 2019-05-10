@@ -13,11 +13,12 @@ config = localsim.conf()
 class Engine(object):
     """The actual simulator engine class. Contains methods for step incrementing, callback firing, and processing the analyzers and data."""
 
-    def __init__(self, sim_clock, scene, agent_manager=None, **extras):
+    def __init__(self, sim_clock, scene, agent_manager=None, settings={}, **extras):
         self.scene = scene
         self.agent_manager = agent_manager if agent_manager else base.AgentManager()
         self.sim_clock = sim_clock
         self.conflict_manager = conflict_manager.ConflictManager(sim_clock, scene, self.agent_manager)
+        self.settings = settings
 
         self.sim_clock.connect('stop', self._stop_callback)
 
@@ -36,7 +37,7 @@ class Engine(object):
         self.los_observer = observer.RoadEntryExitObserver(self.agent_manager, self.scene, road=self.active_roads)
         self.vol_observer = observer.SurveyVolumeObserver(self.agent_manager, self.scene, survey=self.uroad_survey)
 
-        self.tso_controller = tso_controller.TSO(self.scene, self.vol_observer)
+        self.tso_controller = tso_controller.TSO(self.scene, self.vol_observer, self.settings)
 
         for road, entry in self.scene.dispatcher.items():
             entry.run(self.agent_manager)

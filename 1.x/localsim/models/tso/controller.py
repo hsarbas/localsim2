@@ -7,7 +7,7 @@ from localsim.models import scene
 from localsim.models.infra.control import concrete as control
 from localsim.models.infra import survey_zone
 
-from localsim.models.tso import const, settings
+from localsim.models.tso import const
 from ctmmodels.ringbarrier import DTSimplexRingBarrier as NewModel
 from ctmmodels.parentmodel import ParentModel as OldModel
 
@@ -16,11 +16,7 @@ class CTMSolver(object):
     '''Handles the CTM MILP solver (and which models to use)'''
 
     def __init__(self, new_model=True, parameters=None, demand=None, weights=None):
-        if parameters is None:
-            self.parameters = settings._PARAMETERS
-        else:
-            self.parameters = parameters
-
+        self.parameters = parameters
         self.demand = demand
         self.weights = weights
         self.is_new_model = new_model
@@ -144,16 +140,18 @@ class CTMSolver(object):
 class TSO(object):
     '''Maintains a set of stoplights and survey zones, then passes information from them over to the linear solver later on.'''
 
-    def __init__(self, scene, vol_observer):
+    def __init__(self, scene, vol_observer, settings):
         self.scene = scene
         self.vol_observer = vol_observer
         self.controls = scene.controls
         self.survey_zones = scene.surveyors
+        self.settings = settings
 
         self.ctm_solver = CTMSolver(
-            new_model=settings._NEW_MODEL,
-            demand=settings._DEMAND,
-            weights=(settings._ALPHA, settings._BETA, settings._GAMMA)
+            new_model=settings['new_model'],
+            parameters=settings['parameters'],
+            demand=settings['demand'],
+            weights=(settings['alpha'], settings['beta'], settings['gamma'])
         )
 
         self.epoch = 0
@@ -189,7 +187,11 @@ class TSO(object):
                     self.ctm[self.cell_map[k]] += network_state[k]
 
                 # 2. Pass the state to the solver, then solve
-                print("Running solver...")
+                print("Running solver (demand {}, {}, weights {})...".format(
+                    self.settings['demand'],
+                    'new' if self.settings['new_model'] else 'old',
+                    (self.settings['alpha'], self.settings['beta'], self.settings['gamma'])
+                ))
                 _result = self.ctm_solver.recompute(self.ctm, self.epoch)
                 self.greentimes.append(_result)
 
