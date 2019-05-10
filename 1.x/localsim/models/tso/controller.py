@@ -71,12 +71,12 @@ class CTMSolver(object):
 
         timerange, phases = dfg.shape
 
-        # Add padded allred times on top of the first green of a phase
-        # This overwritten green time will be added back in the stoplight_timings function
-        for t in range(1,timerange):
-            for p in range(phases):
-                if dfg.iloc[t,p] == 1 and dfg.iloc[t-1,p] == 0:
-                    dfg.iloc[t,:] = [2]*phases
+        # # Add padded allred times on top of the first green of a phase
+        # # This overwritten green time will be added back in the stoplight_timings function
+        # for t in range(1,timerange):
+        #     for p in range(phases):
+        #         if dfg.iloc[t,p] == 1 and dfg.iloc[t-1,p] == 0:
+        #             dfg.iloc[t,:] = [2]*phases
 
         return dfg
 
@@ -105,12 +105,12 @@ class CTMSolver(object):
 
         timerange, phases = dfg.shape
 
-        # Add padded allred times on top of the first green of a phase
-        # This overwritten green time will be added back in the stoplight_timings function
-        for t in range(1,timerange):
-            for p in range(phases):
-                if dfg.iloc[t,p] == 1 and dfg.iloc[t-1,p] == 0:
-                    dfg.iloc[t,:] = [2]*phases
+        # # Add padded allred times on top of the first green of a phase
+        # # This overwritten green time will be added back in the stoplight_timings function
+        # for t in range(1,timerange):
+        #     for p in range(phases):
+        #         if dfg.iloc[t,p] == 1 and dfg.iloc[t-1,p] == 0:
+        #             dfg.iloc[t,:] = [2]*phases
 
         return dfg
 
@@ -123,17 +123,18 @@ class CTMSolver(object):
         output = []
         for ndx, s in enumerate(signal_timings):
             # Check if the signal timing in question is a padded, allred step
-            if s == 2:
-                output += [0] * const.TIME_STEP # Add the allred period
+            # if s == 2:
+            #     output += [0] * const.TIME_STEP # Add the allred period
 
-                # Check if the next signal is a green; it means that this time step was written over a green light
-                #   so it needs to be added back
-                if ndx < len(signal_timings) - 1 and signal_timings[ndx + 1] == 1:
-                    output += [1] * const.TIME_STEP
-                else:
-                    output += [0] * const.TIME_STEP
-            else:
-                output += [s] * const.TIME_STEP
+            #     # Check if the next signal is a green; it means that this time step was written over a green light
+            #     #   so it needs to be added back
+            #     if ndx < len(signal_timings) - 1 and signal_timings[ndx + 1] == 1:
+            #         output += [1] * const.TIME_STEP
+            #     else:
+            #         output += [0] * const.TIME_STEP
+            # else:
+            #     output += [s] * const.TIME_STEP
+            output += [s] * const.TIME_STEP
 
         # Process the output
         #print("{}: {}".format(cell, output))
