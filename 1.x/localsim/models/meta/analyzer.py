@@ -144,11 +144,11 @@ class VolumeAnalyzer(AbstractAnalyzer):
     def analyze(self):
         q_table = collections.defaultdict(lambda: collections.defaultdict())
 
-        for t in range(300, self.time_ended/1000 + 1, 300):
+        for t in range(60, self.time_ended/1000 + 1, 60):
             for zone in self.zones:
                 name = zone().id
                 data = zone().result()
-                q_table[t][name] = sum(len(data[i]) for i in range(t-299, t+1))
+                q_table[t][name] = sum(len(data[i]) for i in range(t-59, t+1))
 
         q_table_copy = q_table.copy()
         for item in self.labels:
