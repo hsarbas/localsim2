@@ -12,6 +12,8 @@ import time as t_
 import sys
 import sqlite3
 
+from localsim.models.tso.settings import default_settings
+
 if sys.platform == 'win32':
     from signal import signal, SIG_DFL
 else:
@@ -440,7 +442,7 @@ class API(object):
 class SimRunHandler(object):
     """Handler object that takes in the data from the client and runs the simulator"""
 
-    def __init__(self, settings={}):
+    def __init__(self, settings=default_settings):
         self.off_sim = sim.Simulator(settings)
         self.running = None
         self.rand_string = ''

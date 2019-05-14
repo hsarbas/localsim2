@@ -1,9 +1,10 @@
 from localsim.models import simulator, scene
 from localsim.utils import signal, tools
+from localsim.models.tso.settings import default_settings
 
 
 class Simulator(object):
-    def __init__(self, settings={}):
+    def __init__(self, settings=default_settings):
         self.clock = None
         self.scene = None
         self.state = None
