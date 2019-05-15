@@ -1,6 +1,8 @@
 from os import path
 import sys
 from localsim import simrequesthandler as API
+import random
+import string
 
 
 model_type_map = {
@@ -14,7 +16,7 @@ model_type_map = {
     'PM': (0,0,0)
 }
 
-def run_test_case(demand_ns, demand_ew, duration, new_model, model_type, randstring):
+def run_test_case(demand_ns, demand_ew, duration, new_model, model_type):
     # duration in MINUTES
     api = API.API()
 
@@ -49,12 +51,13 @@ def run_test_case(demand_ns, demand_ew, duration, new_model, model_type, randstr
     case_study_map = 'ctm_{}_{}.lmf'.format(*demand_tuple)
     api.load(path.join(path.dirname(__file__), '..', '..', 'maps', 'experiments', case_study_map))
 
-    print("RUNNING on {}: {}".format(case_study_map, duration*6000))
+    randstring = ''.join([random.choice(string.ascii_letters+string.digits) for n in xrange(8)])
+    print("RUNNING on {}: {}\nSeed: {}\n".format(case_study_map, duration*6000, randstring))
     api.run(duration * 6000, 'static', randstring, False)
 
 def main():
     # demand_ns, demand_ew, duration, new_model, model_type, randstring
-    run_test_case(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]), sys.argv[4], sys.argv[5], sys.argv[6])
+    run_test_case(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]), sys.argv[4], sys.argv[5])
 
 if __name__ == "__main__":
     main()

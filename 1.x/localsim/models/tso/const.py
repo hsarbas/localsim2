@@ -51,6 +51,8 @@ STOPLIGHT_MAPPING = {
     'approach3_lane3': (2,2,3),
 }
 
+APPROACHES          = 4
+
 LEFT_TURN           = 0
 THROUGH_TURN        = 1
 RIGHT_TURN          = 2

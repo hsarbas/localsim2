@@ -8,6 +8,7 @@ from localsim.models.infra.control import concrete as control
 from localsim.models.infra import survey_zone
 
 from localsim.models.tso import const
+from ctmmodels import const as ctmconst
 from ctmmodels.ringbarrier import DTSimplexRingBarrier as NewModel
 from ctmmodels.parentmodel import ParentModel as OldModel
 
@@ -20,6 +21,10 @@ class CTMSolver(object):
         self.demand = demand
         self.weights = weights
         self.is_new_model = new_model
+        self.right_movements = [
+            (2, const.RIGHT_TURN, i)
+            for i in range(const.APPROACHES)
+        ]
 
         self.reset_model()
 
@@ -130,7 +135,11 @@ class CTMSolver(object):
             #         output += [0] * const.TIME_STEP
             # else:
             #     output += [s] * const.TIME_STEP
-            output += [s] * const.TIME_STEP
+            
+            if cell in self.right_movements:
+                output += [1] * const.TIME_STEP
+            else:
+                output += [s] * const.TIME_STEP
 
         # Process the output
         #print("{}: {}".format(cell, output))
